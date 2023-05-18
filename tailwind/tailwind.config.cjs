@@ -9,10 +9,6 @@ module.exports = {
   ],
   theme: {
     colors,
-    fontFamily: {
-      poppins: ['Poppins', 'sans-serif'],
-      'open-sans': ['Open Sans', 'sans-serif']
-    },
     extend: {}
   },
   plugins: []
