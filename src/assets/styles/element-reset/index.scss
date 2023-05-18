@@ -1,2 +1,39 @@
+@use '../variables/colors';
+
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': colors.$accent-400
+    ),
+    'info': (
+      'base': colors.$primary-200,
+    )
+  ),
+  $border-radius: (
+    'round': 12px
+  ),
+  $input: (
+    'border-radius': 12px,
+    'bg-color': colors.$primary-100
+  ),
+  $input-padding-horizontal: (
+    'default': 16px
+  ),
+  $checkbox-button: (
+    'checked-border-color': colors.$accent-500
+  ),
+  $button: (
+    'font-weight': 700
+  ),
+  $button-border-width: 2px
+);
+
 @use "element-plus/theme-chalk/src/base";
 @use "element-plus/theme-chalk/src/button";
+@use "element-plus/theme-chalk/src/input";
+@use "element-plus/theme-chalk/src/tag";
+@use "element-plus/theme-chalk/src/checkbox";
+@use "element-plus/theme-chalk/src/rate";
+@use "element-plus/theme-chalk/src/slider";
+@use "element-plus/theme-chalk/src/avatar";
+@use "element-plus/theme-chalk/src/breadcrumb";
