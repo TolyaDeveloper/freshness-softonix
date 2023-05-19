@@ -3,8 +3,7 @@
   "include": [
     "dts/*",
     "src/**/*",
-    "src/**/*.vue",
-    "tests"
+    "src/**/*.vue"
   ],
   "compilerOptions": {
     "baseUrl": ".",

@@ -23,17 +23,24 @@
     'checked-border-color': colors.$accent-500
   ),
   $button: (
-    'font-weight': 700
+    'font-weight': 700,
+    'active-text-color': colors.$accent-400,
   ),
-  $button-border-width: 2px
+  $button-border-width: 2px,
+  $button-font-size: (
+    'default': 15px
+  )
 );
 
+@use "element-plus/theme-chalk/src/avatar";
 @use "element-plus/theme-chalk/src/base";
 @use "element-plus/theme-chalk/src/button";
-@use "element-plus/theme-chalk/src/input";
-@use "element-plus/theme-chalk/src/tag";
-@use "element-plus/theme-chalk/src/checkbox";
-@use "element-plus/theme-chalk/src/rate";
-@use "element-plus/theme-chalk/src/slider";
-@use "element-plus/theme-chalk/src/avatar";
 @use "element-plus/theme-chalk/src/breadcrumb";
+@use "element-plus/theme-chalk/src/carousel";
+@use "element-plus/theme-chalk/src/checkbox";
+@use "element-plus/theme-chalk/src/input";
+@use "element-plus/theme-chalk/src/pagination";
+@use "element-plus/theme-chalk/src/rate";
+@use "element-plus/theme-chalk/src/select";
+@use "element-plus/theme-chalk/src/slider";
+@use "element-plus/theme-chalk/src/tag";
