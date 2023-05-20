@@ -1,9 +1,9 @@
 <template>
-  <DefaultLayout>
+  <Layout :layout="$route.meta.layout">
     <RouterView />
-  </DefaultLayout>
+  </Layout>
 </template>
 
 <script setup lang="ts">
-import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import Layout from './layouts/Layout.vue'
 </script>
