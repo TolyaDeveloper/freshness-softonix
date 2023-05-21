@@ -20,5 +20,5 @@
 import UserIcon from '@/assets/icons/UserIcon.vue'
 import CartIcon from '@/assets/icons/CartIcon.vue'
 
-const itemsInCart = ref(0)
+const itemsInCart = ref(0) // will receive from store
 </script>
