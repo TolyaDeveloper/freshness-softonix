@@ -20,7 +20,5 @@
 import UserIcon from '@/assets/icons/UserIcon.vue'
 import CartIcon from '@/assets/icons/CartIcon.vue'
 
-withDefaults(defineProps<{ itemsInCart?: number }>(),
-  { itemsInCart: 0 }
-)
+const itemsInCart = ref(0)
 </script>
