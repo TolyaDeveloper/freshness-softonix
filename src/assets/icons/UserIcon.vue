@@ -1,3 +1,0 @@
-<template>
-  <svg width="22" height="24" fill="none" stroke="#151515" xmlns="http://www.w3.org/2000/svg"><path d="m2 22 .79-2.88c2.61-9.5 13.81-9.5 16.42 0L20 22" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M11 11.98a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="bevel" /></svg>
-</template>

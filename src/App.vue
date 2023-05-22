@@ -1,6 +1,6 @@
 <template>
   <Layout :layout="$route.meta.layout">
-    <RouterView />
+    <router-view />
   </Layout>
 </template>
 

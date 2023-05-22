@@ -1,17 +1,17 @@
 <template>
   <div class="app-container">
     <header>
-      <TopBar />
-      <ElDivider class="m-0 border-primary-700 opacity-5" />
-      <MiddleBar />
-      <NavBar />
+      <top-bar />
+      <el-divider class="m-0 border-primary-700 opacity-5" />
+      <middle-bar />
+      <nav-bar />
     </header>
     <main class="grow">
       <slot />
     </main>
     <footer class="my-[65px]">
-      <FooterMenu />
-      <Copyright />
+      <footer-menu />
+      <v-copyright />
     </footer>
   </div>
 </template>

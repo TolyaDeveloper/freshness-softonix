@@ -1,10 +1,10 @@
 <template>
   <div class="flex items-center">
-    <RouterLink to="/profile" aria-label="Open your profile page">
-      <UserIcon />
-    </RouterLink>
-    <RouterLink class="relative ml-10" to="/cart" aria-label="Open your shopping cart">
-      <CartIcon />
+    <router-link to="/profile" aria-label="Open your profile page">
+      <icon-user />
+    </router-link>
+    <router-link class="relative ml-10" to="/cart" aria-label="Open your shopping cart">
+      <icon-cart />
       <span
         class="absolute left-[-7px] bottom-[-6px] flex justify-center items-center w-[16px] h-[16px]
                rounded-full bg-secondary-400 text-white text-[12px] font-poppins font-semibold
@@ -12,13 +12,10 @@
       >
         {{ itemsInCart > 9 ? "9+" : itemsInCart }}
       </span>
-    </RouterLink>
+    </router-link>
   </div>
 </template>
 
 <script setup lang="ts">
-import UserIcon from '@/assets/icons/UserIcon.vue'
-import CartIcon from '@/assets/icons/CartIcon.vue'
-
-const itemsInCart = ref(0) // will receive from store
+const itemsInCart = ref(0)
 </script>

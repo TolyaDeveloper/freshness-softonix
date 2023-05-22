@@ -9,14 +9,13 @@
         :key="category.id"
         class="font-poppins text-[15px] font-medium mr-[55px] hover:text-accent-400 ease-in duration-150"
       >
-        <RouterLink :to="category.slug">{{ category.name }}</RouterLink>
+        <router-link :to="category.slug">{{ category.name }}</router-link>
       </li>
     </ul>
   </nav>
 </template>
 
 <script setup lang="ts">
-// temporary
 const categories = [
   {
     id: 1,

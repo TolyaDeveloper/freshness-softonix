@@ -1,18 +1,18 @@
 <template>
   <div class="app-container">
     <header>
-      <TopBar />
-      <ElDivider class="m-0 border-primary-700 opacity-5" />
+      <top-bar />
+      <el-divider class="m-0 border-primary-700 opacity-5" />
       <div class="text-center mt-[40px] mb-[30px]">
-        <Logo />
+        <v-logo />
       </div>
     </header>
     <main class="grow">
       <slot />
     </main>
     <footer>
-      <FooterMenu />
-      <Copyright />
+      <footer-menu />
+      <v-copyright />
     </footer>
   </div>
 </template>

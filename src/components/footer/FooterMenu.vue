@@ -8,7 +8,7 @@
       </h2>
       <ul>
         <li class="text-accent-400 mb-[15px]">
-          <RouterLink to="/profile">Sell on the Market</RouterLink>
+          <router-link to="/profile">Sell on the Market</router-link>
         </li>
       </ul>
     </div>
@@ -30,10 +30,10 @@
       </h2>
       <ul>
         <li class="text-accent-400 mb-[15px]">
-          <RouterLink to="/profile">Your account</RouterLink>
+          <router-link to="/profile">Your account</router-link>
         </li>
         <li class="text-accent-400 mb-[15px]">
-          <RouterLink to="/cart">Cart</RouterLink>
+          <router-link to="/cart">Cart</router-link>
         </li>
       </ul>
     </div>
