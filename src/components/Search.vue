@@ -6,7 +6,7 @@
     :show-message="false"
     @submit.prevent="submitForm"
   >
-    <el-form-item prop="searchQuery">
+    <el-form-item class="mb-0" prop="searchQuery">
       <el-input
         v-model="formModel.searchQuery"
         size="large"

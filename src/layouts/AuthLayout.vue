@@ -10,7 +10,7 @@
     <main class="grow">
       <slot />
     </main>
-    <footer>
+    <footer class="my-[65px]">
       <FooterMenu />
       <Copyright />
     </footer>

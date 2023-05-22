@@ -19,6 +19,18 @@ export function useRequiredRule ({ required = true } = {}) {
   return { required, message: 'Field is required', trigger: 'change' } as FormItemRule
 }
 
+export function useConfirmPassword (initialPassword: Ref<string>) {
+  return {
+    validator (_rule, value: string, callback) {
+      if (initialPassword.value === value) {
+        return callback()
+      }
+
+      callback(new Error('Passwords do not match'))
+    }
+  } as FormItemRule
+}
+
 export function useEmailRule () {
   return { type: 'email', message: 'Incorrect email', trigger: ['change', 'blur'] } as FormItemRule
 }

@@ -139,6 +139,7 @@
     "useCloned": true,
     "useColorMode": true,
     "useConfirmDialog": true,
+    "useConfirmPassword": true,
     "useCounter": true,
     "useCssModule": true,
     "useCssVar": true,
