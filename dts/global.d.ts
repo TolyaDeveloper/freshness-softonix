@@ -9,6 +9,7 @@ declare module 'vue-router' {
     label?: string
     parentName?: string
     requireAuth?: boolean
+    layout?: TLayouts
   }
 }
 
