@@ -8,6 +8,9 @@ export const profileRoutes: RouteRecordRaw[] = [
   {
     path: '/profile',
     name: profileRouteNames.profile,
-    component: () => import('./Profile.vue')
+    component: () => import('./Profile.vue'),
+    meta: {
+      requireAuth: true
+    }
   }
 ]

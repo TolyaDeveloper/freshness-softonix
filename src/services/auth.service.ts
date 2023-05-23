@@ -1,26 +1,22 @@
 class AuthService {
-  async login ({ email, password }: ILoginPayload) {
-    const { data, error } = await useSupabase.auth.signInWithPassword({ email, password })
-
-    return { data, error }
+  login ({ email, password }: ILoginPayload) {
+    return useSupabase.auth.signInWithPassword({ email, password })
   }
 
-  async signup ({ email, password, ...rest }: ISignUpPayload) {
-    const { data, error } = await useSupabase.auth.signUp({ email, password, options: { data: rest } })
-
-    return { data, error }
+  signup ({ email, password, ...rest }: ISignUpPayload) {
+    return useSupabase.auth.signUp({ email, password, options: { data: rest } })
   }
 
-  async getUserProfileById (id: string) {
-    const { data, error } = await useSupabase.from('profiles').select('*').eq('id', id)
-
-    return { data, error }
+  getUserProfileById (id: string) {
+    return useSupabase.from('profiles').select('*').eq('id', id)
   }
 
-  async logout () {
-    const { error } = await useSupabase.auth.signOut()
+  async getUser () {
+    return (await useSupabase.auth.getSession()).data.session?.user
+  }
 
-    return { error }
+  logout () {
+    return useSupabase.auth.signOut()
   }
 }
 

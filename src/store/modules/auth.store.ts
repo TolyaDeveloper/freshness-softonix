@@ -11,8 +11,8 @@ export const useAuthStore = defineStore('authStore', () => {
       throw new Error(error?.message)
     }
 
-    const userProfile = await getUserProfileById(data.user.id)
-    console.log({ userProfile })
+    const userProfile = await getUserProfile(data.user.id)
+    user.value = userProfile
   }
 
   const signup = async (credentials: ISignUpPayload) => {
@@ -23,7 +23,15 @@ export const useAuthStore = defineStore('authStore', () => {
     }
   }
 
-  const getUserProfileById = async (id: string) => {
+  const getUserProfile = async (id?: string) => {
+    if (!id) {
+      id = (await authService.getUser())?.id
+    }
+
+    if (!id) {
+      return null
+    }
+
     const { data, error } = await authService.getUserProfileById(id)
 
     if (error || !data?.length) {
@@ -48,6 +56,7 @@ export const useAuthStore = defineStore('authStore', () => {
     user,
     login,
     signup,
-    logout
+    logout,
+    getUserProfile
   }
 })

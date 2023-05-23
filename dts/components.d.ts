@@ -29,6 +29,7 @@ declare module '@vue/runtime-core' {
     Logo: typeof import('./../src/components/Logo.vue')['default']
     MiddleBar: typeof import('./../src/components/header/MiddleBar.vue')['default']
     NavBar: typeof import('./../src/components/header/NavBar.vue')['default']
+    ProfileForm: typeof import('./../src/views/profile/components/ProfileForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./../src/components/Search.vue')['default']

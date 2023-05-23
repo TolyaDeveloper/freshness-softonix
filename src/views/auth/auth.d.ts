@@ -1,4 +1,7 @@
-type TRoles = 'user' | 'seller'
+enum ERoles {
+  User = 'user',
+  Admin = 'admin',
+}
 
 interface IUser {
   id: string
@@ -6,7 +9,8 @@ interface IUser {
   firstname: string
   lastname: string
   address: string
-  role: TRoles
+  role: ERoles | string
+  last_searched_category: string | null
 }
 
 interface ILoginPayload {
