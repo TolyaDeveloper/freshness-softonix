@@ -25,15 +25,15 @@
       <el-form-item label="Confirm password" prop="confirmPassword">
         <el-input v-model="formModel.confirmPassword" type="password" show-password />
       </el-form-item>
-      <el-form-item label="First Name" prop="firstName">
-        <el-input v-model="formModel.firstName" />
+      <el-form-item label="First Name" prop="firstname">
+        <el-input v-model="formModel.firstname" />
       </el-form-item>
-      <el-form-item label="Last Name" prop="lastName">
-        <el-input v-model="formModel.lastName" />
+      <el-form-item label="Last Name" prop="lastname">
+        <el-input v-model="formModel.lastname" />
       </el-form-item>
-      <el-form-item label="Default delivery address" prop="defaultAddress">
+      <el-form-item label="Default delivery address" prop="address">
         <el-select
-          v-model="formModel.defaultAddress"
+          v-model="formModel.address"
           placeholder="Select a city"
           clearable
         >
@@ -41,7 +41,7 @@
           <el-option label="Kyiv" value="Kyiv" />
         </el-select>
       </el-form-item>
-      <el-button class="ml-auto block" type="primary" native-type="submit">
+      <el-button class="ml-auto block" type="primary" native-type="submit" :loading="isLoading">
         Sign up
       </el-button>
     </el-form>
@@ -49,15 +49,20 @@
 </template>
 
 <script setup lang="ts">
+import { ElNotification } from 'element-plus'
+
 const formRef = useElFormRef()
+const { signup } = useAuthStore()
+const isLoading = ref(false)
+const { $routeNames } = useGlobalProperties()
 
 const formModel = useElFormModel({
   email: '',
   password: '',
   confirmPassword: '',
-  firstName: '',
-  lastName: '',
-  defaultAddress: ''
+  firstname: '',
+  lastname: '',
+  address: ''
 })
 
 const formRules = useElFormRules({
@@ -73,20 +78,49 @@ const formRules = useElFormRules({
     useRequiredRule(),
     useConfirmPassword(toRefs(formModel).password)
   ],
-  firstName: [
+  firstname: [
     useRequiredRule()
   ],
-  lastName: [
+  lastname: [
     useRequiredRule()
   ]
 })
 
-const submitForm = async () => {
+const notifySuccessfulSignUp = () => {
+  ElNotification({
+    title: 'Account created',
+    message: 'Now, check your email to confirm it',
+    type: 'success',
+    duration: 0
+  })
+}
+
+const notifyFailedSignUp = (message: string) => {
+  ElNotification({
+    title: 'Signup error',
+    message,
+    type: 'error',
+    duration: 0
+  })
+}
+
+const submitForm = () => {
   formRef.value.validate(valid => {
     if (valid) {
-      alert('submitted')
-      console.log(formModel)
-      resetForm()
+      const { confirmPassword, ...credentials } = formModel
+      isLoading.value = true
+
+      signup(credentials)
+        .then(() => {
+          notifySuccessfulSignUp()
+          resetForm()
+        })
+        .catch(error => {
+          notifyFailedSignUp(error.message)
+        })
+        .finally(() => {
+          isLoading.value = false
+        })
     }
   })
 }

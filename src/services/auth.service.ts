@@ -1,14 +1,20 @@
 class AuthService {
   async login ({ email, password }: ILoginPayload) {
-    const { data } = await useSupabase.auth.signInWithPassword({ email, password })
+    const { data, error } = await useSupabase.auth.signInWithPassword({ email, password })
 
-    return data
+    return { data, error }
   }
 
   async signup ({ email, password, ...rest }: ISignUpPayload) {
-    const { data } = await useSupabase.auth.signUp({ email, password, options: { data: rest } })
+    const { data, error } = await useSupabase.auth.signUp({ email, password, options: { data: rest } })
 
-    return data
+    return { data, error }
+  }
+
+  async getUserProfileById (id: string) {
+    const { data, error } = await useSupabase.from('profiles').select('*').eq('id', id)
+
+    return { data, error }
   }
 }
 

@@ -22,7 +22,7 @@
       <el-form-item label="Password" prop="password">
         <el-input v-model="formModel.password" type="password" show-password />
       </el-form-item>
-      <el-button class="ml-auto block" type="primary" native-type="submit">
+      <el-button class="ml-auto block" type="primary" native-type="submit" :loading="isLoading">
         Log in
       </el-button>
     </el-form>
@@ -30,7 +30,13 @@
 </template>
 
 <script setup lang="ts">
+import { ElNotification } from 'element-plus'
+
 const formRef = useElFormRef()
+const { login } = useAuthStore()
+const isLoading = ref(false)
+const router = useRouter()
+const { $routeNames } = useGlobalProperties()
 
 const formModel = useElFormModel({
   email: '',
@@ -48,16 +54,31 @@ const formRules = useElFormRules({
   ]
 })
 
-const submitForm = async () => {
-  formRef.value.validate(valid => {
-    if (valid) {
-      alert('submitted')
-      resetForm()
-    }
+const notifyFailedLogin = (message: string) => {
+  ElNotification({
+    title: 'Login error',
+    message,
+    type: 'error',
+    duration: 0
   })
 }
 
-const resetForm = () => {
-  formRef.value.resetFields()
+const submitForm = () => {
+  formRef.value.validate(valid => {
+    if (valid) {
+      isLoading.value = true
+
+      login(formModel)
+        .then(() => {
+          router.push({ name: $routeNames.home })
+        })
+        .catch((error) => {
+          notifyFailedLogin(error.message)
+        })
+        .finally(() => {
+          isLoading.value = false
+        })
+    }
+  })
 }
 </script>

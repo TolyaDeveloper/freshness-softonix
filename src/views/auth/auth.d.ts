@@ -1,10 +1,11 @@
 type TRoles = 'user' | 'seller'
 
 interface IUser {
+  id: string
   email: string
-  firstName: string
-  lastName: string
-  defaultAddress: string
+  firstname: string
+  lastname: string
+  address: string
   role: TRoles
 }
 
@@ -16,7 +17,7 @@ interface ILoginPayload {
 interface ISignUpPayload {
   email: string
   password: string
-  firstName: string
-  lastName: string
-  defaultAddress: string
+  firstname: string
+  lastname: string
+  address: string
 }

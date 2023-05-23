@@ -10,6 +10,8 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Copyright: typeof import('./../src/components/footer/Copyright.vue')['default']
+    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
+    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElDivider: typeof import('element-plus/es')['ElDivider']
@@ -33,5 +35,8 @@ declare module '@vue/runtime-core' {
     SignUpForm: typeof import('./../src/views/auth/components/SignUpForm.vue')['default']
     TopBar: typeof import('./../src/components/header/TopBar.vue')['default']
     UserWithCart: typeof import('./../src/components/UserWithCart.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

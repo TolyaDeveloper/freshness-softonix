@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center">
-    <router-link to="/profile" aria-label="Open your profile page">
+    <router-link :to="{ name: $routeNames.profile }" aria-label="Open your profile page">
       <icon-user />
     </router-link>
     <router-link class="relative ml-10" to="/cart" aria-label="Open your shopping cart">
