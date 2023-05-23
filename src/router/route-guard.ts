@@ -5,6 +5,11 @@ export const routeGuard = async (
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  // todo: please write your own route guard
+  const store = useAuthStore()
+
+  if (!store.user && to.meta.requireAuth) {
+    next(false)
+  }
+
   next()
 }

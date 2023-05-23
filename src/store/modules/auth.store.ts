@@ -1,3 +1,6 @@
+import { router } from '@/router'
+import { routeNames } from '@/router/route-names'
+
 export const useAuthStore = defineStore('authStore', () => {
   const user = ref<TNullable<IUser>>(null)
 
@@ -30,9 +33,21 @@ export const useAuthStore = defineStore('authStore', () => {
     return data[0]
   }
 
+  const logout = async () => {
+    const { error } = await authService.logout()
+    user.value = null
+
+    if (error) {
+      throw new Error(error.message)
+    }
+
+    window.location.href = router.resolve(routeNames.login).href
+  }
+
   return {
     user,
     login,
-    signup
+    signup,
+    logout
   }
 })

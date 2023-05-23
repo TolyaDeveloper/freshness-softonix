@@ -16,6 +16,12 @@ class AuthService {
 
     return { data, error }
   }
+
+  async logout () {
+    const { error } = await useSupabase.auth.signOut()
+
+    return { error }
+  }
 }
 
 export const authService = new AuthService()
