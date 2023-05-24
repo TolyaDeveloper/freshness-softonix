@@ -17,16 +17,23 @@
     <el-form-item label="Last Name" prop="lastname">
       <el-input v-model="editFormModel.lastname" :disabled="!isEditMode" />
     </el-form-item>
-    <el-form-item label="Default delivery address" prop="address">
+    <el-form-item label="Default delivery city" prop="address.city">
       <el-select
-        v-model="editFormModel.address"
+        v-model="editFormModel.address.city"
         :disabled="!isEditMode"
         placeholder="Select a city"
         clearable
       >
-        <el-option label="Lviv" value="Lviv" />
-        <el-option label="Kyiv" value="Kyiv" />
+        <el-option
+          v-for="city in cities"
+          :key="city.label"
+          :label="city.label"
+          :value="city.value"
+        />
       </el-select>
+    </el-form-item>
+    <el-form-item label="Default delivery street" prop="address.street">
+      <el-input v-model="formModel.address.street" :disabled="!isEditMode" />
     </el-form-item>
     <div class="flex justify-between items-center mt-16">
       <div>
@@ -44,7 +51,7 @@
           </el-button>
         </template>
       </div>
-      <el-button type="danger" @click="logout">
+      <el-button type="danger" plain @click="logout">
         Logout
       </el-button>
     </div>
@@ -52,6 +59,7 @@
 </template>
 
 <script setup lang="ts">
+import { cities } from '@/constants/cities'
 import { ElNotification } from 'element-plus'
 
 const formRef = useElFormRef()
@@ -67,10 +75,13 @@ const formModel = useElFormModel({
   email: user.value?.email,
   firstname: user.value?.firstname,
   lastname: user.value?.lastname,
-  address: user.value?.address
+  address: {
+    city: user.value?.address.city,
+    street: user.value?.address.street
+  }
 })
 
-let editFormModel = useElFormModel({ ...formModel })
+let editFormModel = useElFormModel({ ...JSON.parse(JSON.stringify(formModel)) })
 
 const setEditMode = () => {
   isEditMode.value = true
@@ -79,7 +90,7 @@ const setEditMode = () => {
 }
 
 const removeEditMode = () => {
-  editFormModel = useElFormModel({ ...formModel })
+  editFormModel = useElFormModel({ ...JSON.parse(JSON.stringify(formModel)) })
 
   isEditMode.value = false
 }

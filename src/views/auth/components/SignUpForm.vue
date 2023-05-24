@@ -31,15 +31,22 @@
       <el-form-item label="Last Name" prop="lastname">
         <el-input v-model="formModel.lastname" />
       </el-form-item>
-      <el-form-item label="Default delivery address" prop="address">
+      <el-form-item label="Default delivery city" prop="address.city">
         <el-select
-          v-model="formModel.address"
+          v-model="formModel.address.city"
           placeholder="Select a city"
           clearable
         >
-          <el-option label="Lviv" value="Lviv" />
-          <el-option label="Kyiv" value="Kyiv" />
+          <el-option
+            v-for="city in cities"
+            :key="city.label"
+            :label="city.label"
+            :value="city.value"
+          />
         </el-select>
+      </el-form-item>
+      <el-form-item label="Default delivery street" prop="address.street">
+        <el-input v-model="formModel.address.street" />
       </el-form-item>
       <el-button class="ml-auto block" type="primary" native-type="submit" :loading="isLoading">
         Sign up
@@ -49,10 +56,12 @@
 </template>
 
 <script setup lang="ts">
+import { cities } from '@/constants/cities'
 import { ElNotification } from 'element-plus'
 
 const formRef = useElFormRef()
 const { signup } = useAuthStore()
+const router = useRouter()
 const isLoading = ref(false)
 const { $routeNames } = useGlobalProperties()
 
@@ -62,7 +71,10 @@ const formModel = useElFormModel({
   confirmPassword: '',
   firstname: '',
   lastname: '',
-  address: ''
+  address: {
+    city: '',
+    street: ''
+  }
 })
 
 const formRules = useElFormRules({
@@ -114,7 +126,7 @@ const submitForm = () => {
         await signup(credentials)
 
         notifySuccessfulSignUp()
-        resetForm()
+        router.push({ name: $routeNames.login })
       } catch (error) {
         if (error instanceof Error) {
           notifyFailedSignUp(error.message)
@@ -126,7 +138,4 @@ const submitForm = () => {
   })
 }
 
-const resetForm = () => {
-  formRef.value.resetFields()
-}
 </script>

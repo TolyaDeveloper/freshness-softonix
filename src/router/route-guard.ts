@@ -34,3 +34,17 @@ export const initialUserSetup = async (
 
   next()
 }
+
+export const activeSessionGuard = async (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext
+) => {
+  const store = useAuthStore()
+
+  if (store.user && to.meta.isProtectedDuringSession) {
+    next({ name: routeNames.home })
+  } else {
+    next()
+  }
+}

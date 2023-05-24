@@ -10,6 +10,7 @@ declare module 'vue-router' {
     parentName?: string
     requireAuth?: boolean
     layout?: TLayouts
+    isProtectedDuringSession?: boolean
   }
 }
 

@@ -186,7 +186,6 @@
     "useGeolocation": true,
     "useGlobalProperties": true,
     "useHead": true,
-    "useHttp": true,
     "useI18n": true,
     "useIdle": true,
     "useImage": true,
