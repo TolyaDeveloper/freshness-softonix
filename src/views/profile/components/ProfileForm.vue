@@ -5,13 +5,14 @@
     :model="editFormModel"
     :rules="formRules"
     label-position="top"
+    :hide-required-asterisk="!isEditMode"
     @submit.prevent="submitForm"
   >
     <el-form-item label="Email" prop="email">
-      <el-input ref="inputRef" v-model="editFormModel.email" :disabled="!isEditMode" />
+      <el-input v-model="editFormModel.email" disabled />
     </el-form-item>
     <el-form-item label="First Name" prop="firstname">
-      <el-input v-model="editFormModel.firstname" :disabled="!isEditMode" />
+      <el-input ref="inputRef" v-model="editFormModel.firstname" :disabled="!isEditMode" />
     </el-form-item>
     <el-form-item label="Last Name" prop="lastname">
       <el-input v-model="editFormModel.lastname" :disabled="!isEditMode" />
@@ -84,10 +85,6 @@ const removeEditMode = () => {
 }
 
 const formRules = useElFormRules({
-  email: [
-    useRequiredRule(),
-    useEmailRule()
-  ],
   firstname: [
     useRequiredRule()
   ],
