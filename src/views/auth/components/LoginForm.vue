@@ -64,20 +64,21 @@ const notifyFailedLogin = (message: string) => {
 }
 
 const submitForm = () => {
-  formRef.value.validate(valid => {
+  formRef.value.validate(async valid => {
     if (valid) {
       isLoading.value = true
 
-      login(formModel)
-        .then(() => {
-          router.push({ name: $routeNames.home })
-        })
-        .catch((error) => {
+      try {
+        await login(formModel)
+
+        router.push({ name: $routeNames.home })
+      } catch (error) {
+        if (error instanceof Error) {
           notifyFailedLogin(error.message)
-        })
-        .finally(() => {
-          isLoading.value = false
-        })
+        }
+      } finally {
+        isLoading.value = false
+      }
     }
   })
 }

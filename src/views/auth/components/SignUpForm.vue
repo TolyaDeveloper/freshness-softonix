@@ -105,22 +105,23 @@ const notifyFailedSignUp = (message: string) => {
 }
 
 const submitForm = () => {
-  formRef.value.validate(valid => {
+  formRef.value.validate(async valid => {
     if (valid) {
       const { confirmPassword, ...credentials } = formModel
       isLoading.value = true
 
-      signup(credentials)
-        .then(() => {
-          notifySuccessfulSignUp()
-          resetForm()
-        })
-        .catch(error => {
+      try {
+        await signup(credentials)
+
+        notifySuccessfulSignUp()
+        resetForm()
+      } catch (error) {
+        if (error instanceof Error) {
           notifyFailedSignUp(error.message)
-        })
-        .finally(() => {
-          isLoading.value = false
-        })
+        }
+      } finally {
+        isLoading.value = false
+      }
     }
   })
 }
