@@ -66,10 +66,8 @@ interface IDatabase {
       }
       profiles: {
         Row: {
-          address: {
-            street: string
-            city: string
-          }
+          city: string
+          street: string
           email: string
           firstname: string
           id: string
@@ -78,10 +76,8 @@ interface IDatabase {
           role: ERoles
         }
         Insert: {
-          address: {
-            street: string
-            city: string
-          }
+          city: string
+          street: string
           email: string
           firstname: string
           id: string
@@ -90,10 +86,8 @@ interface IDatabase {
           role?: ERoles
         }
         Update: {
-          address?: {
-            street: string
-            city: string
-          }
+          city?: string
+          street?: string
           email?: string
           firstname?: string
           id?: string

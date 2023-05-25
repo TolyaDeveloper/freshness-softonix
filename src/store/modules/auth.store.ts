@@ -52,11 +52,20 @@ export const useAuthStore = defineStore('authStore', () => {
     window.location.href = router.resolve(routeNames.login).href
   }
 
+  const updateProfile = async (userId: string | undefined, updatedDataProfile: Partial<IUser>) => {
+    const { error } = await authService.updateProfile(userId, updatedDataProfile)
+
+    if (error) {
+      throw new Error(error?.message)
+    }
+  }
+
   return {
     user,
     login,
     signup,
     logout,
-    getUserProfile
+    getUserProfile,
+    updateProfile
   }
 })

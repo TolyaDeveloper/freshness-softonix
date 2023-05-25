@@ -8,10 +8,8 @@ interface IUser {
   email: string
   firstname: string
   lastname: string
-  address: {
-    city: string
-    street: string
-  }
+  city: string
+  street: string
   role: ERoles
   last_searched_category: string | null
 }
@@ -26,8 +24,6 @@ interface ISignUpPayload {
   password: string
   firstname: string
   lastname: string
-  address: {
-    city: string
-    street: string
-  }
+  city: string
+  street: string
 }

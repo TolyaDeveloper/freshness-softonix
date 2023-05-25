@@ -3,7 +3,7 @@
     <router-link :to="{ name: $routeNames.profile }" aria-label="Open your profile page">
       <IconUser />
     </router-link>
-    <router-link class="relative ml-10" to="/cart" aria-label="Open your shopping cart">
+    <router-link class="relative ml-7" to="/cart" aria-label="Open your shopping cart">
       <IconCart />
       <span
         class="absolute left-[-7px] bottom-[-6px] flex justify-center items-center w-[16px] h-[16px]
@@ -13,9 +13,15 @@
         {{ itemsInCart > 9 ? "9+" : itemsInCart }}
       </span>
     </router-link>
+    <el-divider class="mx-[20px]" direction="vertical" />
+    <button type="button" aria-label="Logout" title="Logout" @click="store.logout">
+      <IconLogout />
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
+const store = useAuthStore()
+
 const itemsInCart = ref(0)
 </script>
