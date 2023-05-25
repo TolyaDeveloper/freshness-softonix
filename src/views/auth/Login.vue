@@ -30,11 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import { notifyError, notifySuccess } from '@/helpers/notifications.handler'
-
 const formRef = useElFormRef()
 const { login } = useAuthStore()
-const router = useRouter()
 const { $routeNames } = useGlobalProperties()
 
 const isLoading = ref(false)
@@ -60,18 +57,9 @@ const submitForm = () => {
     if (valid) {
       isLoading.value = true
 
-      try {
-        await login(formModel)
+      await login(formModel)
 
-        notifySuccess({ title: 'Signed in successfully' })
-        router.push({ name: $routeNames.home })
-      } catch (error) {
-        if (error instanceof Error) {
-          notifyError({ title: 'Login error', message: error.message })
-        }
-      } finally {
-        isLoading.value = false
-      }
+      isLoading.value = false
     }
   })
 }

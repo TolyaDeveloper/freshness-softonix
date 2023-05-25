@@ -57,11 +57,9 @@
 
 <script setup lang="ts">
 import { cities } from '@/constants/cities'
-import { notifyError, notifySuccess } from '@/helpers/notifications.handler'
 
 const formRef = useElFormRef()
 const { signup } = useAuthStore()
-const router = useRouter()
 const { $routeNames } = useGlobalProperties()
 
 const isLoading = ref(false)
@@ -103,22 +101,9 @@ const submitForm = () => {
       const { confirmPassword, ...credentials } = formModel
       isLoading.value = true
 
-      try {
-        await signup(credentials)
+      await signup(credentials)
 
-        notifySuccess({
-          title: 'Account created',
-          message: 'Now, check your email to confirm it',
-          duration: 0
-        })
-        router.push({ name: $routeNames.login })
-      } catch (error) {
-        if (error instanceof Error) {
-          notifyError({ title: 'Signup error', message: error.message })
-        }
-      } finally {
-        isLoading.value = false
-      }
+      isLoading.value = false
     }
   })
 }

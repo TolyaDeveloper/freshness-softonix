@@ -55,12 +55,11 @@
 
 <script setup lang="ts">
 import { cities } from '@/constants/cities'
-import { notifyError, notifySuccess } from '@/helpers/notifications.handler'
+import { notificationHandler } from '@/helpers'
 
 const formRef = useElFormRef()
 const store = useAuthStore()
 const { user } = storeToRefs(store)
-const { updateProfile } = store
 
 const inputRef = ref<TNullable<HTMLInputElement>>(null)
 const isLoading = ref(false)
@@ -104,15 +103,18 @@ const submitForm = () => {
 
       try {
         const { email, ...updatedProfile } = editFormModel
+        const { error } = await authService.updateProfile(user.value?.id, updatedProfile)
 
-        await updateProfile(user.value?.id, updatedProfile)
+        if (error) {
+          throw new Error(error.message)
+        }
 
         formModel = { ...editFormModel }
         isEditMode.value = false
-        notifySuccess()
+        notificationHandler({ type: 'success', title: 'Account updated' })
       } catch (error) {
         if (error instanceof Error) {
-          notifyError({ title: 'Failed to update account info', message: error.message })
+          notificationHandler({ title: 'Failed to update account info', message: error.message })
         }
       } finally {
         isLoading.value = false
