@@ -75,7 +75,7 @@ interface IDatabase {
           id: string
           last_searched_category: string | null
           lastname: string
-          role: string
+          role: ERoles
         }
         Insert: {
           address: {
@@ -87,7 +87,7 @@ interface IDatabase {
           id: string
           last_searched_category?: string | null
           lastname: string
-          role?: string
+          role?: ERoles
         }
         Update: {
           address?: {
@@ -99,7 +99,7 @@ interface IDatabase {
           id?: string
           last_searched_category?: string | null
           lastname?: string
-          role?: string
+          role?: ERoles
         }
       }
     }

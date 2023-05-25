@@ -14,7 +14,7 @@
       >
         <template #suffix>
           <button type="submit" aria-label="Search">
-            <icon-search />
+            <IconSearch />
           </button>
         </template>
       </el-input>

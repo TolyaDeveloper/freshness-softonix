@@ -1,10 +1,10 @@
 <template>
   <div class="flex items-center">
     <router-link :to="{ name: $routeNames.profile }" aria-label="Open your profile page">
-      <icon-user />
+      <IconUser />
     </router-link>
     <router-link class="relative ml-10" to="/cart" aria-label="Open your shopping cart">
-      <icon-cart />
+      <IconCart />
       <span
         class="absolute left-[-7px] bottom-[-6px] flex justify-center items-center w-[16px] h-[16px]
                rounded-full bg-secondary-400 text-white text-[12px] font-poppins font-semibold

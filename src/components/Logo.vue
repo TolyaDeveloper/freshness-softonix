@@ -1,5 +1,5 @@
 <template>
   <router-link :to="{ name: $routeNames.home }" aria-label="Go home">
-    <icon-logo />
+    <IconLogo />
   </router-link>
 </template>

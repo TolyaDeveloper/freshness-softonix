@@ -1,6 +1,6 @@
 enum ERoles {
-  User = 'user',
-  Admin = 'admin',
+  user = 'user',
+  admin = 'admin',
 }
 
 interface IUser {
@@ -12,7 +12,7 @@ interface IUser {
     city: string
     street: string
   }
-  role: ERoles | string
+  role: ERoles
   last_searched_category: string | null
 }
 

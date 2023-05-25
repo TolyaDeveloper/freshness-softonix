@@ -62,8 +62,9 @@ import { ElNotification } from 'element-plus'
 const formRef = useElFormRef()
 const { signup } = useAuthStore()
 const router = useRouter()
-const isLoading = ref(false)
 const { $routeNames } = useGlobalProperties()
+
+const isLoading = ref(false)
 
 const formModel = useElFormModel({
   email: '',
