@@ -12,55 +12,55 @@ interface IDatabase {
       categories: {
         Row: {
           id: string
-          name: string | null
+          name: string
         }
         Insert: {
           id?: string
-          name?: string | null
+          name: string
         }
         Update: {
           id?: string
-          name?: string | null
+          name?: string
         }
       }
       products: {
         Row: {
-          brand: string | null
-          category: string | null
-          description: string | null
+          brand: string
+          category: string
+          description: string
           id: string
-          in_stock: number | null
-          name: string | null
-          price: number | null
-          qty: number | null
+          in_stock: number
+          name: string
+          price: number
+          qty: number
           rating: number | null
-          unit: string | null
+          unit: string
           vitamins: string[] | null
         }
         Insert: {
-          brand?: string | null
-          category?: string | null
-          description?: string | null
+          brand: string
+          category: string
+          description: string
           id: string
-          in_stock?: number | null
-          name?: string | null
-          price?: number | null
-          qty?: number | null
+          in_stock: number
+          name: string
+          price: number
+          qty: number
           rating?: number | null
-          unit?: string | null
+          unit: string
           vitamins?: string[] | null
         }
         Update: {
-          brand?: string | null
-          category?: string | null
-          description?: string | null
+          brand?: string
+          category?: string
+          description?: string
           id?: string
-          in_stock?: number | null
-          name?: string | null
-          price?: number | null
-          qty?: number | null
+          in_stock?: number
+          name?: string
+          price?: number
+          qty?: number
           rating?: number | null
-          unit?: string | null
+          unit?: string
           vitamins?: string[] | null
         }
       }
@@ -94,6 +94,26 @@ interface IDatabase {
           last_searched_category?: string | null
           lastname?: string
           role?: ERoles
+        }
+      }
+      feedbacks: {
+        Row: {
+          avatar: string
+          content: string
+          id: string
+          username: string
+        }
+        Insert: {
+          avatar: string
+          content: string
+          id?: string
+          username: string
+        }
+        Update: {
+          avatar?: string
+          content?: string
+          id?: string
+          username?: string
         }
       }
     }
