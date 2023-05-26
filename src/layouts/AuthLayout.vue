@@ -7,10 +7,10 @@
         <Logo />
       </div>
     </header>
-    <main class="grow">
+    <main class="grow mt-[15px]">
       <slot />
     </main>
-    <footer>
+    <footer class="my-[65px]">
       <FooterMenu />
       <Copyright />
     </footer>

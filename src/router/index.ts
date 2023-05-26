@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import { routeGuard } from './route-guard'
+import { routeGuard, initialUserSetup, activeSessionGuard } from './route-guard'
 import { routes } from './routes'
 
 export const router = createRouter({
@@ -8,4 +8,6 @@ export const router = createRouter({
   routes
 })
 
+router.beforeEach(initialUserSetup)
+router.beforeEach(activeSessionGuard)
 router.beforeEach(routeGuard)

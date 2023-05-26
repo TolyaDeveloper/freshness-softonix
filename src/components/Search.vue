@@ -6,7 +6,7 @@
     :show-message="false"
     @submit.prevent="submitForm"
   >
-    <el-form-item prop="searchQuery">
+    <el-form-item class="mb-0" prop="searchQuery">
       <el-input
         v-model="formModel.searchQuery"
         size="large"
@@ -14,7 +14,7 @@
       >
         <template #suffix>
           <button type="submit" aria-label="Search">
-            <icon-search />
+            <IconSearch />
           </button>
         </template>
       </el-input>
