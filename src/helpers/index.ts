@@ -1,8 +1,8 @@
 import { ElNotification, type NotificationParams } from 'element-plus'
 
-export const notificationHandler = (options?: NotificationParams) => {
+export const notificationHandler = (message: Error | string, options?: NotificationParams) => {
   ElNotification(Object.assign({
-    title: 'Oops, something went wrong',
+    message: (message as Error).message || message as string || 'Oops, something went wrong',
     type: 'error'
   }, options))
 }

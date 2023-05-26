@@ -16,12 +16,10 @@ export const useAuthStore = defineStore('authStore', () => {
       const userProfile = await getUserProfile(data.user.id)
       user.value = userProfile
 
-      notificationHandler({ title: 'Signed in successfully', type: 'success' })
+      notificationHandler('Signed in successfully', { type: 'success' })
       router.push({ name: routeNames.home })
     } catch (error) {
-      if (error instanceof Error) {
-        notificationHandler({ title: 'Login error', message: error.message })
-      }
+      notificationHandler((error as Error).message)
     }
   }
 
@@ -33,17 +31,10 @@ export const useAuthStore = defineStore('authStore', () => {
         throw new Error(error?.message)
       }
 
-      notificationHandler({
-        title: 'Account created',
-        message: 'Now, check your email to confirm it',
-        duration: 0,
-        type: 'success'
-      })
+      notificationHandler('Now, check your email to confirm it', { duration: 0, type: 'success' })
       router.push({ name: routeNames.login })
     } catch (error) {
-      if (error instanceof Error) {
-        notificationHandler({ title: 'Signup error', message: error.message })
-      }
+      notificationHandler((error as Error).message)
     }
   }
 
@@ -81,7 +72,7 @@ export const useAuthStore = defineStore('authStore', () => {
       window.location.href = router.resolve(routeNames.login).href
     } catch (error) {
       if (error instanceof Error) {
-        notificationHandler({ message: error.message })
+        notificationHandler((error as Error).message)
       }
     }
   }

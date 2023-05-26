@@ -111,11 +111,9 @@ const submitForm = () => {
 
         formModel = { ...editFormModel }
         isEditMode.value = false
-        notificationHandler({ type: 'success', title: 'Account updated' })
+        notificationHandler('Account updated', { type: 'success' })
       } catch (error) {
-        if (error instanceof Error) {
-          notificationHandler({ title: 'Failed to update account info', message: error.message })
-        }
+        notificationHandler((error as Error).message)
       } finally {
         isLoading.value = false
       }
