@@ -24,12 +24,3 @@
 <script setup lang="ts">
 defineProps<{ feedback: IFeedback }>()
 </script>
-
-<style>
-.multiline-truncate {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-}
-</style>

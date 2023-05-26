@@ -1,3 +1,15 @@
+interface ICategory {
+  id: string
+  name: string
+}
+
+interface IFeedback {
+  id: string
+  username: string
+  avatar: string
+  content: string
+}
+
 interface IProduct {
   id: string
   name: string

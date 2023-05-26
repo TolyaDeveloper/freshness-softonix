@@ -9,47 +9,40 @@
           :alt="product.name"
           @error="imageHasError = true"
         />
-        <h3 class="mb-[4px] mt-[15px] font-poppins font-medium text-[15px] truncate">
-          {{ product.name }}
-        </h3>
-        <p
-          class="truncate text-primary-600 text-[12px]"
-        >
-          {{ product.description }}
-        </p>
-        <template v-if="product.rating">
-          <el-rate v-model="rating" class="h-[20px]" disabled allow-half />
-        </template>
+        <slot name="title" :title="product.name">
+          <h3 class="mb-[4px] mt-[15px] font-poppins font-medium text-[15px] truncate">
+            {{ product.name }}
+          </h3>
+        </slot>
+        <slot name="description" :description="product.description">
+          <p class="truncate text-primary-600 text-[12px]">
+            {{ product.description }}
+          </p>
+        </slot>
+        <el-rate v-if="rating" v-model="rating" class="h-[20px]" disabled allow-half />
         <p class="mt-[15px] font-poppins font-semibold text-[18px]">
-          {{ new Intl.NumberFormat('us', {
-            style: 'currency',
-            currency: 'USD',
-            currencyDisplay: 'code'
-          }).format(product.price) }}
+          {{ $filters.currencyParser(product.price) }}
         </p>
       </div>
     </router-link>
-    <template v-if="isAlreadyInCart">
-      <router-link #default="{ navigate }" :to="{ name: $routeNames.home }" custom>
-        <el-button
-          role="link"
-          class="absolute right-[15px] bottom-[10px]"
-          round
-          @click="navigate"
-        >
-          View in cart
-        </el-button>
-      </router-link>
-    </template>
-    <template v-else>
+    <router-link v-if="isAlreadyInCart" #default="{ navigate }" :to="{ name: $routeNames.home }" custom>
       <el-button
+        role="link"
         class="absolute right-[15px] bottom-[10px]"
-        type="primary"
         round
+        @click="navigate"
       >
-        Buy now
+        View in cart
       </el-button>
-    </template>
+    </router-link>
+    <el-button
+      v-else
+      class="absolute right-[15px] bottom-[10px]"
+      type="primary"
+      round
+    >
+      Buy now
+    </el-button>
   </div>
 </template>
 
@@ -60,7 +53,7 @@ const props = defineProps<{
   product: IProduct
 }>()
 
-const rating = ref(props.product.rating as number)
+const rating = ref(props.product.rating)
 const isAlreadyInCart = ref(false)
 const imageHasError = ref(false)
 </script>

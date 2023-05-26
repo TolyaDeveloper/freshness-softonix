@@ -1,9 +1,11 @@
 import type { Plugin } from 'vue'
 
 import { routeNames } from '@/router/route-names'
+import { allFilters } from '@/core/filters'
 
 export const globalProperties = {
-  $routeNames: routeNames
+  $routeNames: routeNames,
+  $filters: allFilters
 }
 
 export const VueGlobalPropertiesPlugin: Plugin = {

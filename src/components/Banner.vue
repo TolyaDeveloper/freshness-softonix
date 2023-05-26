@@ -7,12 +7,16 @@
       :alt="title"
     />
     <div class="relative flex flex-col items-start h-full z-10 truncate">
-      <p v-if="subfocus" class="mb-[10px] text-accent-400 font-poppins text-[12px] font-semibold">
-        {{ subfocus }}
-      </p>
-      <p class="font-poppins text-[22px] font-semibold">
-        {{ title }}
-      </p>
+      <slot name="subfocus">
+        <p v-if="subfocus" class="mb-[10px] text-accent-400 font-poppins text-[12px] font-semibold">
+          {{ subfocus }}
+        </p>
+      </slot>
+      <slot name="title">
+        <p class="font-poppins text-[22px] font-semibold">
+          {{ title }}
+        </p>
+      </slot>
       <router-link #default="{ navigate }" :to="to" custom>
         <el-button
           class="mt-auto bg-transparent border-2 border-accent-400 font-poppins font-semibold"
@@ -45,7 +49,7 @@ withDefaults(defineProps<{
 </script>
 
 <style lang="scss">
-.image  image {
+.image image {
   @apply rounded-[12px]
 }
 </style>

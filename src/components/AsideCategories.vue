@@ -1,9 +1,10 @@
 <template>
-  <aside>
-    <BlockTitle class="mb-[15px]">{{ title }}</BlockTitle>
+  <el-skeleton v-if="!store.categories.length" :rows="5" />
+  <aside v-else>
+    <BlockTitle class="mb-[15px]">Category menu</BlockTitle>
     <ul>
       <li
-        v-for="category in categories.slice(0, dynamicMaxItemsCount)"
+        v-for="category in store.categories.slice(0, dynamicMaxItemsCount)"
         :key="category.id"
         class="mb-[6px] text-accent-400"
       >
@@ -13,14 +14,14 @@
       </li>
     </ul>
     <el-button
-      v-if="dynamicMaxItemsCount < categories.length"
+      v-if="dynamicMaxItemsCount < store.categories.length"
       class="mt-[35px] flex items-center text-primary-700 font-bold font-poppins hover:text-primary-600"
       type="info"
       size="large"
       round
       @click="expandList"
     >
-      {{ buttonTitle }}
+      More categories
       <IconArrowRight class="ml-[12px]" />
     </el-button>
   </aside>
@@ -28,18 +29,20 @@
 
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  title: string
-  categories: ICategory[]
-  buttonTitle?: string
   maxItems?: number
 }>(), {
-  maxItems: 5,
-  buttonTitle: 'More categories'
+  maxItems: 5
 })
+
+const store = useShopStore()
 
 const dynamicMaxItemsCount = ref(props.maxItems)
 
 const expandList = () => {
-  dynamicMaxItemsCount.value = props.categories.length
+  dynamicMaxItemsCount.value = store.categories.length
 }
+
+onMounted(() => {
+  store.getCategories()
+})
 </script>

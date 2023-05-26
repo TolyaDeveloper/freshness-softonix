@@ -1,6 +1,5 @@
 <template>
   <el-carousel
-    class="custom-carousel"
     height="225px"
     :initial-index="1"
     :autoplay="false"
@@ -21,11 +20,3 @@
 <script setup lang="ts">
 defineProps<{ feedbacks: IFeedback[] }>()
 </script>
-
-<style lang="scss">
-.custom-carousel {
-  .el-carousel__arrow {
-    @apply bg-accent-400;
-  }
-}
-</style>

@@ -1,5 +1,6 @@
 import 'vue-router'
 import { routeNames } from '@/router/route-names'
+import { allFilters } from '@/core/filters'
 import { globalProperties, portalNames } from '@/plugins'
 import { EElComponentSize, EElComponentType } from '@/types/enums'
 
@@ -19,6 +20,7 @@ declare module '@vue/runtime-core' {
     // todo: Here you define you global vue definitions.
     $portalNames: typeof portalNames
     $routeNames: typeof routeNames
+    $filters: typeof allFilters
 
     // todo: These ones are used only for element library for size and type props;
     $elComponentSize: typeof EElComponentSize
