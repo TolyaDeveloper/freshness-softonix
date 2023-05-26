@@ -113,7 +113,7 @@ const submitForm = () => {
         isEditMode.value = false
         notificationHandler('Account updated', { type: 'success' })
       } catch (error) {
-        notificationHandler((error as Error).message)
+        notificationHandler(error as Error)
       } finally {
         isLoading.value = false
       }

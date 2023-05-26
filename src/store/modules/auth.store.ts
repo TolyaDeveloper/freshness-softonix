@@ -19,7 +19,7 @@ export const useAuthStore = defineStore('authStore', () => {
       notificationHandler('Signed in successfully', { type: 'success' })
       router.push({ name: routeNames.home })
     } catch (error) {
-      notificationHandler((error as Error).message)
+      notificationHandler(error as Error)
     }
   }
 
@@ -34,7 +34,7 @@ export const useAuthStore = defineStore('authStore', () => {
       notificationHandler('Now, check your email to confirm it', { duration: 0, type: 'success' })
       router.push({ name: routeNames.login })
     } catch (error) {
-      notificationHandler((error as Error).message)
+      notificationHandler(error as Error)
     }
   }
 
@@ -72,7 +72,7 @@ export const useAuthStore = defineStore('authStore', () => {
       window.location.href = router.resolve(routeNames.login).href
     } catch (error) {
       if (error instanceof Error) {
-        notificationHandler((error as Error).message)
+        notificationHandler(error as Error)
       }
     }
   }
