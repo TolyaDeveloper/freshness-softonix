@@ -1,16 +1,16 @@
 <template>
-  <ul class="grid-view">
-    <template v-if="view === 'grid'">
+  <template v-if="view === 'grid'">
+    <ul class="grid-view">
       <li v-for="product in products" :key="product.id">
         <GridProductCard :product="product" />
       </li>
-    </template>
-  </ul>
-  <ul class="list-view">
-    <template v-if="view === 'list'">
+    </ul>
+  </template>
+  <template v-if="view === 'list'">
+    <ul class="list-view">
       list view
-    </template>
-  </ul>
+    </ul>
+  </template>
 </template>
 
 <script setup lang="ts">
