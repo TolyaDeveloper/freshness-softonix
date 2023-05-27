@@ -1,15 +1,21 @@
 <template>
   <template v-if="authStore.user">
-    <slot name="title" />
-    <ProductsSkeleton v-if="!shopStore.productsByLastSearch.length" />
-    <ProductContainer v-else :products="shopStore.productsByLastSearch" view="grid" />
+    <ProductsSkeleton v-if="isLoading" />
+    <template v-else-if="shopStore.productsByLastSearch.length">
+      <slot name="title" />
+      <ProductContainer :products="shopStore.productsByLastSearch" view="grid" />
+    </template>
   </template>
 </template>
 <script setup lang="ts">
 const authStore = useAuthStore()
 const shopStore = useShopStore()
 
-onMounted(() => {
-  shopStore.getProductsByLastSearch(4, authStore.user?.last_searched_category)
+const isLoading = ref(true)
+
+onMounted(async () => {
+  await shopStore.getProductsByLastSearch(4, authStore.user?.last_searched_category)
+
+  isLoading.value = false
 })
 </script>
