@@ -1,9 +1,22 @@
 <template>
   <AsideWithBanners />
-  <BlockTitle class="my-[50px]">Most popular products 🔥</BlockTitle>
-  <MostPopularProducts />
-  <BlockTitle class="my-[50px]">Our clients say</BlockTitle>
-  <FeedbacksSlider :feedbacks="store.feedbacks" />
+  <MostPopularProducts>
+    <template #title>
+      <BlockTitle class="my-[50px]">Most popular products 🔥</BlockTitle>
+    </template>
+  </MostPopularProducts>
+  <FeedbacksSlider :feedbacks="store.feedbacks">
+    <template #title>
+      <BlockTitle class="my-[50px]">Our clients say</BlockTitle>
+    </template>
+  </FeedbacksSlider>
+  <ProductsByLastSearch>
+    <template #title>
+      <BlockTitle class="my-[50px]">
+        Recommendations based on your searches 🔍
+      </BlockTitle>
+    </template>
+  </ProductsByLastSearch>
 </template>
 
 <script setup lang="ts">

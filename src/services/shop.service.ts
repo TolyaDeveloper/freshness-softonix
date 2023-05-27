@@ -10,6 +10,10 @@ class ShopService {
   getFeedbacks () {
     return useSupabase.from('feedbacks').select('*')
   }
+
+  getProductsByLastSearch (limit: number, categoryId: TNullable<string | undefined>) {
+    return useSupabase.from('products').select('*').eq('category', categoryId).limit(limit)
+  }
 }
 
 export const shopService = new ShopService()

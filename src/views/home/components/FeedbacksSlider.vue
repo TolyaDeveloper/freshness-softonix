@@ -1,4 +1,5 @@
 <template>
+  <slot name="title" />
   <el-carousel
     height="225px"
     :initial-index="1"

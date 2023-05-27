@@ -46,6 +46,8 @@ declare module '@vue/runtime-core' {
     MiddleBar: typeof import('./../src/components/header/MiddleBar.vue')['default']
     MostPopularProducts: typeof import('./../src/views/home/components/MostPopularProducts.vue')['default']
     ProductContainer: typeof import('./../src/components/products/ProductContainer.vue')['default']
+    ProductsByLastSearch: typeof import('./../src/views/home/components/ProductsByLastSearch.vue')['default']
+    ProductsSkeleton: typeof import('./../src/components/skeletons/ProductsSkeleton.vue')['default']
     ProfileForm: typeof import('./../src/views/profile/components/ProfileForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

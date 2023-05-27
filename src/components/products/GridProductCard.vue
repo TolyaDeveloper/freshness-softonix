@@ -9,12 +9,12 @@
           :alt="product.name"
           @error="imageHasError = true"
         />
-        <slot name="title" :title="product.name">
+        <slot name="title">
           <h3 class="mb-[4px] mt-[15px] font-poppins font-medium text-[15px] truncate">
             {{ product.name }}
           </h3>
         </slot>
-        <slot name="description" :description="product.description">
+        <slot name="description">
           <p class="truncate text-primary-600 text-[12px]">
             {{ product.description }}
           </p>
@@ -56,4 +56,5 @@ const props = defineProps<{
 const rating = ref(props.product.rating)
 const isAlreadyInCart = ref(false)
 const imageHasError = ref(false)
+
 </script>
