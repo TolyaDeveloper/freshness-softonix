@@ -5,7 +5,7 @@
       <BlockTitle class="my-[50px]">Most popular products 🔥</BlockTitle>
     </template>
   </MostPopularProducts>
-  <FeedbacksSlider :feedbacks="store.feedbacks">
+  <FeedbacksSlider :feedbacks="feedbacks">
     <template #title>
       <BlockTitle class="my-[50px]">Our clients say</BlockTitle>
     </template>
@@ -20,11 +20,23 @@
 </template>
 
 <script setup lang="ts">
-import { useShopStore } from '@/store/modules/shop.store'
+const feedbacks = ref<IFeedback[]>([])
 
-const store = useShopStore()
+const getFeedbacks = async () => {
+  try {
+    const { data } = await homeService.getFeedbacks()
+
+    if (!data) {
+      return
+    }
+
+    feedbacks.value = data
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 onMounted(() => {
-  store.getFeedbacks()
+  getFeedbacks()
 })
 </script>

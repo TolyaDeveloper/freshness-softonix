@@ -1,13 +1,27 @@
 <template>
   <slot name="title" />
-  <ProductsSkeleton v-if="!store.mostPopularProducts.length" />
-  <ProductContainer v-else :products="store.mostPopularProducts" view="grid" />
+  <ProductsSkeleton v-if="!mostPopularProducts.length" />
+  <ProductContainer v-else :products="mostPopularProducts" view="grid" />
 </template>
 
 <script setup lang="ts">
-const store = useShopStore()
+const mostPopularProducts = ref<IProduct[]>([])
+
+const getMostPopularProducts = async (limit: number) => {
+  try {
+    const { data } = await homeService.getMostPopularProducts(limit)
+
+    if (!data) {
+      return
+    }
+
+    mostPopularProducts.value = data
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 onMounted(() => {
-  store.getMostPopularProducts(4)
+  getMostPopularProducts(4)
 })
 </script>
