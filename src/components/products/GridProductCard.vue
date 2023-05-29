@@ -56,5 +56,4 @@ const props = defineProps<{
 const rating = ref(props.product.rating)
 const isAlreadyInCart = ref(false)
 const imageHasError = ref(false)
-
 </script>

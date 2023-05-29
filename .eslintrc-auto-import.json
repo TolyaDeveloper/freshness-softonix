@@ -1,5 +1,6 @@
 {
   "globals": {
+    "CategoryProductsService": true,
     "Component": true,
     "ComponentPublicInstance": true,
     "ComputedRef": true,
@@ -12,6 +13,7 @@
     "asyncComputed": true,
     "authService": true,
     "autoResetRef": true,
+    "categoryProductsService": true,
     "computed": true,
     "computedAsync": true,
     "computedEager": true,
