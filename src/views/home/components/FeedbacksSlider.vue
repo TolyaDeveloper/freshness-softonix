@@ -1,5 +1,7 @@
 <template>
-  <slot name="title" />
+  <slot name="title">
+    <BlockTitle class="my-[50px]">Our clients say</BlockTitle>
+  </slot>
   <el-carousel
     height="225px"
     :initial-index="1"

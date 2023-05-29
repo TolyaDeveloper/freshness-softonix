@@ -1,5 +1,7 @@
 <template>
-  <slot name="title" />
+  <slot name="title">
+    <BlockTitle class="my-[50px]">Most popular products 🔥</BlockTitle>
+  </slot>
   <ProductsSkeleton v-if="!mostPopularProducts.length" />
   <ProductContainer v-else :products="mostPopularProducts" view="grid" />
 </template>

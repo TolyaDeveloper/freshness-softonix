@@ -2,7 +2,11 @@
   <template v-if="authStore.user">
     <ProductsSkeleton v-if="isLoading" />
     <template v-else-if="productsByLastSearch.length">
-      <slot name="title" />
+      <slot name="title">
+        <BlockTitle class="my-[50px]">
+          Recommendations based on your searches 🔍
+        </BlockTitle>
+      </slot>
       <ProductContainer :products="productsByLastSearch" view="grid" />
     </template>
   </template>
