@@ -1,1 +1,0 @@
-type TLayouts = 'default' | 'auth'

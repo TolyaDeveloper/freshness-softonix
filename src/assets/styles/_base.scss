@@ -50,7 +50,21 @@ label {
   max-width: 1260px;
   min-height: 100vh;
   margin: 0 auto;
-  padding: 0 45px 0 45px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   background-color: #fff;
+
+  @apply px-[20px] md:px-[45px];
+}
+
+.multiline-truncate {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.link {
+  &:hover {
+    text-decoration: underline;
+  }
 }
