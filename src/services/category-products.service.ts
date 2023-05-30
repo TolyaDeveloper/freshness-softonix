@@ -39,8 +39,18 @@ export class CategoryProductsService {
     return query
   }
 
-  getMinMaxPrices () {
-    return useSupabase.rpc('get_min_max_prices')
+  getBrands (categoryId: string) {
+    return useSupabase.from('products').select('brand').eq('category', categoryId)
+  }
+
+  getMinMaxPrices (categoryId: string, filters: Pick<IFilters, 'filterByRating' | 'filterByBrand'>) {
+    const { filterByRating, filterByBrand } = filters
+
+    return useSupabase.rpc('get_min_max_prices', {
+      p_category: [categoryId],
+      p_brand: filterByBrand,
+      p_rating: filterByRating
+    })
   }
 }
 

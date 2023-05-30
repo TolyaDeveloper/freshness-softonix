@@ -121,7 +121,17 @@ interface IDatabase {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_min_max_prices: {
+        Args: {
+          p_rating?: number[]
+          p_category?: string[]
+          p_brand?: string[]
+        }
+        Returns: {
+          min_price: number
+          max_price: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

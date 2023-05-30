@@ -64,7 +64,7 @@ const totalProducts = ref(0)
 const categoryProducts = ref<IProduct[]>([])
 const isLoading = ref(true)
 const productView = ref<TProductViews>('grid')
-const minMaxPrices = ref<[number, number]>([0, 10])
+const minMaxPrices = ref<[number, number]>([0, Infinity])
 
 const categoryId = ref<string>(route.params.id as string)
 const filters = ref<IFilters>({
@@ -99,6 +99,38 @@ const getCategoryProductsWithCount = async () => {
   }
 }
 
+const getMinMaxPrices = async () => {
+  try {
+    const { data } = await categoryProductsService.getMinMaxPrices(categoryId.value, {
+      filterByBrand: filters.value.filterByBrand,
+      filterByRating: filters.value.filterByRating
+    })
+
+    if (!data) {
+      return
+    }
+
+    minMaxPrices.value[0] = Math.floor(data[0].min_price)
+    minMaxPrices.value[1] = Math.ceil(data[0].max_price)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const getBrands = async () => {
+  try {
+    const { data } = await categoryProductsService.getBrands(categoryId.value)
+
+    if (!data) {
+      return
+    }
+
+    console.log({ brands: data })
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 const reset = () => {
   replace({ query: {} })
 }
@@ -107,12 +139,15 @@ watch(() => route.params.id, () => {
   categoryId.value = route.params.id as string
 
   getCategoryProductsWithCount()
+  getMinMaxPrices()
+  getBrands()
 
   console.log('watch 1')
 }, { immediate: true })
 
 watch(() => filters, () => {
   getCategoryProductsWithCount()
+  getMinMaxPrices()
 
   console.log('watch 2')
 

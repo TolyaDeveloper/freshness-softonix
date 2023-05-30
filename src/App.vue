@@ -8,13 +8,6 @@
 import Layout from './layouts/Layout.vue'
 
 const store = useGeneralStore()
-const t = async () => {
-  const data = await categoryProductsService.getMinMaxPrices()
-
-  console.log({ mydata: data })
-}
-
-// t()
 
 onBeforeMount(() => {
   store.getInitialData()
