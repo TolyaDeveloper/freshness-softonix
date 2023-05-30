@@ -69,4 +69,7 @@ declare module '@vue/runtime-core' {
     TopBar: typeof import('./../src/components/header/TopBar.vue')['default']
     UserMenu: typeof import('./../src/components/UserMenu.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }

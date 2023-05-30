@@ -38,6 +38,10 @@ export class CategoryProductsService {
 
     return query
   }
+
+  getMinMaxPrices () {
+    return useSupabase.rpc('get_min_max_prices')
+  }
 }
 
 export const categoryProductsService = new CategoryProductsService()

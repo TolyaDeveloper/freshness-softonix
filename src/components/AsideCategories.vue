@@ -1,5 +1,5 @@
 <template>
-  <el-skeleton v-if="!generalStore.categories.length" :rows="5" />
+  <el-skeleton v-if="generalStore.initialLoading" :rows="5" />
   <aside v-else>
     <BlockTitle class="mb-[15px]">Category menu</BlockTitle>
     <ul>
@@ -18,8 +18,4 @@
 
 <script setup lang="ts">
 const generalStore = useGeneralStore()
-
-onMounted(() => {
-  generalStore.getCategories()
-})
 </script>

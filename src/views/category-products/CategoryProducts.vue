@@ -66,14 +66,14 @@ const isLoading = ref(true)
 const productView = ref<TProductViews>('grid')
 const minMaxPrices = ref<[number, number]>([0, 10])
 
-const categoryId = ref('')
+const categoryId = ref<string>(route.params.id as string)
 const filters = ref<IFilters>({
-  filterByBrand: [],
+  filterByBrand: route.query.filterByBrand as string[] || [],
   filterByRangePrice: [minMaxPrices.value[0], minMaxPrices.value[1]],
-  filterByRating: [],
-  itemsPerPage: 3,
-  page: 1,
-  priceSortType: 'DEFAULT'
+  filterByRating: [route.query.filterByRating].flat(1).filter(Boolean).map(Number),
+  itemsPerPage: Number(route.query.itemsPerPage) || 3,
+  page: Number(route.query.page) || 1,
+  priceSortType: route.query.priceSortType as TPriceFilters || 'DEFAULT'
 })
 
 const getCategoryProductsWithCount = async () => {
@@ -106,9 +106,9 @@ const reset = () => {
 watch(() => route.params.id, () => {
   categoryId.value = route.params.id as string
 
-  console.log('watch 1')
-
   getCategoryProductsWithCount()
+
+  console.log('watch 1')
 }, { immediate: true })
 
 watch(() => filters, () => {
