@@ -1,15 +1,13 @@
 export class CategoryProductsService {
-  async getCategoryProductsWithCount (options: IFilters) {
+  async getCategoryProductsWithCount (categoryId: string, filters: IFilters) {
     const {
-      categoryId,
       page,
       itemsPerPage,
       priceSortType,
       filterByBrand,
       filterByRating,
-      filterByMinPrice,
-      filterByMaxPrice
-    } = options
+      filterByRangePrice
+    } = filters
 
     const offset = (page - 1) * itemsPerPage
     const limit = itemsPerPage
@@ -19,8 +17,8 @@ export class CategoryProductsService {
       .select('*', { count: 'exact' })
       .eq('category', categoryId)
       .range(offset, offset + limit - 1)
-      .gte('price', filterByMinPrice ?? 0)
-      .lte('price', filterByMaxPrice ?? Infinity)
+      .gte('price', filterByRangePrice[0] ?? 0)
+      .lte('price', filterByRangePrice[1] ?? Infinity)
 
     if (priceSortType === 'LOW_TO_HIGH') {
       query.order('price', { ascending: true })
