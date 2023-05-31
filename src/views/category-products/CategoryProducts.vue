@@ -67,10 +67,11 @@
 </template>
 
 <script setup lang="ts">
+import { useFilters } from '@/composables/useFilters'
 import { findCategory } from '@/helpers'
 
 const route = useRoute()
-const { replace, push } = useRouter()
+const { push } = useRouter()
 const generalStore = useGeneralStore()
 
 const totalProducts = ref(0)
@@ -80,16 +81,12 @@ const isLoading = ref(true)
 const productView = ref<TProductViews>('grid')
 const minMaxPrices = ref<number[]>([])
 
+const { getFiltersByQuery, defaultFilters } = useFilters()
+const filters = ref(getFiltersByQuery())
+const priceRange = ref<number[]>([])
+
 const categoryName = computed(() => {
   return findCategory(generalStore.categories, route.params.id as string)
-})
-const priceRange = ref<number[]>([])
-const filters = ref<IFilters>({
-  filterByBrand: [route.query.filterByBrand as string[]].flat(1).filter(Boolean) || [],
-  filterByRating: [route.query.filterByRating].flat(1).filter(Boolean).map(Number),
-  itemsPerPage: Number(route.query.itemsPerPage) || 3,
-  page: Number(route.query.page) || 1,
-  priceSortType: route.query.priceSortType as TPriceFilters || 'DEFAULT'
 })
 
 const getCategoryProductsWithCount = async () => {
@@ -150,15 +147,7 @@ const getBrands = async () => {
 }
 
 const reset = () => {
-  replace({ query: {} })
-
-  filters.value = {
-    filterByBrand: [],
-    filterByRating: [],
-    itemsPerPage: 3,
-    page: 1,
-    priceSortType: 'DEFAULT'
-  }
+  filters.value = { ...defaultFilters }
 }
 
 onMounted(() => {
