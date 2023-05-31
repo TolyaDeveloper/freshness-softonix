@@ -6,7 +6,7 @@
     <el-image
       class="max-w-[270px] w-full h-[280px] rounded-[12px]"
       fit="cover"
-      :src="imageHasError ? NoProductThumbnail : ''"
+      :src="imageHasError ? NoProductThumbnail : product.image"
       :alt="product.name"
       @error="imageHasError = true"
     />
@@ -23,7 +23,7 @@
           Brand
         </p>
         <p>
-          {{ product.brand }}
+          {{ product.brand.name }}
         </p>
         <p>
           Stock

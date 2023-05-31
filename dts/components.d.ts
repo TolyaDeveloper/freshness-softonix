@@ -15,6 +15,7 @@ declare module '@vue/runtime-core' {
     BlockTitle: typeof import('./../src/components/BlockTitle.vue')['default']
     Copyright: typeof import('./../src/components/footer/Copyright.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElBacktop: typeof import('element-plus/es')['ElBacktop']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']

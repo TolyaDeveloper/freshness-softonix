@@ -1,5 +1,4 @@
 import { ElNotification, type NotificationParams } from 'element-plus'
-import type { LocationQueryValue } from 'vue-router'
 
 export const notificationHandler = (message: Error | string, options?: NotificationParams) => {
   ElNotification(Object.assign({
@@ -8,14 +7,6 @@ export const notificationHandler = (message: Error | string, options?: Notificat
   }, options))
 }
 
-export const parseArrayQuery = (query: LocationQueryValue | LocationQueryValue[]): any => {
-  if (!query) {
-    return []
-  }
-
-  if (Array.isArray(query)) {
-    return query
-  }
-
-  return [query]
+export const findCategory = (categories: ICategory[], categoryId: string) => {
+  return categories.find(category => category.id === categoryId)?.name ?? 'Unknown category'
 }

@@ -5,7 +5,7 @@
         <el-image
           class="max-w-[240px] w-full h-[180px] rounded-[12px]"
           fit="cover"
-          :src="imageHasError ? NoProductThumbnail : ''"
+          :src="imageHasError ? NoProductThumbnail : product.image"
           :alt="product.name"
           @error="imageHasError = true"
         />

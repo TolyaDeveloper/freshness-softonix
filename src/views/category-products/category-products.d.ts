@@ -6,5 +6,5 @@ interface IFilters {
   priceSortType: TPriceFilters
   filterByBrand: string[]
   filterByRating: number[]
-  filterByRangePrice: [number, number]
+  filterByRangePrice: number[]
 }

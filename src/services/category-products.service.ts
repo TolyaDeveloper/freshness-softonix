@@ -1,4 +1,4 @@
-export class CategoryProductsService {
+class CategoryProductsService {
   async getCategoryProductsWithCount (categoryId: string, filters: IFilters) {
     const {
       page,
@@ -14,7 +14,7 @@ export class CategoryProductsService {
 
     const query = useSupabase
       .from('products')
-      .select('*', { count: 'exact' })
+      .select('*, category (*), brand (*)', { count: 'exact' })
       .eq('category', categoryId)
       .range(offset, offset + limit - 1)
       .gte('price', filterByRangePrice[0] ?? 0)
@@ -39,8 +39,8 @@ export class CategoryProductsService {
     return query
   }
 
-  getBrands (categoryId: string) {
-    return useSupabase.from('products').select('brand').eq('category', categoryId)
+  getBrands () {
+    return useSupabase.from('brands').select('*')
   }
 
   getMinMaxPrices (categoryId: string, filters: Pick<IFilters, 'filterByRating' | 'filterByBrand'>) {

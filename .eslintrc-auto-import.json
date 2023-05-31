@@ -1,6 +1,5 @@
 {
   "globals": {
-    "CategoryProductsService": true,
     "Component": true,
     "ComponentPublicInstance": true,
     "ComputedRef": true,

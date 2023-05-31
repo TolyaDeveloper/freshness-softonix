@@ -26,7 +26,7 @@
 import type { Arrayable } from 'element-plus/es/utils'
 
 const props = defineProps<{
-  modelValue: [number, number]
+  modelValue: number[]
   min: number | undefined
   max: number | undefined
 }>()

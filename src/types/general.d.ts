@@ -7,12 +7,18 @@ interface ICategory {
   name: string
 }
 
-interface IProduct {
+interface IBrand {
   id: string
   name: string
+}
+
+interface IProduct {
+  id: string
+  image: string
+  name: string
   description: string
-  category: string | ICategory
-  brand: string
+  category: ICategory
+  brand: IBrand
   price: number
   rating: number | null
   in_stock: number

@@ -25,10 +25,11 @@ interface IDatabase {
       }
       products: {
         Row: {
-          brand: string
-          category: string
+          brand: { id: string; name: string }
+          category: { id: string; name: string }
           description: string
           id: string
+          image: string
           in_stock: number
           name: string
           price: number
@@ -38,10 +39,11 @@ interface IDatabase {
           vitamins: string[] | null
         }
         Insert: {
-          brand: string
-          category: string
+          brand: { id: string; name: string }
+          category: { id: string; name: string }
           description: string
           id: string
+          image?: string
           in_stock: number
           name: string
           price: number
@@ -51,10 +53,11 @@ interface IDatabase {
           vitamins?: string[] | null
         }
         Update: {
-          brand?: string
-          category?: string
+          brand?: { id: string; name: string }
+          category?: { id: string; name: string }
           description?: string
           id?: string
+          image?: string
           in_stock?: number
           name?: string
           price?: number
@@ -114,6 +117,20 @@ interface IDatabase {
           content?: string
           id?: string
           username?: string
+        }
+      }
+      brands: {
+        Row: {
+          id: string
+          name: string
+        }
+        Insert: {
+          id: string
+          name: string
+        }
+        Update: {
+          id?: string
+          name?: string
         }
       }
     }

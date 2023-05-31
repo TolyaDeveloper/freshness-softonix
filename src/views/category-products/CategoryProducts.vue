@@ -3,13 +3,14 @@
     <el-breadcrumb-item :to="{ name: $routeNames.home }">
       Homepage
     </el-breadcrumb-item>
-    <el-breadcrumb-item>
-      Category name here
+    <el-breadcrumb-item v-if="!generalStore.initialLoading">
+      {{ categoryName }}
     </el-breadcrumb-item>
   </el-breadcrumb>
   <div class="mt-[25px] flex justify-between items-center">
-    <h1 class="font-poppins text-[32px] leading-[48px] font-semibold">
-      Category name here
+    <el-skeleton v-if="generalStore.initialLoading" :rows="0" style="height: 48px;" />
+    <h1 v-else class="font-poppins text-[32px] leading-[48px] font-semibold">
+      {{ categoryName }}
     </h1>
     <div class="flex items-center">
       <ProductViewsSwitch v-model="productView" />
@@ -26,9 +27,10 @@
   <div class="grid grid-cols-[270px_1fr] gap-[30px] mt-[70px]">
     <div>
       <AsideCategories />
-      <FilterByBrand class="mt-[50px]" />
+      <FilterByBrand v-model="filters.filterByBrand" class="mt-[50px]" :brands="brands" />
       <FilterByRating v-model="filters.filterByRating" class="mt-[50px]" />
       <FilterByRangePrice
+        v-if="filters.filterByRangePrice.length"
         v-model="filters.filterByRangePrice" class="mt-[50px]"
         :min="minMaxPrices[0]"
         :max="minMaxPrices[1]"
@@ -36,20 +38,27 @@
     </div>
     <div>
       <ProductsSkeleton v-if="isLoading" :view="productView" :limit="1" />
+      <h2
+        v-else-if="!categoryProducts.length"
+        class="text-center font-poppins font-semibold text-[18px]"
+      >
+        🍴 No products found
+      </h2>
       <ProductContainer v-else :products="categoryProducts" :view="productView" />
     </div>
   </div>
   <el-button class="mt-[30px]" round size="large" type="default" @click="reset">Reset</el-button>
-  <div class="mt-[80px] flex items-center justify-between">
+  <div class="mt-[80px] grid grid-cols-3">
     <el-pagination
       v-model:current-page="filters.page"
       v-model:page-size="filters.itemsPerPage"
+      class="col-start-2 justify-center"
       :total="totalProducts"
       layout="prev, pager, next"
       background
       small
     />
-    <p class="ml-[24px]">
+    <p class="ml-[24px] text-right">
       <el-tag round>{{ totalProducts }}</el-tag>
       <span class="ml-[4px] text-[12px] text-primary-500">Products</span>
     </p>
@@ -57,19 +66,26 @@
 </template>
 
 <script setup lang="ts">
+import { findCategory } from '@/helpers'
+
 const route = useRoute()
 const { replace, push } = useRouter()
+const generalStore = useGeneralStore()
 
 const totalProducts = ref(0)
 const categoryProducts = ref<IProduct[]>([])
+const brands = ref<IBrand[]>([])
 const isLoading = ref(true)
 const productView = ref<TProductViews>('grid')
-const minMaxPrices = ref<[number, number]>([0, Infinity])
+const minMaxPrices = ref<number[]>([])
 
 const categoryId = ref<string>(route.params.id as string)
+const categoryName = computed(() => {
+  return findCategory(generalStore.categories, categoryId.value)
+})
 const filters = ref<IFilters>({
-  filterByBrand: route.query.filterByBrand as string[] || [],
-  filterByRangePrice: [minMaxPrices.value[0], minMaxPrices.value[1]],
+  filterByBrand: [route.query.filterByBrand as string[]].flat(1).filter(Boolean) || [],
+  filterByRangePrice: [],
   filterByRating: [route.query.filterByRating].flat(1).filter(Boolean).map(Number),
   itemsPerPage: Number(route.query.itemsPerPage) || 3,
   page: Number(route.query.page) || 1,
@@ -119,13 +135,13 @@ const getMinMaxPrices = async () => {
 
 const getBrands = async () => {
   try {
-    const { data } = await categoryProductsService.getBrands(categoryId.value)
+    const { data } = await categoryProductsService.getBrands()
 
     if (!data) {
       return
     }
 
-    console.log({ brands: data })
+    brands.value = data
   } catch (error) {
     console.error(error)
   }
