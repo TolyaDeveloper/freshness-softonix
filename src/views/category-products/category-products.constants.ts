@@ -23,12 +23,3 @@ export const itemsPerPageOptions = [
     label: 6
   }
 ]
-
-export const defaultFilters: IFilters = {
-  filterByBrand: [],
-  filterByRangePrice: [0, 0],
-  filterByRating: [],
-  itemsPerPage: 3,
-  page: 1,
-  priceSortType: 'DEFAULT'
-}

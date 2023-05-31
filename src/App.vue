@@ -1,5 +1,8 @@
 <template>
-  <Layout v-loading.fullscreen="store.initialLoading" :layout="$route.meta.layout">
+  <Layout
+    v-loading.fullscreen="generalStore.initialLoading"
+    :layout="$route.meta.layout"
+  >
     <router-view />
     <el-backtop :right="70" :bottom="70" />
   </Layout>
@@ -8,9 +11,9 @@
 <script setup lang="ts">
 import Layout from './layouts/Layout.vue'
 
-const store = useGeneralStore()
+const generalStore = useGeneralStore()
 
 onBeforeMount(() => {
-  store.getInitialData()
+  generalStore.getInitialData()
 })
 </script>
