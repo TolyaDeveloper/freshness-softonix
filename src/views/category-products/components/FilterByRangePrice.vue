@@ -30,11 +30,12 @@ const props = defineProps<{
   min: number | undefined
   max: number | undefined
 }>()
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'change'])
 
 const range = ref([props.modelValue[0], props.modelValue[1]])
 
 const updatePrice = (value: Arrayable<number>) => {
   emit('update:modelValue', value)
+  emit('change')
 }
 </script>

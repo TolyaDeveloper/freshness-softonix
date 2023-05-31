@@ -30,10 +30,11 @@
       <FilterByBrand v-model="filters.filterByBrand" class="mt-[50px]" :brands="brands" />
       <FilterByRating v-model="filters.filterByRating" class="mt-[50px]" />
       <FilterByRangePrice
-        v-if="filters.filterByRangePrice.length"
-        v-model="filters.filterByRangePrice" class="mt-[50px]"
+        v-if="priceRange.length"
+        v-model="priceRange" class="mt-[50px]"
         :min="minMaxPrices[0]"
         :max="minMaxPrices[1]"
+        @change="getCategoryProductsWithCount"
       />
     </div>
     <div>
@@ -79,13 +80,12 @@ const isLoading = ref(true)
 const productView = ref<TProductViews>('grid')
 const minMaxPrices = ref<number[]>([])
 
-const categoryId = ref<string>(route.params.id as string)
 const categoryName = computed(() => {
-  return findCategory(generalStore.categories, categoryId.value)
+  return findCategory(generalStore.categories, route.params.id as string)
 })
+const priceRange = ref<number[]>([])
 const filters = ref<IFilters>({
   filterByBrand: [route.query.filterByBrand as string[]].flat(1).filter(Boolean) || [],
-  filterByRangePrice: [],
   filterByRating: [route.query.filterByRating].flat(1).filter(Boolean).map(Number),
   itemsPerPage: Number(route.query.itemsPerPage) || 3,
   page: Number(route.query.page) || 1,
@@ -93,12 +93,13 @@ const filters = ref<IFilters>({
 })
 
 const getCategoryProductsWithCount = async () => {
-  try {
-    isLoading.value = true
+  isLoading.value = true
 
+  try {
     const { data, count } = await categoryProductsService.getCategoryProductsWithCount(
-      categoryId.value,
-      filters.value
+      route.params.id as string,
+      filters.value,
+      priceRange.value
     )
 
     totalProducts.value = count ?? 0
@@ -117,7 +118,7 @@ const getCategoryProductsWithCount = async () => {
 
 const getMinMaxPrices = async () => {
   try {
-    const { data } = await categoryProductsService.getMinMaxPrices(categoryId.value, {
+    const { data } = await categoryProductsService.getMinMaxPrices(route.params.id as string, {
       filterByBrand: filters.value.filterByBrand,
       filterByRating: filters.value.filterByRating
     })
@@ -128,6 +129,7 @@ const getMinMaxPrices = async () => {
 
     minMaxPrices.value[0] = Math.floor(data[0].min_price)
     minMaxPrices.value[1] = Math.ceil(data[0].max_price)
+    priceRange.value = minMaxPrices.value
   } catch (error) {
     console.error(error)
   }
@@ -149,24 +151,30 @@ const getBrands = async () => {
 
 const reset = () => {
   replace({ query: {} })
+
+  filters.value = {
+    filterByBrand: [],
+    filterByRating: [],
+    itemsPerPage: 3,
+    page: 1,
+    priceSortType: 'DEFAULT'
+  }
 }
 
-watch(() => route.params.id, () => {
-  categoryId.value = route.params.id as string
-
-  getCategoryProductsWithCount()
-  getMinMaxPrices()
+onMounted(() => {
   getBrands()
+})
 
-  console.log('watch 1')
-}, { immediate: true })
+watch(() => route.params.id, () => {
+  reset()
+})
 
 watch(() => filters, () => {
+  priceRange.value = []
+
   getCategoryProductsWithCount()
   getMinMaxPrices()
 
-  console.log('watch 2')
-
   push({ query: { ...filters.value } })
-}, { deep: true })
+}, { deep: true, immediate: true })
 </script>
