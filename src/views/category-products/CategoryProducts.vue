@@ -38,7 +38,7 @@
       />
     </div>
     <div>
-      <ProductsSkeleton v-if="isLoading" :view="productView" :limit="1" />
+      <ProductsSkeleton v-if="isLoading" :view="productView" :limit="3" />
       <h2
         v-else-if="!categoryProducts.length"
         class="text-center font-poppins font-semibold text-[18px]"
