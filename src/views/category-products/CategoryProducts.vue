@@ -155,6 +155,10 @@ onMounted(() => {
 })
 
 watch(() => route.params.id, () => {
+  if (!route.params.id) {
+    return
+  }
+
   reset()
 })
 
