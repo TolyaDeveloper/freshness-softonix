@@ -28,18 +28,18 @@
     class="mt-[20px] flex items-center md:hidden"
     type="button"
     aria-label="Open filters"
-    @click="isMenuOpened = !isMenuOpened"
+    @click="isMobileMenuOpened = !isMobileMenuOpened"
   >
     <IconFilters />
     <span class="ml-[5px] font-poppins">
-      {{ isMenuOpened ? 'Hide filters' : 'Open filters' }}
+      {{ isMobileMenuOpened ? 'Hide filters' : 'Open filters' }}
     </span>
   </button>
   <div class="relative grid grid-cols-1 md:grid-cols-[270px_1fr] gap-[30px] mt-[30px] md:mt-[70px]">
     <div
       class="md:block absolute md:static z-10 bg-primary-100 md:bg-transparent p-[15px] md:p-0
              rounded-[12px] border border-primary-300 md:border-none"
-      :class="{ [`hidden`]: !isMenuOpened }"
+      :class="{ [`hidden`]: !isMobileMenuOpened }"
     >
       <AsideCategories />
       <FilterByBrand v-model="filters.filterByBrand" class="mt-[50px]" :brands="brands" />
@@ -95,7 +95,7 @@ const brands = ref<IBrand[]>([])
 const isLoading = ref(true)
 const productView = ref<TProductViews>('grid')
 const minMaxPrices = ref<number[]>([])
-const isMenuOpened = ref(false)
+const isMobileMenuOpened = ref(false)
 
 const { getFiltersByQuery, defaultFilters } = useFilters()
 const filters = ref(getFiltersByQuery())
@@ -164,7 +164,7 @@ const getBrands = async () => {
 
 const reset = () => {
   filters.value = { ...defaultFilters }
-  isMenuOpened.value = false
+  isMobileMenuOpened.value = false
 }
 
 onMounted(() => {
