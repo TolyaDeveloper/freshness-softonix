@@ -47,6 +47,7 @@ declare module '@vue/runtime-core' {
     GridProductCard: typeof import('./../src/components/products/GridProductCard.vue')['default']
     IconArrowRight: typeof import('~icons/icon/arrow-right')['default']
     IconCart: typeof import('~icons/icon/cart')['default']
+    IconFilters: typeof import('~icons/icon/filters')['default']
     IconGridView: typeof import('~icons/icon/grid-view')['default']
     IconListView: typeof import('~icons/icon/list-view')['default']
     IconLogo: typeof import('~icons/icon/logo')['default']

@@ -17,7 +17,7 @@
       <div
         v-for="skeleton in limit"
         :key="skeleton"
-        class="mb-[30px] grid grid-cols-[270px_1fr_200px] grid-rows-[280px] gap-[30px] items-center"
+        class="mb-[30px] grid grid-cols-[1fr] md:grid-cols-[270px_1fr_1fr] md:grid-rows-[280px] gap-[30px] items-center"
       >
         <el-skeleton-item variant="image" style="height: 280px" />
         <div>
