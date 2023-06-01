@@ -86,7 +86,7 @@ import { useFilters } from '@/composables/useFilters'
 import { findCategory } from '@/helpers'
 
 const route = useRoute()
-const { push } = useRouter()
+const { replace } = useRouter()
 const generalStore = useGeneralStore()
 
 const totalProducts = ref(0)
@@ -185,6 +185,6 @@ watch(() => filters, () => {
   getCategoryProductsWithCount()
   getMinMaxPrices()
 
-  push({ query: { ...filters.value } })
+  replace({ query: { ...filters.value } })
 }, { deep: true, immediate: true })
 </script>
