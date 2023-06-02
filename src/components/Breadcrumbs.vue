@@ -4,9 +4,9 @@
       {{ homeTitle }}
     </el-breadcrumb-item>
     <el-breadcrumb-item
-      v-for="breadcrumb in breadcrumbs.slice(0, -1)"
-      :key="breadcrumb.routeName"
-      :to="{ name: breadcrumb.routeName }"
+      v-for="(breadcrumb, index) in breadcrumbs.slice(0, -1)"
+      :key="index"
+      :to="breadcrumb.to"
     >
       {{ breadcrumb.title }}
     </el-breadcrumb-item>
@@ -17,10 +17,14 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{
-  breadcrumbs: IBreadcrumb[]
+import type { RouteLocationRaw } from 'vue-router'
+
+const props = withDefaults(defineProps<{
+  breadcrumbs: { title: string; to?: RouteLocationRaw }[]
   homeTitle?: string
 }>(), {
   homeTitle: 'Homepage'
 })
+
+console.log(props.breadcrumbs)
 </script>
