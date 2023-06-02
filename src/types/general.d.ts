@@ -26,3 +26,8 @@ interface IProduct {
   unit: string
   qty: number
 }
+
+interface IBreadcrumb {
+  routeName: string
+  title: string
+}

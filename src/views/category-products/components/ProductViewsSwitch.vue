@@ -5,7 +5,7 @@
       :class="{ active: modelValue === 'grid' }"
       type="button"
       title="Grid view"
-      @click="updateView('grid')"
+      @click="modelValue = 'grid'"
     >
       <p class="mr-[4px]">
         Grid view
@@ -17,7 +17,7 @@
       :class="{ active: modelValue === 'list' }"
       type="button"
       title="List view"
-      @click="updateView('list')"
+      @click="modelValue = 'list'"
     >
       <p class="mr-[4px]">
         List view
@@ -28,12 +28,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ modelValue: TProductViews }>()
-const emit = defineEmits<{ (e: 'update:modelValue', value: TProductViews): void }>()
-
-const updateView = (value: TProductViews) => {
-  emit('update:modelValue', value)
-}
+const modelValue = defineModel<TProductViews>()
 </script>
 
 <style lang="scss" scoped>

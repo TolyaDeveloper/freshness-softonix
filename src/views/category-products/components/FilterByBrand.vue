@@ -4,7 +4,7 @@
     <el-checkbox-group v-model="modelValue">
       <transition-group name="brands">
         <el-checkbox
-          v-for="brand in sortedBrands.slice(0, isListExpanded ? props.brands.length : limit)"
+          v-for="brand in sortedBrands.slice(0, isListExpanded ? props.brands.length : dynamicListSize)"
           :key="brand.id"
           class="block"
           :label="brand.id"
@@ -34,6 +34,9 @@ const props = withDefaults(defineProps<{
 })
 
 const modelValue = defineModel<string[]>()
+const dynamicListSize = computed(() => {
+  return (modelValue.value?.length ?? 0) > props.limit ? modelValue.value?.length : props.limit
+})
 
 const sortedBrands = computed(() => {
   return [...props.brands].sort((a, b) => {

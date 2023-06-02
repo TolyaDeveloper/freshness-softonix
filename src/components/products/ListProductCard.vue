@@ -17,20 +17,11 @@
       <p class="mb-[8px] truncate text-[12px] text-primary-600">
         {{ product.description }}
       </p>
-      <el-rate v-if="rating" v-model="rating" class="h-[20px]" disabled allow-half />
-      <div class="mt-[20px] grid grid-cols-[auto_1fr] gap-x-[30px] gap-y-[10px] text-primary-500">
-        <p>
-          Brand
-        </p>
-        <p>
-          {{ product.brand.name }}
-        </p>
-        <p>
-          Stock
-        </p>
-        <p>
-          {{ product.in_stock }} {{ product.unit }}
-        </p>
+      <el-rate v-if="product.rating" :model-value="product.rating" class="h-[20px]" disabled allow-half />
+      <div class="mt-[20px] grid grid-cols-[auto_1fr] gap-x-[30px] gap-y-[10px] text-primary-600">
+        <p>Brand</p>
+        <p>{{ product.brand.name }}</p>
+        <p class="font-bold">{{ product.qty }} {{ product.unit }}</p>
       </div>
     </div>
     <div class="p-[15px] lg:p-0">
@@ -57,10 +48,9 @@
 <script setup lang="ts">
 import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
 
-const props = defineProps<{
+defineProps<{
   product: IProduct
 }>()
 
-const rating = ref(props.product.rating)
 const imageHasError = ref(false)
 </script>

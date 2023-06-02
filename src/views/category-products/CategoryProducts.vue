@@ -1,20 +1,18 @@
 <template>
-  <el-breadcrumb class="text-[12px]">
-    <el-breadcrumb-item :to="{ name: $routeNames.home }">
-      Homepage
-    </el-breadcrumb-item>
-    <el-breadcrumb-item v-if="!generalStore.initialLoading">
-      {{ categoryName }}
-    </el-breadcrumb-item>
-  </el-breadcrumb>
-  <div class="mt-[25px] flex justify-between sm:items-center flex-col sm:flex-row">
-    <el-skeleton v-if="generalStore.initialLoading" :rows="0" style="height: 48px;" />
-    <h1 v-else class="font-poppins text-[32px] leading-[48px] font-semibold truncate">
+  <div class="mt-[25px] flex justify-between md:items-center flex-col md:flex-row">
+    <div v-if="generalStore.initialLoading">
+      <el-skeleton style="width: 240px; height: 48px" animated>
+        <template #template>
+          <el-skeleton-item variant="caption" style="height: 48px" />
+        </template>
+      </el-skeleton>
+    </div>
+    <h1 v-else class="font-poppins md:max-w-[350px] text-[32px] leading-[48px] font-semibold md:truncate">
       {{ categoryName }}
     </h1>
     <div class="flex items-center mt-[15px] sm:mt-0">
       <ProductViewsSwitch v-model="productView" />
-      <p class="ml-[24px] snap-start">
+      <p class="ml-[24px]">
         <el-tag round>{{ totalProducts }}</el-tag>
         <span class="ml-[4px] text-[12px] text-primary-500">Products</span>
       </p>
@@ -82,8 +80,8 @@
 </template>
 
 <script setup lang="ts">
-import { useFilters } from '@/composables/useFilters'
 import { findCategory } from '@/helpers'
+import { routeNames } from '@/router/route-names'
 
 const route = useRoute()
 const { replace } = useRouter()
@@ -104,6 +102,8 @@ const priceRange = ref<number[]>([])
 const categoryName = computed(() => {
   return findCategory(generalStore.categories, route.params.id as string)
 })
+
+useBreadcrumbs([{ routeName: routeNames.categories, title: categoryName.value }])
 
 const getCategoryProductsWithCount = async () => {
   isLoading.value = true
