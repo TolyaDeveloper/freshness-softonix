@@ -1,4 +1,8 @@
 <template>
+  <Breadcrumbs
+    v-if="categoryName || !route.query.searchQuery"
+    :breadcrumbs="[{ title: categoryName }]"
+  />
   <div class="mt-[25px] flex justify-between md:items-center flex-col md:flex-row">
     <div v-if="generalStore.initialLoading">
       <el-skeleton style="width: 240px; height: 48px" animated>
@@ -81,7 +85,6 @@
 
 <script setup lang="ts">
 import { findCategory } from '@/helpers'
-import { routeNames } from '@/router/route-names'
 
 const route = useRoute()
 const { replace } = useRouter()
@@ -100,10 +103,8 @@ const filters = ref(getFiltersByQuery())
 const priceRange = ref<number[]>([])
 
 const categoryName = computed(() => {
-  return findCategory(generalStore.categories, route.query.id as string)
+  return findCategory(generalStore.categories, route.query.id as string) ?? ''
 })
-
-useBreadcrumbs([{ routeName: routeNames.products, title: 'Products' }])
 
 const getProductsWithCount = async () => {
   isLoading.value = true

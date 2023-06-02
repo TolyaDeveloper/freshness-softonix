@@ -6,18 +6,6 @@
       <MiddleBar />
     </header>
     <main class="grow mt-[15px]">
-      <el-breadcrumb v-if="route.name !== $routeNames.home" class="text-[12px]">
-        <el-breadcrumb-item
-          v-for="breadcrumb in generalStore.breadcrumbs.slice(0, -1)"
-          :key="breadcrumb.routeName"
-          :to="{ name: breadcrumb.routeName }"
-        >
-          {{ breadcrumb.title }}
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>
-          {{ generalStore.breadcrumbs.at(-1)?.title }}
-        </el-breadcrumb-item>
-      </el-breadcrumb>
       <slot />
     </main>
     <footer class="my-[65px]">
@@ -26,8 +14,3 @@
     </footer>
   </div>
 </template>
-
-<script setup lang="ts">
-const generalStore = useGeneralStore()
-const route = useRoute()
-</script>

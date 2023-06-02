@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     AsideWithBanners: typeof import('./../src/views/home/components/AsideWithBanners.vue')['default']
     Banner: typeof import('./../src/components/Banner.vue')['default']
     BlockTitle: typeof import('./../src/components/BlockTitle.vue')['default']
+    Breadcrumbs: typeof import('./../src/components/Breadcrumbs.vue')['default']
     Copyright: typeof import('./../src/components/footer/Copyright.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBacktop: typeof import('element-plus/es')['ElBacktop']

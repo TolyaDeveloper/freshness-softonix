@@ -8,5 +8,5 @@ export const notificationHandler = (message: Error | string, options?: Notificat
 }
 
 export const findCategory = (categories: ICategory[], categoryId: string) => {
-  return categories.find(category => category.id === categoryId)?.name ?? 'Unknown category'
+  return categories.find(category => category.id === categoryId)?.name
 }

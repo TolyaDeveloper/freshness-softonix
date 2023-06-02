@@ -1,9 +1,6 @@
-import { routeNames } from '@/router/route-names'
-
 export const useGeneralStore = defineStore('generalStore', () => {
   const categories = ref<ICategory[]>([])
   const initialLoading = ref(true)
-  const breadcrumbs = ref<IBreadcrumb[]>([{ routeName: routeNames.home, title: 'Homepage' }])
 
   const getCategories = async () => {
     try {
@@ -33,7 +30,6 @@ export const useGeneralStore = defineStore('generalStore', () => {
     categories,
     getCategories,
     getInitialData,
-    initialLoading,
-    breadcrumbs
+    initialLoading
   }
 })
