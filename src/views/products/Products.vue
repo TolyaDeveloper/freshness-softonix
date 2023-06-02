@@ -103,7 +103,7 @@ const categoryName = computed(() => {
   return findCategory(generalStore.categories, route.query.id as string)
 })
 
-useBreadcrumbs([{ routeName: routeNames.products, title: categoryName.value }])
+useBreadcrumbs([{ routeName: routeNames.products, title: 'Products' }])
 
 const getProductsWithCount = async () => {
   isLoading.value = true
