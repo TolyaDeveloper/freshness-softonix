@@ -44,10 +44,12 @@
 @use "element-plus/theme-chalk/src/base";
 @use "element-plus/theme-chalk/src/button";
 @use "element-plus/theme-chalk/src/breadcrumb";
+@use "element-plus/theme-chalk/src/backtop";
 @use "element-plus/theme-chalk/src/carousel";
 @use "element-plus/theme-chalk/src/carousel-item";
 @use "element-plus/theme-chalk/src/card";
 @use "element-plus/theme-chalk/src/checkbox";
+@use "element-plus/theme-chalk/src/checkbox-group";
 @use "element-plus/theme-chalk/src/divider";
 @use "element-plus/theme-chalk/src/input";
 @use "element-plus/theme-chalk/src/image";
@@ -61,3 +63,4 @@
 @use "element-plus/theme-chalk/src/skeleton";
 @use "element-plus/theme-chalk/src/skeleton-item";
 @use "element-plus/theme-chalk/src/tag";
+@use "element-plus/theme-chalk/src/loading";

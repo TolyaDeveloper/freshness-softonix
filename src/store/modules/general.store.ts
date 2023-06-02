@@ -1,5 +1,6 @@
 export const useGeneralStore = defineStore('generalStore', () => {
   const categories = ref<ICategory[]>([])
+  const initialLoading = ref(true)
 
   const getCategories = async () => {
     try {
@@ -19,8 +20,16 @@ export const useGeneralStore = defineStore('generalStore', () => {
     }
   }
 
+  const getInitialData = async () => {
+    await getCategories()
+
+    initialLoading.value = false
+  }
+
   return {
     categories,
-    getCategories
+    getCategories,
+    getInitialData,
+    initialLoading
   }
 })

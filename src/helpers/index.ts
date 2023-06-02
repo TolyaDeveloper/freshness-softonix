@@ -6,3 +6,7 @@ export const notificationHandler = (message: Error | string, options?: Notificat
     type: 'error'
   }, options))
 }
+
+export const findCategory = (categories: ICategory[], categoryId: string) => {
+  return categories.find(category => category.id === categoryId)?.name
+}

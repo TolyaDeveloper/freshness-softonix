@@ -61,20 +61,10 @@ export const useAuthStore = defineStore('authStore', () => {
   }
 
   const logout = async (): Promise<void> => {
-    try {
-      const { error } = await authService.logout()
-      user.value = null
+    await authService.logout()
+    user.value = null
 
-      if (error) {
-        throw new Error(error.message)
-      }
-
-      window.location.href = router.resolve(routeNames.login).href
-    } catch (error) {
-      if (error instanceof Error) {
-        notificationHandler(error as Error)
-      }
-    }
+    window.location.href = router.resolve({ name: routeNames.login }).href
   }
 
   return {

@@ -5,7 +5,7 @@
         <el-image
           class="max-w-[240px] w-full h-[180px] rounded-[12px]"
           fit="cover"
-          :src="imageHasError ? NoProductThumbnail : ''"
+          :src="imageHasError ? NoProductThumbnail : product.image"
           :alt="product.name"
           @error="imageHasError = true"
         />
@@ -19,7 +19,7 @@
             {{ product.description }}
           </p>
         </slot>
-        <el-rate v-if="rating" v-model="rating" class="h-[20px]" disabled allow-half />
+        <el-rate v-if="product.rating" :model-value="product.rating" class="h-[20px]" disabled allow-half />
         <p class="mt-[15px] font-poppins font-semibold text-[18px]">
           {{ $filters.currencyParser(product.price) }}
         </p>
@@ -49,12 +49,10 @@
 <script setup lang="ts">
 import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
 
-const props = defineProps<{
+defineProps<{
   product: IProduct
 }>()
 
-const rating = ref(props.product.rating)
 const isAlreadyInCart = ref(false)
 const imageHasError = ref(false)
-
 </script>

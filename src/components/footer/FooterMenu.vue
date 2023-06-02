@@ -8,7 +8,7 @@
       </h2>
       <ul>
         <li class="text-accent-400 mb-[15px]">
-          <router-link :to="{ name: $routeNames.profile }">Sell on the Market</router-link>
+          <router-link class="link" :to="{ name: $routeNames.profile }">Sell on the Market</router-link>
         </li>
       </ul>
     </div>
@@ -18,17 +18,17 @@
       </h2>
       <ul>
         <li class="text-accent-400 mb-[15px]">
-          <a href="https://www.youtube.com/@farmfreshtoyou/videos" rel="noopener noreferrer" target="_blank">
+          <a class="link" href="https://www.youtube.com/@farmfreshtoyou/videos" rel="noopener noreferrer" target="_blank">
             YouTube
           </a>
         </li>
         <li class="text-accent-400 mb-[15px]">
-          <a href="https://www.facebook.com/farmfreshtoyou" rel="noopener noreferrer" target="_blank">
+          <a class="link" href="https://www.facebook.com/farmfreshtoyou" rel="noopener noreferrer" target="_blank">
             Facebook
           </a>
         </li>
         <li class="text-accent-400 mb-[15px]">
-          <a href="https://twitter.com/farmfreshtoyou" rel="noopener noreferrer" target="_blank">
+          <a class="link" href="https://twitter.com/farmfreshtoyou" rel="noopener noreferrer" target="_blank">
             Twitter
           </a>
         </li>
@@ -40,10 +40,10 @@
       </h2>
       <ul>
         <li class="text-accent-400 mb-[15px]">
-          <router-link :to="{ name: $routeNames.profile }">Your account</router-link>
+          <router-link class="link" :to="{ name: $routeNames.profile }">Your account</router-link>
         </li>
         <li class="text-accent-400 mb-[15px]">
-          <router-link to="/cart">Cart</router-link>
+          <router-link class="link" to="/cart">Cart</router-link>
         </li>
       </ul>
     </div>

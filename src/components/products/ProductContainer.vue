@@ -8,7 +8,9 @@
   </template>
   <template v-if="view === 'list'">
     <ul class="list-view">
-      list view
+      <li v-for="product in products" :key="product.id">
+        <ListProductCard :product="product" />
+      </li>
     </ul>
   </template>
 </template>

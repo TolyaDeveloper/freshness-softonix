@@ -25,10 +25,11 @@ interface IDatabase {
       }
       products: {
         Row: {
-          brand: string
-          category: string
+          brand: { id: string; name: string }
+          category: { id: string; name: string }
           description: string
           id: string
+          image: string
           in_stock: number
           name: string
           price: number
@@ -38,10 +39,11 @@ interface IDatabase {
           vitamins: string[] | null
         }
         Insert: {
-          brand: string
-          category: string
+          brand: { id: string; name: string }
+          category: { id: string; name: string }
           description: string
           id: string
+          image?: string
           in_stock: number
           name: string
           price: number
@@ -51,10 +53,11 @@ interface IDatabase {
           vitamins?: string[] | null
         }
         Update: {
-          brand?: string
-          category?: string
+          brand?: { id: string; name: string }
+          category?: { id: string; name: string }
           description?: string
           id?: string
+          image?: string
           in_stock?: number
           name?: string
           price?: number
@@ -116,12 +119,36 @@ interface IDatabase {
           username?: string
         }
       }
+      brands: {
+        Row: {
+          id: string
+          name: string
+        }
+        Insert: {
+          id: string
+          name: string
+        }
+        Update: {
+          id?: string
+          name?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_min_max_prices: {
+        Args: {
+          p_rating?: number[]
+          p_category?: string[]
+          p_brand?: string[]
+        }
+        Returns: {
+          min_price: number
+          max_price: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

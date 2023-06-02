@@ -11,7 +11,7 @@ import { ImportsBuilder } from './vite.config.imports'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({ script: { defineModel: true } }),
     visualizer({
       open: true
     }),

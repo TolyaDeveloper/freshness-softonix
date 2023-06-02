@@ -1,5 +1,5 @@
 <template>
-  <template v-if="authStore.user">
+  <div>
     <ProductsSkeleton v-if="isLoading" />
     <template v-else-if="productsByLastSearch.length">
       <slot name="title">
@@ -9,7 +9,7 @@
       </slot>
       <ProductContainer :products="productsByLastSearch" view="grid" />
     </template>
-  </template>
+  </div>
 </template>
 <script setup lang="ts">
 const authStore = useAuthStore()
