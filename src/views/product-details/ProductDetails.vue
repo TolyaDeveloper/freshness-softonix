@@ -38,13 +38,15 @@
           </p>
           <AddToCartWithQuantity :product="product" />
         </div>
-        <p class="mt-[30px] font-poppins font-semibold text-[12px]">Vitamins</p>
-        <el-divider class="my-[10px]" />
-        <ul>
-          <li v-for="vitamin in product.vitamins" :key="vitamin" class="text-primary-600 mb-[5px]">
-            {{ vitamin }}
-          </li>
-        </ul>
+        <template v-if="product.vitamins?.length">
+          <p class="mt-[30px] font-poppins font-semibold text-[12px]">Vitamins</p>
+          <el-divider class="my-[10px]" />
+          <ul>
+            <li v-for="vitamin in product.vitamins" :key="vitamin" class="text-primary-600 mb-[5px]">
+              {{ vitamin }}
+            </li>
+          </ul>
+        </template>
       </div>
     </div>
   </template>
