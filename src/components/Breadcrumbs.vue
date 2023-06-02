@@ -19,12 +19,10 @@
 <script setup lang="ts">
 import type { RouteLocationRaw } from 'vue-router'
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   breadcrumbs: { title: string; to?: RouteLocationRaw }[]
   homeTitle?: string
 }>(), {
   homeTitle: 'Homepage'
 })
-
-console.log(props.breadcrumbs)
 </script>
