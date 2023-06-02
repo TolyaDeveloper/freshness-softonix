@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { itemsPerPageOptions } from '@/views/category-products/category-products.constants'
+import { itemsPerPageOptions } from '@/views/products/products.constants'
 
 const modelValue = defineModel<number>()
 </script>

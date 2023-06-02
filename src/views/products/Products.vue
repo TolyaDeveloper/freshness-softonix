@@ -8,7 +8,7 @@
       </el-skeleton>
     </div>
     <h1 v-else class="font-poppins md:max-w-[350px] text-[32px] leading-[48px] font-semibold md:truncate">
-      {{ categoryName }}
+      {{ !route.query.searchQuery ? categoryName : `«Search: ${route.query.searchQuery}»` }}
     </h1>
     <div class="flex items-center mt-[15px] sm:mt-0">
       <ProductViewsSwitch v-model="productView" />
@@ -47,19 +47,19 @@
         v-model="priceRange" class="mt-[50px]"
         :min="minMaxPrices[0]"
         :max="minMaxPrices[1]"
-        @change="getCategoryProductsWithCount"
+        @change="getProductsWithCount"
       />
       <el-button class="mt-[30px]" round size="large" type="default" @click="reset">Reset</el-button>
     </div>
     <div>
       <ProductsSkeleton v-if="isLoading" :view="productView" :limit="3" />
       <h2
-        v-else-if="!categoryProducts.length"
+        v-else-if="!products.length"
         class="text-center font-poppins font-semibold text-[18px]"
       >
         🍴 No products found
       </h2>
-      <ProductContainer v-else :products="categoryProducts" :view="productView" />
+      <ProductContainer v-else :products="products" :view="productView" />
     </div>
   </div>
   <div class="mt-[80px] grid grid-cols-3">
@@ -88,7 +88,7 @@ const { replace } = useRouter()
 const generalStore = useGeneralStore()
 
 const totalProducts = ref(0)
-const categoryProducts = ref<IProduct[]>([])
+const products = ref<IProduct[]>([])
 const brands = ref<IBrand[]>([])
 const isLoading = ref(true)
 const productView = ref<TProductViews>('grid')
@@ -100,19 +100,20 @@ const filters = ref(getFiltersByQuery())
 const priceRange = ref<number[]>([])
 
 const categoryName = computed(() => {
-  return findCategory(generalStore.categories, route.params.id as string)
+  return findCategory(generalStore.categories, route.query.id as string)
 })
 
-useBreadcrumbs([{ routeName: routeNames.categories, title: categoryName.value }])
+useBreadcrumbs([{ routeName: routeNames.products, title: categoryName.value }])
 
-const getCategoryProductsWithCount = async () => {
+const getProductsWithCount = async () => {
   isLoading.value = true
 
   try {
-    const { data, count } = await categoryProductsService.getCategoryProductsWithCount(
-      route.params.id as string,
+    const { data, count } = await categoryProductsService.getProductsWithCount(
       filters.value,
-      priceRange.value
+      priceRange.value,
+      route.query.id as string,
+      route.query.searchQuery as string
     )
 
     totalProducts.value = count ?? 0
@@ -121,7 +122,7 @@ const getCategoryProductsWithCount = async () => {
       return
     }
 
-    categoryProducts.value = data
+    products.value = data
   } catch (error) {
     console.error(error)
   } finally {
@@ -131,10 +132,10 @@ const getCategoryProductsWithCount = async () => {
 
 const getMinMaxPrices = async () => {
   try {
-    const { data } = await categoryProductsService.getMinMaxPrices(route.params.id as string, {
+    const { data } = await categoryProductsService.getMinMaxPrices({
       filterByBrand: filters.value.filterByBrand,
       filterByRating: filters.value.filterByRating
-    })
+    }, route.query.id as string)
 
     if (!data) {
       return
@@ -171,8 +172,8 @@ onMounted(() => {
   getBrands()
 })
 
-watch(() => route.params.id, () => {
-  if (!route.params.id) {
+watch(() => route.query.id, () => {
+  if (!route.query.id) {
     return
   }
 
@@ -182,9 +183,9 @@ watch(() => route.params.id, () => {
 watch(() => filters, () => {
   priceRange.value = []
 
-  getCategoryProductsWithCount()
+  getProductsWithCount()
   getMinMaxPrices()
 
-  replace({ query: { ...filters.value } })
+  replace({ query: { ...route.query, ...filters.value } })
 }, { deep: true, immediate: true })
 </script>

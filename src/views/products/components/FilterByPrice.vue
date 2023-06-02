@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { priceFilterOptions } from '@/views/category-products/category-products.constants'
+import { priceFilterOptions } from '@/views/products/products.constants'
 
 const modelValue = defineModel<TPriceFilters>()
 </script>

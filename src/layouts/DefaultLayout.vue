@@ -10,7 +10,7 @@
         <el-breadcrumb-item
           v-for="breadcrumb in generalStore.breadcrumbs.slice(0, -1)"
           :key="breadcrumb.routeName"
-          :to="{ name: $routeNames.home }"
+          :to="{ name: breadcrumb.routeName }"
         >
           {{ breadcrumb.title }}
         </el-breadcrumb-item>

@@ -8,7 +8,7 @@
         :key="category.id"
         class="mb-[6px] text-accent-400"
       >
-        <router-link class="link" :to="{ name: $routeNames.categories, params: { id: category.id } }">
+        <router-link class="link" :to="{ name: $routeNames.products, query: { id: category.id } }">
           {{ category.name }}
         </router-link>
       </li>

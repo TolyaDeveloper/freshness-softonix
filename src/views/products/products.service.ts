@@ -1,5 +1,5 @@
 class CategoryProductsService {
-  async getCategoryProductsWithCount (categoryId: string, filters: IFilters, priceRange: number[]) {
+  async getProductsWithCount (filters: IFilters, priceRange: number[], categoryId?: string, searchQuery?: string) {
     const {
       page,
       itemsPerPage,
@@ -14,10 +14,13 @@ class CategoryProductsService {
     const query = useSupabase
       .from('products')
       .select('*, category (*), brand (*)', { count: 'exact' })
-      .eq('category', categoryId)
       .range(offset, offset + limit - 1)
       .gte('price', priceRange[0] ?? 0)
       .lte('price', priceRange[1] ?? Infinity)
+
+    if (categoryId) {
+      query.eq('category', categoryId)
+    }
 
     if (priceSortType === 'LOW_TO_HIGH') {
       query.order('price', { ascending: true })
@@ -35,6 +38,10 @@ class CategoryProductsService {
       query.in('rating', filterByRating)
     }
 
+    if (searchQuery) {
+      query.textSearch('name', searchQuery)
+    }
+
     return query
   }
 
@@ -42,11 +49,11 @@ class CategoryProductsService {
     return useSupabase.from('brands').select('*')
   }
 
-  getMinMaxPrices (categoryId: string, filters: Pick<IFilters, 'filterByRating' | 'filterByBrand'>) {
+  getMinMaxPrices (filters: Pick<IFilters, 'filterByRating' | 'filterByBrand'>, categoryId?: string) {
     const { filterByRating, filterByBrand } = filters
 
     return useSupabase.rpc('get_min_max_prices', {
-      p_category: [categoryId],
+      p_category: categoryId ? [categoryId] : undefined,
       p_brand: filterByBrand,
       p_rating: filterByRating
     })
