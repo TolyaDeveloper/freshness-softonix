@@ -6,6 +6,6 @@ export const useBreadcrumbs = (breadcrumbs: IBreadcrumb[]) => {
   })
 
   onBeforeUnmount(() => {
-    generalStore.breadcrumbs = [{ routeName: 'home', title: 'Home' }]
+    generalStore.breadcrumbs = [{ routeName: 'home', title: 'Homepage' }]
   })
 }

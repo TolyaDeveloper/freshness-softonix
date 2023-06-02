@@ -28,6 +28,6 @@ interface IProduct {
 }
 
 interface IBreadcrumb {
-  routeName: string
   title: string
+  routeName?: string
 }
