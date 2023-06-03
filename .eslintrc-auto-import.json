@@ -137,7 +137,6 @@
     "useBase64": true,
     "useBattery": true,
     "useBluetooth": true,
-    "useBreadcrumbs": true,
     "useBreakpoints": true,
     "useBroadcastChannel": true,
     "useBrowserLocation": true,

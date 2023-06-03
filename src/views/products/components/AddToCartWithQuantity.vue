@@ -4,7 +4,6 @@
       v-if="!isAlreadyInCart"
       v-model="quantity"
       class="mr-[24px]"
-      :unit="product.unit"
     />
     <router-link
       v-if="isAlreadyInCart" #default="{ navigate }" :to="{ name: $routeNames.home }"
@@ -38,6 +37,6 @@ const quantity = ref(1)
 const isAlreadyInCart = ref(false)
 
 const validateQuantityInput = () => {
-  return quantity.value > 0 && !isNaN(quantity.value)
+  return quantity.value >= 1 && !isNaN(quantity.value)
 }
 </script>

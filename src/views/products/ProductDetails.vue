@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { productDetailsService } from '@/views/product-details/product-details.service'
+import { productDetailsService } from '@/views/products/products.service'
 
 import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
 
