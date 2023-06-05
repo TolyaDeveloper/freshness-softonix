@@ -19,40 +19,30 @@
             {{ product.description }}
           </p>
         </slot>
-        <el-rate v-if="product.rating" :model-value="product.rating" class="h-[20px]" disabled allow-half />
+        <el-rate v-if="product.rating" :model-value="product.rating" class="h-[20px]" disabled />
         <p class="mt-[15px] font-poppins font-semibold text-[18px]">
           {{ $filters.currencyParser(product.price) }}
         </p>
       </div>
     </router-link>
-    <router-link v-if="isAlreadyInCart" #default="{ navigate }" :to="{ name: $routeNames.home }" custom>
-      <el-button
-        role="link"
-        class="absolute right-[15px] bottom-[10px]"
-        round
-        @click="navigate"
-      >
-        View in cart
-      </el-button>
-    </router-link>
-    <el-button
-      v-else
-      class="absolute right-[15px] bottom-[10px]"
-      type="primary"
-      round
-    >
-      Buy now
-    </el-button>
+    <div class="absolute right-[15px] bottom-[10px]">
+      <AddToCart :product="product" :units="1" :is-already-in-cart="isAlreadyInCart" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
 
-defineProps<{
+const props = defineProps<{
   product: IProduct
 }>()
 
-const isAlreadyInCart = ref(false)
+const authStore = useAuthStore()
+
+const isAlreadyInCart = computed(() => {
+  return authStore.user?.cart ? props.product.id in authStore.user.cart : false
+})
+
 const imageHasError = ref(false)
 </script>

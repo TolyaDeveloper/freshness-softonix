@@ -43,7 +43,7 @@
           <router-link class="link" :to="{ name: $routeNames.profile }">Your account</router-link>
         </li>
         <li class="text-accent-400 mb-[15px]">
-          <router-link class="link" to="/cart">Cart</router-link>
+          <router-link class="link" :to="{ name: $routeNames.cart }">Cart</router-link>
         </li>
       </ul>
     </div>

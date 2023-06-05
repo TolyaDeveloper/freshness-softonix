@@ -69,6 +69,7 @@ interface IDatabase {
       }
       profiles: {
         Row: {
+          cart: Record<string, number> | null
           city: string
           street: string
           email: string
@@ -79,6 +80,7 @@ interface IDatabase {
           role: ERoles
         }
         Insert: {
+          cart?: Record<string, number> | null
           city: string
           street: string
           email: string
@@ -89,6 +91,7 @@ interface IDatabase {
           role?: ERoles
         }
         Update: {
+          cart?: Record<string, number> | null
           city?: string
           street?: string
           email?: string

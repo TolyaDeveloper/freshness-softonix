@@ -28,8 +28,8 @@ export const useGeneralStore = defineStore('generalStore', () => {
 
   return {
     categories,
+    initialLoading,
     getCategories,
-    getInitialData,
-    initialLoading
+    getInitialData
   }
 })
