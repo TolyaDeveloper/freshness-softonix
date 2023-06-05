@@ -1,6 +1,6 @@
 <template>
   <div class="relative max-w-[270px] w-full border border-primary-300 rounded-[12px] p-[15px]">
-    <router-link to="/">
+    <router-link :to="{ name: $routeNames.productDetails, params: { id: product.id } }">
       <div>
         <el-image
           class="max-w-[240px] w-full h-[180px] rounded-[12px]"

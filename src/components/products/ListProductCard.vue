@@ -28,7 +28,11 @@
       <p class="mb-[15px] font-poppins font-semibold text-[18px]">
         {{ $filters.currencyParser(product.price) }}
       </p>
-      <router-link #default="{ navigate }" :to="{ name: $routeNames.home }" custom>
+      <router-link
+        #default="{ navigate }"
+        :to="{ name: $routeNames.productDetails, params: { id: product.id } }"
+        custom
+      >
         <el-button
           class="flex items-center font-poppins text-[15px] font-bold"
           role="link"

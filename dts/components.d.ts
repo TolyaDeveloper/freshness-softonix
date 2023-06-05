@@ -9,12 +9,14 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AddToCartWithQuantity: typeof import('./../src/views/products/components/AddToCartWithQuantity.vue')['default']
     AsideCategories: typeof import('./../src/components/AsideCategories.vue')['default']
     AsideWithBanners: typeof import('./../src/views/home/components/AsideWithBanners.vue')['default']
     Banner: typeof import('./../src/components/Banner.vue')['default']
     BlockTitle: typeof import('./../src/components/BlockTitle.vue')['default']
     Breadcrumbs: typeof import('./../src/components/Breadcrumbs.vue')['default']
     Copyright: typeof import('./../src/components/footer/Copyright.vue')['default']
+    DetailedProductParameters: typeof import('./../src/views/products/components/DetailedProductParameters.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBacktop: typeof import('element-plus/es')['ElBacktop']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -30,6 +32,7 @@ declare module '@vue/runtime-core' {
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElInputNumber: typeof import('element-plus/es')['ElInputNumber']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElRate: typeof import('element-plus/es')['ElRate']
@@ -53,6 +56,7 @@ declare module '@vue/runtime-core' {
     IconListView: typeof import('~icons/icon/list-view')['default']
     IconLogo: typeof import('~icons/icon/logo')['default']
     IconLogout: typeof import('~icons/icon/logout')['default']
+    IconPlus: typeof import('~icons/icon/plus')['default']
     IconSearch: typeof import('~icons/icon/search')['default']
     IconUser: typeof import('~icons/icon/user')['default']
     IconUserCircle: typeof import('~icons/icon/user-circle')['default']
@@ -66,6 +70,7 @@ declare module '@vue/runtime-core' {
     ProductsSkeleton: typeof import('./../src/components/skeletons/ProductsSkeleton.vue')['default']
     ProductViewsSwitch: typeof import('./../src/views/products/components/ProductViewsSwitch.vue')['default']
     ProfileForm: typeof import('./../src/views/profile/components/ProfileForm.vue')['default']
+    QuantityInput: typeof import('./../src/components/products/QuantityInput.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./../src/components/Search.vue')['default']

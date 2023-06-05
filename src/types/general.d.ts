@@ -26,8 +26,3 @@ interface IProduct {
   unit: string
   qty: number
 }
-
-interface IBreadcrumb {
-  title: string
-  routeName?: string
-}
