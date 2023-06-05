@@ -17,7 +17,7 @@
       <p class="mb-[8px] truncate text-[12px] text-primary-600">
         {{ product.description }}
       </p>
-      <el-rate v-if="product.rating" :model-value="product.rating" class="h-[20px]" disabled allow-half />
+      <el-rate v-if="product.rating" :model-value="product.rating" class="h-[20px]" disabled />
       <div class="mt-[20px] grid grid-cols-[auto_1fr] gap-x-[30px] gap-y-[10px] text-primary-600">
         <p>Brand</p>
         <p>{{ product.brand.name }}</p>
