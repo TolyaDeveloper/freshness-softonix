@@ -8,21 +8,19 @@
     <AddToCart
       :product="product"
       :units="quantity"
-      :disabled="!validateQuantityInput()"
+      :disabled="!validateQuantityInput(quantity)"
       :is-already-in-cart="isAlreadyInCart"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+import { validateQuantityInput } from '@/helpers'
+
 const props = defineProps<{ product: IProduct }>()
 
 const quantity = ref(1)
 const authStore = useAuthStore()
-
-const validateQuantityInput = () => {
-  return quantity.value >= 1 && !isNaN(quantity.value)
-}
 
 const isAlreadyInCart = computed(() => {
   return authStore.user?.cart ? props.product.id in authStore.user.cart : false

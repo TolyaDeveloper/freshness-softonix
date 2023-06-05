@@ -54,6 +54,8 @@
 </template>
 
 <script setup lang="ts">
+import { validateQuantityInput } from '@/helpers'
+
 import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
 
 const props = defineProps<{
@@ -67,12 +69,8 @@ const quantity = ref(authStore.user?.cart ? authStore.user?.cart[props.product.i
 const imageHasError = ref(false)
 
 watch(quantity, () => {
-  if (validateQuantityInput()) {
+  if (validateQuantityInput(quantity.value)) {
     cartStore.editProductCartUnits(props.product.id, quantity.value)
   }
 })
-
-const validateQuantityInput = () => {
-  return quantity.value >= 1 && !isNaN(quantity.value)
-}
 </script>
