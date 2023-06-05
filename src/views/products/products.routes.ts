@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 
 export const productsRouteNames = {
   products: 'products',
-  productDetails: 'product/details/:id'
+  productDetails: 'productDetails'
 }
 
 export const productsRoutes: RouteRecordRaw[] = [
