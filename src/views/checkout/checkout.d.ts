@@ -6,4 +6,7 @@ interface ICheckout {
   street: string
   paymentMethod: string
   additionalInformation: string
+  cardNumber: string
+  cardHolder: string
+  cardCVC: string
 }

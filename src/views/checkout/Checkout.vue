@@ -38,8 +38,12 @@
 </template>
 
 <script setup lang="ts">
+import { notificationHandler } from '@/helpers'
+import { routeNames } from '@/router/route-names'
+
 const formRef = useElFormRef()
 const authStore = useAuthStore()
+const router = useRouter()
 
 const formModel = useElFormModel({
   firstname: authStore.user?.firstname ?? '',
@@ -48,7 +52,10 @@ const formModel = useElFormModel({
   city: authStore.user?.city ?? '',
   street: authStore.user?.street ?? '',
   paymentMethod: '',
-  additionalInformation: ''
+  additionalInformation: '',
+  cardNumber: '',
+  cardHolder: '',
+  cardCVC: ''
 })
 
 const formRules = useElFormRules({
@@ -73,10 +80,27 @@ const formRules = useElFormRules({
   ]
 })
 
+const createOrder = async () => {
+  try {
+    if (!authStore.user) {
+      return
+    }
+
+    await checkoutService.createOrder(authStore.user.id, authStore.user.cart as Record<string, number>)
+    await cartService.updateCart({}, authStore.user.id)
+
+    authStore.user.cart = {}
+    router.replace({ name: routeNames.home })
+    notificationHandler('Order successfully created', { type: 'success' })
+  } catch (error) {
+    notificationHandler(error as Error)
+  }
+}
+
 const submitForm = () => {
   formRef.value.validate(async valid => {
     if (valid) {
-      alert('submit')
+      createOrder()
     }
   })
 }

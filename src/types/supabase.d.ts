@@ -136,6 +136,40 @@ interface IDatabase {
           name?: string
         }
       }
+      promocodes: {
+        Row: {
+          code: string
+          discount: number
+          id: string
+        }
+        Insert: {
+          code: string
+          discount: number
+          id?: string
+        }
+        Update: {
+          code?: string
+          discount?: number
+          id?: string
+        }
+      }
+      orders: {
+        Row: {
+          id: string
+          products: Record<string, number>
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          products: Record<string, number>
+          user_id: string
+        }
+        Update: {
+          id?: string
+          products?: Record<string, number> | null
+          user_id?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never

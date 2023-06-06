@@ -14,6 +14,7 @@
     "autoResetRef": true,
     "cartService": true,
     "categoryProductsService": true,
+    "checkoutService": true,
     "computed": true,
     "computedAsync": true,
     "computedEager": true,

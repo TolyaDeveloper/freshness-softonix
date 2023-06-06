@@ -16,14 +16,10 @@
         </slot>
         <p class="font-poppins font-semibold text-[18px] text-accent-400">
           {{ $filters.currencyParser(product.price) }}
+          <span>/ {{ product.qty }}  {{ product.unit }}</span>
         </p>
       </div>
       <QuantityInput v-model="quantity" class="ml-[30px]" />
-      <p class="ml-[15px] font-poppins flex">
-        <span>{{ quantity * product.qty }}</span>
-        &nbsp;
-        <span>{{ product.unit }}/{{ product.unit }}s</span>
-      </p>
     </div>
     <div class="flex items-center">
       <router-link

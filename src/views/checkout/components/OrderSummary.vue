@@ -14,36 +14,72 @@
       />
     </ul>
     <el-divider class="border-primary-700 opacity-5" />
-    <el-input v-model="promocode" class="mt-[30px]" placeholder="Apply promo code" size="large">
+    <el-input
+      v-if="!isPromocodeApplied"
+      v-model="promocode"
+      class="mt-[30px]"
+      placeholder="Apply promo code"
+      size="large"
+    >
       <template #suffix>
         <el-button
           class="text-primary-700 hover:text-primary-600 text-[12px] sm:text-[14px] font-bold font-poppins"
           type="info"
+          @click="applyPromocode"
         >
           Apply now
         </el-button>
       </template>
     </el-input>
     <el-divider class="border-primary-700 opacity-5" />
-    <div class="mt-[30px] flex items-center justify-between">
+    <div class="mt-[30px] flex items-center">
       <p class="font-poppins font-semibold">Total:</p>
-      <p class="font-poppins font-semibold text-[20px] text-accent-400">
+      <p
+        class="ml-auto font-poppins font-semibold text-[20px] text-accent-400"
+        :class="{ [`line-through`]: isPromocodeApplied }"
+      >
         {{ $filters.currencyParser(totalPrice) }}
+      </p>
+      <p
+        v-if="isPromocodeApplied"
+        class="ml-[30px] font-poppins font-semibold text-[20px] text-accent-400"
+      >
+        {{ $filters.currencyParser(priceWithPromocode) }}
       </p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { notificationHandler } from '@/helpers'
 import { routeNames } from '@/router/route-names'
 
 const cartStore = useCartStore()
 const router = useRouter()
 const promocode = ref('')
+const isPromocodeApplied = ref(false)
+const priceWithPromocode = ref(0)
 
 const totalPrice = computed(() => {
   return cartStore.getTotalCartPrice()
 })
+
+const applyPromocode = async () => {
+  try {
+    const { data } = await checkoutService.applyPromocode(promocode.value)
+
+    if (!data?.length) {
+      throw new Error('Invalid promocode')
+    }
+
+    priceWithPromocode.value = Number((totalPrice.value - (totalPrice.value * (data[0].discount / 100))).toFixed(2))
+    isPromocodeApplied.value = true
+
+    notificationHandler('Promocode successfully applied', { type: 'success' })
+  } catch (error) {
+    notificationHandler(error as Error)
+  }
+}
 
 onMounted(() => {
   if (!cartStore.cartProducts.length) {

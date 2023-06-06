@@ -46,11 +46,6 @@
           {{ $filters.currencyParser(product.price) }}
         </p>
         <div>
-          <p class="mb-[4px] flex justify-center">
-            <span>{{ quantity * product.qty }}</span>
-            &nbsp;
-            <span>{{ product.unit }}/{{ product.unit }}s</span>
-          </p>
           <QuantityInput v-model="quantity" :disabled="true" :controls="false" />
         </div>
       </div>

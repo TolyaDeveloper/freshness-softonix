@@ -11,6 +11,7 @@ declare global {
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const cartService: typeof import('../src/services/cart.service')['cartService']
   const categoryProductsService: typeof import('../src/views/products/products.service')['categoryProductsService']
+  const checkoutService: typeof import('../src/views/checkout/checkout.service')['checkoutService']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
