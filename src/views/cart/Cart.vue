@@ -3,7 +3,7 @@
   <BlockTitle class="mt-[30px] mb-[30px] text-center">🛒 Cart</BlockTitle>
   <el-skeleton v-if="loading" />
   <div v-else-if="!cartStore.cartProducts.length" class="text-center mt-[100px]">
-    <h2 class="text-[18px]">
+    <h2>
       No products in cart
     </h2>
     <router-link
@@ -31,8 +31,8 @@
         :product="product"
       />
     </ul>
-    <p v-if="cartStore.cartProducts.length" class="text-right  text-[18px]">
-      <span class="block">Total: <span class="font-bold">{{ $filters.currencyParser(totalPrice) }}</span></span>
+    <div v-if="cartStore.cartProducts.length" class="text-right text-[18px]">
+      <div>Total: <span class="font-bold">{{ $filters.currencyParser(cartStore.totalCartPrice) }}</span></div>
       <router-link
         #default="{ navigate }"
         :to="{ name: $routeNames.checkout }"
@@ -50,7 +50,7 @@
           <IconArrowRight class="ml-[12px] stroke-white" />
         </el-button>
       </router-link>
-    </p>
+    </div>
   </template>
 </template>
 
@@ -63,10 +63,6 @@ const getCartProducts = async () => {
 
   loading.value = false
 }
-
-const totalPrice = computed(() => {
-  return cartStore.getTotalCartPrice()
-})
 
 onMounted(() => {
   getCartProducts()

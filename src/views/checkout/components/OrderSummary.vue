@@ -23,22 +23,23 @@
     >
       <template #suffix>
         <el-button
-          class="text-primary-700 hover:text-primary-600 text-[12px] sm:text-[14px] font-bold font-poppins"
-          type="info"
+          class="text-[12px] sm:text-[14px] font-bold font-poppins"
+          type="primary"
+          :disabled="!promocode.length"
           @click="applyPromocode"
         >
           Apply now
         </el-button>
       </template>
     </el-input>
-    <el-divider class="border-primary-700 opacity-5" />
+    <el-divider v-if="!isPromocodeApplied" class="border-primary-700 opacity-5" />
     <div class="mt-[30px] flex items-center">
       <p class="font-poppins font-semibold">Total:</p>
       <p
         class="ml-auto font-poppins font-semibold text-[20px] text-accent-400"
         :class="{ [`line-through`]: isPromocodeApplied }"
       >
-        {{ $filters.currencyParser(totalPrice) }}
+        {{ $filters.currencyParser(cartStore.totalCartPrice) }}
       </p>
       <p
         v-if="isPromocodeApplied"
@@ -60,10 +61,6 @@ const promocode = ref('')
 const isPromocodeApplied = ref(false)
 const priceWithPromocode = ref(0)
 
-const totalPrice = computed(() => {
-  return cartStore.getTotalCartPrice()
-})
-
 const applyPromocode = async () => {
   try {
     const { data } = await checkoutService.applyPromocode(promocode.value)
@@ -72,7 +69,12 @@ const applyPromocode = async () => {
       throw new Error('Invalid promocode')
     }
 
-    priceWithPromocode.value = Number((totalPrice.value - (totalPrice.value * (data[0].discount / 100))).toFixed(2))
+    priceWithPromocode.value = Number(
+    (
+      cartStore.totalCartPrice -
+      cartStore.totalCartPrice * (data[0].discount / 100)
+    ).toFixed(2)
+  )
     isPromocodeApplied.value = true
 
     notificationHandler('Promocode successfully applied', { type: 'success' })

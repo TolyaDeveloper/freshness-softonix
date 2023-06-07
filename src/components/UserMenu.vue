@@ -31,16 +31,19 @@
       <IconStack />
     </router-link>
     <el-divider class="mx-[20px]" direction="vertical" />
-    <button type="button" aria-label="Logout" title="Logout" @click="store.logout">
+    <el-button
+      class="border-none p-0 text-primary-700"
+      aria-label="Logout"
+      title="Logout"
+      @click="store.logout"
+    >
       <IconLogout />
-    </button>
+    </el-button>
   </div>
 </template>
 
 <script setup lang="ts">
 const store = useAuthStore()
 
-const itemsInCart = computed(() => {
-  return !store.user?.cart ? 0 : Object.keys(store.user.cart).length
-})
+const itemsInCart = computed(() => Object.keys(store.user?.cart || {}).length)
 </script>

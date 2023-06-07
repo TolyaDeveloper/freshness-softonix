@@ -26,9 +26,8 @@
     <FilterByPrice v-model="filters.priceSortType" />
     <ItemsPerPage v-model="filters.itemsPerPage" class="mt-[15px] sm:mt-0" />
   </div>
-  <button
-    class="mt-[20px] flex items-center md:hidden"
-    type="button"
+  <el-button
+    class="mt-[20px] flex items-center md:hidden border-none p-0"
     aria-label="Open filters"
     @click="isMobileMenuOpened = !isMobileMenuOpened"
   >
@@ -36,7 +35,7 @@
     <span class="ml-[5px] font-poppins">
       {{ isMobileMenuOpened ? 'Hide filters' : 'Open filters' }}
     </span>
-  </button>
+  </el-button>
   <div class="relative grid grid-cols-1 md:grid-cols-[270px_1fr] gap-[30px] mt-[30px] md:mt-[70px]">
     <div
       class="md:block absolute md:static z-10 bg-primary-100 md:bg-transparent p-[15px] md:p-0

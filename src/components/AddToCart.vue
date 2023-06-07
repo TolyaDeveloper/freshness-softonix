@@ -22,14 +22,12 @@
 </template>
 
 <script setup lang="ts">
-const props = withDefaults(defineProps<{
+const props = defineProps<{
   product: IProduct
   units: number
   isAlreadyInCart: boolean
   disabled?: boolean
-}>(), {
-  disabled: false
-})
+}>()
 
 const cartStore = useCartStore()
 

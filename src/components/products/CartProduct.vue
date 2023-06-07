@@ -1,19 +1,15 @@
 <template>
   <li class="flex items-center justify-between border border-primary-300 rounded-[12px] p-[15px]">
     <div class="flex items-center">
-      <el-image
-        class="max-w-[80px] w-full h-[80px] rounded-[12px] shrink-0"
-        fit="cover"
-        :src="imageHasError ? NoProductThumbnail : product.image"
+      <ProductImage
+        :src="product.image"
         :alt="product.name"
-        @error="imageHasError = true"
+        class="max-w-[80px] w-full h-[80px] rounded-[12px] shrink-0"
       />
       <div class="ml-[30px] max-w-[150px] shrink-0 w-full">
-        <slot name="title">
-          <h3 class="font-poppins font-medium text-[15px] truncate">
-            {{ product.name }}
-          </h3>
-        </slot>
+        <h3 class="font-poppins font-medium text-[15px] truncate">
+          {{ product.name }}
+        </h3>
         <p class="font-poppins font-semibold text-[18px] text-accent-400">
           {{ $filters.currencyParser(product.price) }}
           <span>/ {{ product.qty }}  {{ product.unit }}</span>
@@ -36,23 +32,22 @@
           View
         </el-button>
       </router-link>
-      <button
+      <el-button
         class="ml-[15px]"
-        type="button"
         aria-label="Delete from cart"
         title="Delete from cart"
+        type="danger"
+        round
         @click="cartStore.deleteProductFromCart(product.id)"
       >
-        <IconDelete class="hover:stroke-secondary-500" />
-      </button>
+        <IconDelete />
+      </el-button>
     </div>
   </li>
 </template>
 
 <script setup lang="ts">
 import { validateQuantityInput } from '@/helpers'
-
-import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
 
 const props = defineProps<{
   product: IProduct
@@ -61,8 +56,7 @@ const props = defineProps<{
 const authStore = useAuthStore()
 const cartStore = useCartStore()
 
-const quantity = ref(authStore.user?.cart ? authStore.user?.cart[props.product.id] : 1)
-const imageHasError = ref(false)
+const quantity = ref(authStore.user?.cart?.[props.product.id] || 1)
 
 watch(quantity, () => {
   if (validateQuantityInput(quantity.value)) {

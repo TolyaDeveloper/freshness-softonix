@@ -84,20 +84,20 @@ export const useCartStore = defineStore('cartStore', () => {
     }
   }
 
-  const getTotalCartPrice = () => {
+  const totalCartPrice = computed(() => {
     const userCart = authStore.user?.cart ?? {}
 
     return cartProducts.value.reduce((total, product) => {
       return total + (product.price * (userCart[product.id] ?? 0))
     }, 0)
-  }
+  })
 
   return {
     cartProducts,
+    totalCartPrice,
     getProductsFromUserCart,
     addProductToCart,
     deleteProductFromCart,
-    editProductCartUnits,
-    getTotalCartPrice
+    editProductCartUnits
   }
 })

@@ -2,12 +2,10 @@
   <div class="relative max-w-[270px] w-full border border-primary-300 rounded-[12px] p-[15px]">
     <router-link :to="{ name: $routeNames.productDetails, params: { id: product.id } }">
       <div>
-        <el-image
+        <ProductImage
           class="max-w-[240px] w-full h-[180px] rounded-[12px]"
-          fit="cover"
-          :src="imageHasError ? NoProductThumbnail : product.image"
+          :src="product.image"
           :alt="product.name"
-          @error="imageHasError = true"
         />
         <slot name="title">
           <h3 class="mb-[4px] mt-[15px] font-poppins font-medium text-[15px] truncate">
@@ -32,8 +30,6 @@
 </template>
 
 <script setup lang="ts">
-import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
-
 const props = defineProps<{
   product: IProduct
 }>()
@@ -43,6 +39,4 @@ const authStore = useAuthStore()
 const isAlreadyInCart = computed(() => {
   return authStore.user?.cart ? props.product.id in authStore.user.cart : false
 })
-
-const imageHasError = ref(false)
 </script>

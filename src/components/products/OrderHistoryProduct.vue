@@ -1,20 +1,19 @@
 <template>
-  <li class="mb-[15px] p-[15px] border border-primary-300 rounded-[12px] list-none">
+  <li class="relative mb-[15px] p-[15px] border border-primary-300 rounded-[12px] list-none">
+    <el-tag class="mr-[15px] absolute right-0" :type="elTagTypeMappings[order.status]">
+      {{ order.status }}
+    </el-tag>
     <div v-for="product in orderProducts" :key="product.id">
       <div class="py-[10px] flex items-center">
-        <el-image
+        <ProductImage
           class="max-w-[80px] w-full h-[80px] rounded-[12px] shrink-0"
-          fit="cover"
-          :src="imageHasError ? NoProductThumbnail : product.image"
+          :src="product.image"
           :alt="product.name"
-          @error="imageHasError = true"
         />
         <div class="ml-[30px] max-w-[150px] shrink-0 w-full">
-          <slot name="title">
-            <h3 class="font-poppins font-medium text-[15px] truncate">
-              {{ product.name }}
-            </h3>
-          </slot>
+          <h3 class="font-poppins font-medium text-[15px] truncate">
+            {{ product.name }}
+          </h3>
           <p class="font-poppins font-semibold text-[18px] text-accent-400">
             {{ $filters.currencyParser(product.price) }}
             <span>/ {{ product.qty }}  {{ product.unit }}</span>
@@ -22,7 +21,6 @@
           <p class="mt-[10px] text-[12px] font-poppins">Quantity: {{ order.products[product.id] }}</p>
         </div>
         <div class="ml-auto">
-          <el-tag class="mr-[15px]" :type="elTagTypeMappings[order.status]">{{ order.status }}</el-tag>
           <router-link
             #default="{ navigate }"
             :to="{ name: $routeNames.productDetails, params: { id: product.id } }"
@@ -44,30 +42,19 @@
 </template>
 
 <script setup lang="ts">
-import type { EpPropMergeType } from 'element-plus/es/utils'
-
-import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
+import type { TagProps } from 'element-plus'
 
 const props = defineProps<{
   order: IOrder
   products: IProduct[]
 }>()
 
-const elTagTypeMappings: Record<
-TOrderStatuses,
-| EpPropMergeType<
-StringConstructor,
-'' | 'warning' | 'danger' | 'success' | 'info',
-unknown
->
-| undefined
-> = {
+const elTagTypeMappings: Record<TOrderStatuses, TagProps['type']> = {
   Processing: 'warning',
   Canceled: 'danger',
   Completed: 'success'
 }
 
-const imageHasError = ref(false)
 const orderProducts = ref(props.products.filter(product => {
   return Object.keys(props.order.products).includes(product.id)
 }))

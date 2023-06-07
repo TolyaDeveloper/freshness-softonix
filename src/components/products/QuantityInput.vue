@@ -21,15 +21,3 @@ withDefaults(defineProps<{
 
 const modelValue = defineModel<number>()
 </script>
-
-<style lang="scss">
-.input-number  {
-  span {
-    @apply rounded-[12px];
-
-    &:hover {
-      @apply bg-primary-300;
-    }
-  }
-}
-</style>

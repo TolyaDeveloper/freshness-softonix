@@ -3,7 +3,7 @@
   <BlockTitle class="mt-[30px] mb-[30px] text-center">📦 Orders history</BlockTitle>
   <el-skeleton v-if="isLoading" />
   <div v-else-if="!orders.length" class="text-center mt-[100px]">
-    <h2 class="text-[18px]">
+    <h2>
       No orders yet
     </h2>
     <router-link
@@ -22,13 +22,14 @@
       </el-button>
     </router-link>
   </div>
-  <OrderHistoryProduct
-    v-for="order in orders"
-    v-else
-    :key="order.id"
-    :order="order"
-    :products="products"
-  />
+  <template v-else>
+    <OrderHistoryProduct
+      v-for="order in orders"
+      :key="order.id"
+      :order="order"
+      :products="products"
+    />
+  </template>
 </template>
 
 <script setup lang="ts">

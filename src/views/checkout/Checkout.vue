@@ -29,7 +29,7 @@
         <p>Step 3 of 3</p>
       </div>
       <AdditionalInformation v-model="formModel" />
-      <el-button type="primary" size="large" native-type="submit">
+      <el-button type="primary" size="large" native-type="submit" :loading="isLoading">
         Complete order
       </el-button>
     </el-form>
@@ -44,6 +44,7 @@ import { routeNames } from '@/router/route-names'
 const formRef = useElFormRef()
 const authStore = useAuthStore()
 const router = useRouter()
+const isLoading = ref(false)
 
 const formModel = useElFormModel({
   firstname: authStore.user?.firstname ?? '',
@@ -51,7 +52,7 @@ const formModel = useElFormModel({
   email: authStore.user?.email ?? '',
   city: authStore.user?.city ?? '',
   street: authStore.user?.street ?? '',
-  paymentMethod: '',
+  paymentMethod: 'CARD',
   additionalInformation: '',
   cardNumber: '',
   cardHolder: '',
@@ -83,6 +84,8 @@ const formRules = useElFormRules({
 
 const createOrder = async () => {
   try {
+    isLoading.value = true
+
     if (!authStore.user) {
       return
     }
@@ -95,6 +98,8 @@ const createOrder = async () => {
     notificationHandler('Order successfully created', { type: 'success' })
   } catch (error) {
     notificationHandler(error as Error)
+  } finally {
+    isLoading.value = false
   }
 }
 

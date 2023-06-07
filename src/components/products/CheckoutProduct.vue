@@ -1,23 +1,11 @@
 <template>
   <li class="flex items-start flex-col sm:flex-row p-[15px]">
     <div class="mr-[15px] w-[100px] shrink-0">
-      <el-image
+      <ProductImage
         class="max-w-[100px] w-full h-[80px] rounded-[12px] shrink-0 block"
-        fit="cover"
-        :src="imageHasError ? NoProductThumbnail : product.image"
+        :src="product.image"
         :alt="product.name"
-        @error="imageHasError = true"
       />
-      <button
-        class="mt-[12px]"
-        type="button"
-        aria-label="Remove from checkout"
-        title="Remove from checkout"
-        @click="cartStore.deleteProductFromCart(product.id)"
-      >
-        <IconTimes class="mr-[6px]" />
-        Remove
-      </button>
     </div>
     <div class="w-full mt-[30px] sm:mt-0">
       <h3 class="font-poppins font-medium truncate">{{ product.name }}</h3>
@@ -54,16 +42,11 @@
 </template>
 
 <script setup lang="ts">
-import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
-
 const props = defineProps<{
   product: IProduct
 }>()
 
-const cartStore = useCartStore()
 const authStore = useAuthStore()
 
 const quantity = ref(authStore.user?.cart ? authStore.user?.cart[props.product.id] : 1)
-
-const imageHasError = ref(false)
 </script>

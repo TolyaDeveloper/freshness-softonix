@@ -3,12 +3,10 @@
     class="grid sm:grid-cols-[1fr_1fr] md:grid-cols-[1fr] lg:grid-cols-[270px_1fr_200px] grid-rows-[280px] gap-[30px]
            items-center border border-primary-300 rounded-[12px]"
   >
-    <el-image
+    <ProductImage
       class="lg:max-w-[270px] w-full h-[280px] rounded-[12px]"
-      fit="cover"
-      :src="imageHasError ? NoProductThumbnail : product.image"
+      :src="product.image"
       :alt="product.name"
-      @error="imageHasError = true"
     />
     <div class="p-[15px] lg:p-0">
       <h2 class="mb-[5px] truncate font-poppins font-semibold text-[18px]">
@@ -50,11 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
-
 defineProps<{
   product: IProduct
 }>()
-
-const imageHasError = ref(false)
 </script>
