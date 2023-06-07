@@ -158,16 +158,19 @@ interface IDatabase {
           id: string
           products: Record<string, number>
           user_id: string
+          status: TOrderStatuses
         }
         Insert: {
           id?: string
           products: Record<string, number>
           user_id: string
+          status: TOrderStatuses
         }
         Update: {
           id?: string
           products?: Record<string, number> | null
           user_id?: string
+          status?: TOrderStatuses
         }
       }
     }

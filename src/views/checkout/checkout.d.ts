@@ -8,5 +8,6 @@ interface ICheckout {
   additionalInformation: string
   cardNumber: string
   cardHolder: string
+  cardExpirationDate: string
   cardCVC: string
 }

@@ -21,33 +21,51 @@
           </p>
           <p class="mt-[10px] text-[12px] font-poppins">Quantity: {{ order.products[product.id] }}</p>
         </div>
-        <router-link
-          #default="{ navigate }"
-          :to="{ name: $routeNames.productDetails, params: { id: product.id } }"
-          custom
-        >
-          <el-button
-            class="ml-auto"
-            role="link"
-            round
-            title="View detailed product"
-            @click="navigate"
+        <div class="ml-auto">
+          <el-tag class="mr-[15px]" :type="elTagTypeMappings[order.status]">{{ order.status }}</el-tag>
+          <router-link
+            #default="{ navigate }"
+            :to="{ name: $routeNames.productDetails, params: { id: product.id } }"
+            custom
           >
-            View
-          </el-button>
-        </router-link>
+            <el-button
+              role="link"
+              round
+              title="View detailed product"
+              @click="navigate"
+            >
+              View
+            </el-button>
+          </router-link>
+        </div>
       </div>
     </div>
   </li>
 </template>
 
 <script setup lang="ts">
+import type { EpPropMergeType } from 'element-plus/es/utils'
+
 import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
 
 const props = defineProps<{
   order: IOrder
   products: IProduct[]
 }>()
+
+const elTagTypeMappings: Record<
+TOrderStatuses,
+| EpPropMergeType<
+StringConstructor,
+'' | 'warning' | 'danger' | 'success' | 'info',
+unknown
+>
+| undefined
+> = {
+  Processing: 'warning',
+  Canceled: 'danger',
+  Completed: 'success'
+}
 
 const imageHasError = ref(false)
 const orderProducts = ref(props.products.filter(product => {

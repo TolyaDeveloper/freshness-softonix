@@ -25,11 +25,18 @@
               <el-input v-model="(modelValue as ICheckout).cardNumber" />
             </el-form-item>
             <div class="mt-[10px] flex">
-              <el-form-item class="grow" label="Card holder" prop="ecardHoldermail">
+              <el-form-item class="grow" label="Card holder" prop="cardHolder">
                 <el-input v-model="(modelValue as ICheckout).cardHolder" />
               </el-form-item>
+              <el-form-item class="ml-[15px] w-[120px]" label="Expiration date" prop="cardExpirationDate">
+                <el-input
+                  v-model="(modelValue as ICheckout).cardExpirationDate"
+                  placeholder="mm/yy"
+                  @input="handleExpirationDate"
+                />
+              </el-form-item>
               <el-form-item class="ml-[15px] w-[120px]" label="CVC" prop="cardCVC">
-                <el-input v-model="(modelValue as ICheckout).cardCVC" placeholder="mm/yy" @input="handleCVC" />
+                <el-input v-model="(modelValue as ICheckout).cardCVC" />
               </el-form-item>
             </div>
           </div>
@@ -50,17 +57,17 @@
 <script setup lang="ts">
 const modelValue = defineModel<ICheckout>()
 
-const handleCVC = (value: string) => {
+const handleExpirationDate = (value: string) => {
   if (value.length === 2) {
     value = value.slice(0, 2) + '/';
 
-    (modelValue.value as ICheckout).cardCVC = value
+    (modelValue.value as ICheckout).cardExpirationDate = value
 
     return
   }
 
   if (value.at(-1) === '/') {
-    (modelValue.value as ICheckout).cardCVC = ''
+    (modelValue.value as ICheckout).cardExpirationDate = ''
   }
 }
 </script>

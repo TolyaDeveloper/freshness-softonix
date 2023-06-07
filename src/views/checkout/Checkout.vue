@@ -55,6 +55,7 @@ const formModel = useElFormModel({
   additionalInformation: '',
   cardNumber: '',
   cardHolder: '',
+  cardExpirationDate: '',
   cardCVC: ''
 })
 
@@ -90,7 +91,7 @@ const createOrder = async () => {
     await cartService.updateCart({}, authStore.user.id)
 
     authStore.user.cart = {}
-    router.replace({ name: routeNames.home })
+    router.replace({ name: routeNames.orders })
     notificationHandler('Order successfully created', { type: 'success' })
   } catch (error) {
     notificationHandler(error as Error)

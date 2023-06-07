@@ -1,6 +1,6 @@
 class OrdersService {
   getOrdersIdsByUserId (userId: string) {
-    return useSupabase.from('orders').select('products, id').eq('user_id', userId)
+    return useSupabase.from('orders').select('*').eq('user_id', userId)
   }
 }
 
