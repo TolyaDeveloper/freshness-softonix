@@ -6,6 +6,7 @@ import { profileRoutes } from '@/views/profile/profile.routes'
 import { productsRoutes } from '@/views/products/products.routes'
 import { cartRoutes } from '@/views/cart/cart.routes'
 import { checkoutRoutes } from '@/views/checkout/checkout.routes'
+import { ordersRoutes } from '@/views/orders/orders.routes'
 
 const routes: Array<RouteRecordRaw> = [
   ...homeRoutes,
@@ -13,7 +14,8 @@ const routes: Array<RouteRecordRaw> = [
   ...profileRoutes,
   ...productsRoutes,
   ...cartRoutes,
-  ...checkoutRoutes
+  ...checkoutRoutes,
+  ...ordersRoutes
 ]
 
 export {

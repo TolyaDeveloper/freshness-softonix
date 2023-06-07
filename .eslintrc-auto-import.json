@@ -79,6 +79,7 @@
     "onStartTyping": true,
     "onUnmounted": true,
     "onUpdated": true,
+    "ordersService": true,
     "pausableWatch": true,
     "productDetailsService": true,
     "provide": true,

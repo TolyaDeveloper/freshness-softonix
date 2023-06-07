@@ -4,6 +4,7 @@ import { profileRouteNames } from '@/views/profile/profile.routes'
 import { productsRouteNames } from '@/views/products/products.routes'
 import { cartRouteNames } from '@/views/cart/cart.routes'
 import { checkoutRouteNames } from '@/views/checkout/checkout.routes'
+import { ordersRouteNames } from '@/views/orders/orders.routes'
 
 export const routeNames = {
   ...homeRouteNames,
@@ -11,5 +12,6 @@ export const routeNames = {
   ...profileRouteNames,
   ...productsRouteNames,
   ...cartRouteNames,
-  ...checkoutRouteNames
+  ...checkoutRouteNames,
+  ...ordersRouteNames
 }

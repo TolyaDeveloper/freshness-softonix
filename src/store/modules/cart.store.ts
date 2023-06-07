@@ -14,7 +14,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
       const productIds = Object.keys(authStore.user.cart)
 
-      const { data } = await cartService.getProductsFromUserCart(productIds)
+      const { data } = await generalService.getProductsByIds(productIds)
 
       if (!data) {
         return
