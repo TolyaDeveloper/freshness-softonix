@@ -2,7 +2,7 @@
   <div>
     <el-form-item prop="paymentMethod">
       <el-radio-group
-        v-model="(modelValue as ICheckout).paymentMethod"
+        v-model="modelValue.paymentMethod"
         class="w-full"
       >
         <div class="mb-[15px] bg-white rounded-[12px] p-[15px] border border-primary-300">

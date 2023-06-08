@@ -1,7 +1,7 @@
 <template>
   <el-form-item>
     <el-input
-      v-model="(modelValue as ICheckout).additionalInformation"
+      v-model="modelValue.additionalInformation"
       type="textarea"
       placeholder="Need a specific delivery day? Sending a gitf? Let’s say ..."
       :rows="5"
@@ -11,5 +11,5 @@
 </template>
 
 <script setup lang="ts">
-const modelValue = defineModel<ICheckout>()
+const modelValue = defineModel<ICheckout>({ required: true })
 </script>
