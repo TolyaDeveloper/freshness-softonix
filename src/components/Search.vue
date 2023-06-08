@@ -1,18 +1,20 @@
 <template>
   <el-form
     :model="formModel"
-    @submit.prevent="submitForm"
+    @submit.prevent="submitForm()"
   >
     <el-form-item class="mb-0" prop="searchQuery">
       <el-input
         v-model="formModel.searchQuery"
         size="large"
         placeholder="Search Products, categories ..."
+        clearable
+        @clear="clearSearch"
       >
         <template #suffix>
-          <el-button class="border-none p-0 bg-transparent" native-type="submit" aria-label="Search">
+          <button type="submit" aria-label="Search">
             <IconSearch />
-          </el-button>
+          </button>
         </template>
       </el-input>
     </el-form-item>
@@ -20,14 +22,25 @@
 </template>
 
 <script setup lang="ts">
+import { routeNames } from '@/router/route-names'
+
+const router = useRouter()
+const route = useRoute()
 
 const formModel = useElFormModel({
-  searchQuery: ''
+  searchQuery: route.query.searchQuery as string ?? ''
 })
 
-const submitForm = async () => {
-  if (formModel.searchQuery.trim() !== '') {
-    alert('submit')
+const submitForm = async (force?: boolean) => {
+  if (formModel.searchQuery.trim() !== '' || force) {
+    router.push({ name: routeNames.products, query: { ...route.query, searchQuery: formModel.searchQuery } })
   }
+}
+
+const clearSearch = () => {
+  const query = { ...route.query }
+  delete query.searchQuery
+
+  router.push({ query })
 }
 </script>
