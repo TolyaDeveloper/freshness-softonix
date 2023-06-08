@@ -10,3 +10,7 @@ export const notificationHandler = (message: Error | string, options?: Notificat
 export const findCategory = (categories: ICategory[], categoryId: string) => {
   return categories.find(category => category.id === categoryId)?.name
 }
+
+export const validateQuantityInput = (quantity: number) => {
+  return quantity >= 1 && !isNaN(quantity)
+}

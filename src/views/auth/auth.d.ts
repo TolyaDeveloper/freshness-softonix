@@ -4,6 +4,7 @@ enum ERoles {
 }
 
 interface IUser {
+  cart: Record<string, number> | null
   id: string
   email: string
   firstname: string

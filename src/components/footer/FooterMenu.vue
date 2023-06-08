@@ -3,7 +3,7 @@
     class="text-center min-[500px]:text-left grid grid-cols-1 min-[500px]:grid-cols-2 sm:grid-cols-3 gap-[30px]"
   >
     <div>
-      <h2 class="font-poppins text-[18px] font-semibold mb-[15px]">
+      <h2 class="mb-[15px]">
         Earnings
       </h2>
       <ul>
@@ -13,7 +13,7 @@
       </ul>
     </div>
     <div>
-      <h2 class="font-poppins text-[18px] font-semibold mb-[15px]">
+      <h2 class="mb-[15px]">
         Connections
       </h2>
       <ul>
@@ -35,7 +35,7 @@
       </ul>
     </div>
     <div>
-      <h2 class="font-poppins text-[18px] font-semibold mb-[15px]">
+      <h2 class="mb-[15px]">
         Account
       </h2>
       <ul>
@@ -43,7 +43,7 @@
           <router-link class="link" :to="{ name: $routeNames.profile }">Your account</router-link>
         </li>
         <li class="text-accent-400 mb-[15px]">
-          <router-link class="link" to="/cart">Cart</router-link>
+          <router-link class="link" :to="{ name: $routeNames.cart }">Cart</router-link>
         </li>
       </ul>
     </div>

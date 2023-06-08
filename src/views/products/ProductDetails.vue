@@ -11,12 +11,10 @@
       class="mt-[30px] grid grid-cols-1 md:grid-cols-[minmax(320px,_380px)_minmax(320px,_1fr)] xl:grid-cols-[570px_1fr]
              gap-[30px]"
     >
-      <el-image
+      <ProductImage
         class="max-w-[400px] md:max-w-[570px] w-full h-[300px] md:h-[435px] rounded-[12px]"
-        fit="cover"
-        :src="imageHasError ? NoProductThumbnail : product.image"
+        :src="product.image"
         :alt="product.name"
-        @error="imageHasError = true"
       />
       <div>
         <h1 class="font-poppins font-semibold text-[32px]">
@@ -55,13 +53,10 @@
 <script setup lang="ts">
 import { productDetailsService } from '@/views/products/products.service'
 
-import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
-
 const route = useRoute()
 
 const product = ref<TNullable<IProduct>>(null)
 const isLoading = ref(true)
-const imageHasError = ref(false)
 
 const getProductDetails = async () => {
   try {

@@ -2,7 +2,9 @@
 
 @import 'fonts';
 @import 'base';
+@import 'typography';
 @import './element-reset';
+@import './element-reset/input-number';
 
 @tailwind components;
 @tailwind utilities;

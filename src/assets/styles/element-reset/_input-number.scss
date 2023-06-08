@@ -1,0 +1,11 @@
+@use "element-plus/theme-chalk/src/input-number";
+
+.el-input-number {
+  span {
+    @apply rounded-[12px];
+
+    &:hover {
+      @apply bg-primary-300;
+    }
+  }
+}

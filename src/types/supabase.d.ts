@@ -69,6 +69,7 @@ interface IDatabase {
       }
       profiles: {
         Row: {
+          cart: Record<string, number> | null
           city: string
           street: string
           email: string
@@ -79,6 +80,7 @@ interface IDatabase {
           role: ERoles
         }
         Insert: {
+          cart?: Record<string, number> | null
           city: string
           street: string
           email: string
@@ -89,6 +91,7 @@ interface IDatabase {
           role?: ERoles
         }
         Update: {
+          cart?: Record<string, number> | null
           city?: string
           street?: string
           email?: string
@@ -131,6 +134,43 @@ interface IDatabase {
         Update: {
           id?: string
           name?: string
+        }
+      }
+      promocodes: {
+        Row: {
+          code: string
+          discount: number
+          id: string
+        }
+        Insert: {
+          code: string
+          discount: number
+          id?: string
+        }
+        Update: {
+          code?: string
+          discount?: number
+          id?: string
+        }
+      }
+      orders: {
+        Row: {
+          id: string
+          products: Record<string, number>
+          user_id: string
+          status: TOrderStatuses
+        }
+        Insert: {
+          id?: string
+          products: Record<string, number>
+          user_id: string
+          status: TOrderStatuses
+        }
+        Update: {
+          id?: string
+          products?: Record<string, number> | null
+          user_id?: string
+          status?: TOrderStatuses
         }
       }
     }

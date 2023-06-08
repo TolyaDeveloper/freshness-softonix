@@ -15,7 +15,7 @@
     <div>
       <div class="grid grid-cols-[auto_auto] justify-between gap-[15px]">
         <p class="text-primary-500">Farm:</p>
-        <p level="body4">{{ product.brand.name }}</p>
+        <p>{{ product.brand.name }}</p>
       </div>
       <div class="mt-[12px] grid grid-cols-[auto_auto] justify-between gap-[15px]">
         <p class="text-primary-500">1 unit:</p>

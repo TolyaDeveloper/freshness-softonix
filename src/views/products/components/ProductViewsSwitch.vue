@@ -1,9 +1,8 @@
 <template>
   <div class="flex">
-    <button
+    <el-button
       class="flex items-center"
       :class="{ active: modelValue === 'grid' }"
-      type="button"
       title="Grid view"
       @click="modelValue = 'grid'"
     >
@@ -11,11 +10,10 @@
         Grid view
       </p>
       <IconGridView />
-    </button>
-    <button
+    </el-button>
+    <el-button
       class="ml-[25px] flex items-center"
       :class="{ active: modelValue === 'list' }"
-      type="button"
       title="List view"
       @click="modelValue = 'list'"
     >
@@ -23,7 +21,7 @@
         List view
       </p>
       <IconListView />
-    </button>
+    </el-button>
   </div>
 </template>
 

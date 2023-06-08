@@ -31,6 +31,63 @@ export function useConfirmPassword (initialPassword: Ref<string>) {
   } as FormItemRule
 }
 
+export function useCVCRule () {
+  return {
+    validator (_rule, value: string, callback) {
+      if (!value || !/^\d{3}$/.test(value)) {
+        return callback(new Error('Invalid CVC'))
+      }
+
+      callback()
+    }
+  } as FormItemRule
+}
+
+export function useCardExpirationRule () {
+  return {
+    validator (_rule, value: string, callback) {
+      if (!value || !/^\d{2}\/\d{2}$/.test(value)) {
+        return callback(new Error('Invalid format'))
+      }
+
+      const [month, year] = value.split('/')
+
+      const expirationMonth = Number(month)
+      const expirationYear = Number(year)
+
+      const currentDate = new Date()
+      const currentYear = currentDate.getFullYear() % 100
+      const currentMonth = currentDate.getMonth() + 1
+
+      if (
+        expirationYear < currentYear ||
+        (expirationYear === currentYear && expirationMonth < currentMonth)
+      ) {
+        return callback(new Error('Invalid date'))
+      }
+      callback()
+    }
+  } as FormItemRule
+}
+
+export function useCardNumberRule () {
+  return {
+    validator (_rule, value: string, callback) {
+      const cleanedNum = value.replace(/\s/g, '')
+
+      const isVisa = /^4[0-9]{12}(?:[0-9]{3})?$/.test(cleanedNum)
+      const isMastercard = /^5[1-5][0-9]{14}$/.test(cleanedNum)
+      const isMastercard2017 = /^2[2-7][0-9]{14}$/.test(cleanedNum)
+
+      if (isVisa || isMastercard || isMastercard2017) {
+        return callback()
+      }
+
+      return callback(new Error('Invalid card number'))
+    }
+  } as FormItemRule
+}
+
 export function useEmailRule () {
   return { type: 'email', message: 'Incorrect email', trigger: ['change', 'blur'] } as FormItemRule
 }
