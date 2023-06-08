@@ -1,7 +1,7 @@
 <template>
   <el-form
     :model="formModel"
-    @submit.prevent="submitForm()"
+    @submit.prevent="submitForm"
   >
     <el-form-item class="mb-0" prop="searchQuery">
       <el-input
@@ -31,8 +31,8 @@ const formModel = useElFormModel({
   searchQuery: route.query.searchQuery as string ?? ''
 })
 
-const submitForm = async (force?: boolean) => {
-  if (formModel.searchQuery.trim() !== '' || force) {
+const submitForm = async () => {
+  if (formModel.searchQuery.trim() !== '') {
     router.push({ name: routeNames.products, query: { ...route.query, searchQuery: formModel.searchQuery } })
   }
 }
