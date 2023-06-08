@@ -192,8 +192,8 @@ watch(() => route.query.id, () => {
 watch(() => filters, () => {
   priceRange.value = []
 
-  getProductsWithCount()
   getMinMaxPrices()
+  getProductsWithCount()
 
   replace({ query: { ...route.query, ...filters.value } })
 }, { deep: true, immediate: true })

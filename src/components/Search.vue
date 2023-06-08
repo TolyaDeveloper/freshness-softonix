@@ -12,9 +12,13 @@
         @clear="clearSearch"
       >
         <template #suffix>
-          <button type="submit" aria-label="Search">
+          <el-button
+            class="border-none p-0 bg-transparent"
+            native-type="submit"
+            aria-label="Search"
+          >
             <IconSearch />
-          </button>
+          </el-button>
         </template>
       </el-input>
     </el-form-item>
