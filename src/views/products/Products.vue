@@ -89,6 +89,7 @@ import { findCategory } from '@/helpers'
 const route = useRoute()
 const { replace } = useRouter()
 const generalStore = useGeneralStore()
+const authStore = useAuthStore()
 
 const totalProducts = ref(0)
 const products = ref<IProduct[]>([])
@@ -119,11 +120,15 @@ const getProductsWithCount = async () => {
 
     totalProducts.value = count ?? 0
 
-    if (!data) {
+    if (!data?.length) {
       return
     }
 
     products.value = data
+
+    if (route.query.searchQuery) {
+      authStore.updateLastSearchedCategory(data[0].category.id)
+    }
   } catch (error) {
     console.error(error)
   } finally {
