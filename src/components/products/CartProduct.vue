@@ -15,7 +15,7 @@
           <span>/ {{ product.qty }}  {{ product.unit }}</span>
         </p>
       </div>
-      <QuantityInput v-model="quantity" class="ml-[30px]" />
+      <QuantityInput v-model="quantity" class="ml-[30px]" @input="handleQuantity" />
     </div>
     <div class="flex items-center">
       <router-link
@@ -58,9 +58,9 @@ const cartStore = useCartStore()
 
 const quantity = ref(authStore.user?.cart?.[props.product.id] || 1)
 
-watch(quantity, () => {
-  if (validateQuantityInput(quantity.value)) {
-    cartStore.editProductCartUnits(props.product.id, quantity.value)
+const handleQuantity = (value: number) => {
+  if (validateQuantityInput(value)) {
+    cartStore.editProductCartUnits(props.product.id, value)
   }
-})
+}
 </script>

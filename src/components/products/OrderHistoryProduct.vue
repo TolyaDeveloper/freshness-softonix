@@ -1,6 +1,6 @@
 <template>
   <li class="relative mb-[15px] p-[15px] border border-primary-300 rounded-[12px] list-none">
-    <el-tag class="mr-[15px] absolute right-0" :type="elTagTypeMappings[order.status]">
+    <el-tag class="mr-[15px] absolute right-0 top-[50%] translate-y-[-50%]" :type="elTagTypeMappings[order.status]">
       {{ order.status }}
     </el-tag>
     <div v-for="product in orderProducts" :key="product.id">
@@ -19,22 +19,6 @@
             <span>/ {{ product.qty }}  {{ product.unit }}</span>
           </p>
           <p class="mt-[10px] text-[12px] font-poppins">Quantity: {{ order.products[product.id] }}</p>
-        </div>
-        <div class="ml-auto">
-          <router-link
-            #default="{ navigate }"
-            :to="{ name: $routeNames.productDetails, params: { id: product.id } }"
-            custom
-          >
-            <el-button
-              role="link"
-              round
-              title="View detailed product"
-              @click="navigate"
-            >
-              View
-            </el-button>
-          </router-link>
         </div>
       </div>
     </div>
@@ -58,6 +42,4 @@ const elTagTypeMappings: Record<TOrderStatuses, TagProps['type']> = {
 const orderProducts = ref(props.products.filter(product => {
   return Object.keys(props.order.products).includes(product.id)
 }))
-
-console.log(orderProducts.value)
 </script>

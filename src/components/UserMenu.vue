@@ -22,14 +22,15 @@
         {{ itemsInCart > 9 ? "9+" : itemsInCart }}
       </span>
     </router-link>
-    <router-link
-      class="ml-7"
-      :to="{ name: $routeNames.orders }"
-      aria-label="Orders history"
-      title="Orders history"
-    >
-      <IconStack />
-    </router-link>
+    <el-tooltip placement="bottom" content="Orders history">
+      <router-link
+        class="ml-7"
+        :to="{ name: $routeNames.orders }"
+        aria-label="Orders history"
+      >
+        <IconStack />
+      </router-link>
+    </el-tooltip>
     <el-divider class="mx-[20px]" direction="vertical" />
     <el-button
       class="border-none p-0 text-primary-700"

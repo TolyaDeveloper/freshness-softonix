@@ -6,6 +6,7 @@
       :min="1"
       :disabled="disabled"
       :controls="controls"
+      @input="value => $emit('input', value)"
     />
   </div>
 </template>
@@ -18,6 +19,8 @@ withDefaults(defineProps<{
   disabled: false,
   controls: true
 })
+
+defineEmits(['input'])
 
 const modelValue = defineModel<number>()
 </script>

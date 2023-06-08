@@ -48,6 +48,7 @@ declare module '@vue/runtime-core' {
     ElSkeletonItem: typeof import('element-plus/es')['ElSkeletonItem']
     ElSlider: typeof import('element-plus/es')['ElSlider']
     ElTag: typeof import('element-plus/es')['ElTag']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     FeedbackItem: typeof import('./../src/views/home/components/FeedbackItem.vue')['default']
     FeedbacksSlider: typeof import('./../src/views/home/components/FeedbacksSlider.vue')['default']
     FilterByBrand: typeof import('./../src/views/products/components/FilterByBrand.vue')['default']

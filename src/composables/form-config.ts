@@ -34,7 +34,6 @@ export function useConfirmPassword (initialPassword: Ref<string>) {
 export function useCVCRule () {
   return {
     validator (_rule, value: string, callback) {
-      console.log(value)
       if (!value || !/^\d{3}$/.test(value)) {
         return callback(new Error('Invalid CVC'))
       }
