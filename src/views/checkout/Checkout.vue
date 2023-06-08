@@ -79,6 +79,18 @@ const formRules = useElFormRules({
   ],
   paymentMethod: [
     useRequiredRule()
+  ],
+  cardNumber: [
+    useCardNumberRule()
+  ],
+  cardHolder: [
+    useRequiredRule()
+  ],
+  cardExpirationDate: [
+    useCardExpirationRule()
+  ],
+  cardCVC: [
+    useCVCRule()
   ]
 })
 

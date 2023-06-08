@@ -22,21 +22,21 @@
           </div>
           <div v-if="modelValue?.paymentMethod === 'CARD'">
             <el-form-item label="Card number" prop="cardNumber">
-              <el-input v-model="(modelValue as ICheckout).cardNumber" />
+              <el-input v-model="modelValue.cardNumber" @input="handleCardNumber" />
             </el-form-item>
             <div class="mt-[10px] flex">
               <el-form-item class="grow" label="Card holder" prop="cardHolder">
-                <el-input v-model="(modelValue as ICheckout).cardHolder" />
+                <el-input v-model="modelValue.cardHolder" />
               </el-form-item>
               <el-form-item class="ml-[15px] w-[120px]" label="Expiration date" prop="cardExpirationDate">
                 <el-input
-                  v-model="(modelValue as ICheckout).cardExpirationDate"
+                  v-model="modelValue.cardExpirationDate"
                   placeholder="mm/yy"
                   @input="handleExpirationDate"
                 />
               </el-form-item>
               <el-form-item class="ml-[15px] w-[120px]" label="CVC" prop="cardCVC">
-                <el-input v-model="(modelValue as ICheckout).cardCVC" />
+                <el-input v-model="modelValue.cardCVC" />
               </el-form-item>
             </div>
           </div>
@@ -55,19 +55,31 @@
 </template>
 
 <script setup lang="ts">
-const modelValue = defineModel<ICheckout>()
+const modelValue = defineModel<ICheckout>({ required: true })
 
 const handleExpirationDate = (value: string) => {
-  if (value.length === 2) {
-    value = value.slice(0, 2) + '/';
+  value = value.replace(/\D/g, '')
 
-    (modelValue.value as ICheckout).cardExpirationDate = value
-
-    return
+  if (value.length > 2) {
+    value = value.slice(0, 2) + '/' + value.slice(2)
   }
 
-  if (value.at(-1) === '/') {
-    (modelValue.value as ICheckout).cardExpirationDate = ''
+  (modelValue.value as ICheckout).cardExpirationDate = value
+}
+
+const handleCardNumber = (value: string) => {
+  const cardNumber = value.replace(/\D/g, '')
+  const cardNumberLength = cardNumber.length
+
+  let maskedCardNumber = ''
+
+  for (let i = 0; i < cardNumberLength; i++) {
+    if (i > 0 && i % 4 === 0) {
+      maskedCardNumber += ' '
+    }
+    maskedCardNumber += cardNumber[i]
   }
+
+  (modelValue.value as ICheckout).cardNumber = maskedCardNumber
 }
 </script>
