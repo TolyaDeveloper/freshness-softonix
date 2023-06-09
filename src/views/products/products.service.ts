@@ -45,10 +45,6 @@ class CategoryProductsService {
     return query
   }
 
-  getBrands () {
-    return useSupabase.from('brands').select('*')
-  }
-
   getMinMaxPrices (filters: Pick<IFilters, 'filterByRating' | 'filterByBrand'>, categoryId?: string) {
     const { filterByRating, filterByBrand } = filters
 
@@ -63,6 +59,10 @@ class CategoryProductsService {
 class ProductDetailsService {
   getProductById (productId: string) {
     return useSupabase.from('products').select('*, category (*), brand (*)').eq('id', productId)
+  }
+
+  updateProduct (editedProduct: Partial<IProduct>, productId: string) {
+    return useSupabase.from('products').update(editedProduct).eq('id', productId)
   }
 }
 

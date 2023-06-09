@@ -44,7 +44,7 @@
       :class="{ [`hidden`]: !isMobileMenuOpened }"
     >
       <AsideCategories />
-      <FilterByBrand v-model="filters.filterByBrand" class="mt-[50px]" :brands="brands" />
+      <FilterByBrand v-model="filters.filterByBrand" class="mt-[50px]" :brands="generalStore.brands" />
       <FilterByRating v-model="filters.filterByRating" class="mt-[50px]" />
       <FilterByRangePrice
         v-if="priceRange.length"
@@ -94,7 +94,6 @@ const authStore = useAuthStore()
 
 const totalProducts = ref(0)
 const products = ref<IProduct[]>([])
-const brands = ref<IBrand[]>([])
 const isLoading = ref(true)
 const productView = ref<TProductViews>('grid')
 const minMaxPrices = ref<number[]>([])
@@ -156,19 +155,7 @@ const getMinMaxPrices = async () => {
   }
 }
 
-const getBrands = async () => {
-  try {
-    const { data } = await categoryProductsService.getBrands()
 
-    if (!data) {
-      return
-    }
-
-    brands.value = data
-  } catch (error) {
-    console.error(error)
-  }
-}
 
 const reset = () => {
   filters.value = { ...defaultFilters }
@@ -176,7 +163,7 @@ const reset = () => {
 }
 
 onMounted(() => {
-  getBrands()
+  generalStore.getBrands()
 })
 
 watch(() => route.query.searchQuery, async () => {

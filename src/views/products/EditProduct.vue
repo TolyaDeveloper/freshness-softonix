@@ -8,6 +8,7 @@
       ]"
     />
     <BlockTitle class="mt-[30px] text-center">✏️ Edit product</BlockTitle>
+    <ProductForm class="mt-[50px]" :product="product" />
   </template>
 </template>
 

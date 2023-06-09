@@ -88,6 +88,7 @@ declare module '@vue/runtime-core' {
     OrderSummary: typeof import('./../src/views/checkout/components/OrderSummary.vue')['default']
     PaymentMethod: typeof import('./../src/views/checkout/components/PaymentMethod.vue')['default']
     ProductContainer: typeof import('./../src/components/products/ProductContainer.vue')['default']
+    ProductForm: typeof import('./../src/views/products/components/ProductForm.vue')['default']
     ProductImage: typeof import('./../src/components/products/ProductImage.vue')['default']
     ProductsByLastSearch: typeof import('./../src/views/home/components/ProductsByLastSearch.vue')['default']
     ProductsSkeleton: typeof import('./../src/components/skeletons/ProductsSkeleton.vue')['default']
