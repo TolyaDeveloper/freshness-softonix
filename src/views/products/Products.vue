@@ -155,8 +155,6 @@ const getMinMaxPrices = async () => {
   }
 }
 
-
-
 const reset = () => {
   filters.value = { ...defaultFilters }
   isMobileMenuOpened.value = false
