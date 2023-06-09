@@ -58,9 +58,11 @@
 
 <script setup lang="ts">
 import { notificationHandler } from '@/helpers'
+import { routeNames } from '@/router/route-names'
 
 const props = defineProps<{ product?: IProduct }>()
 
+const route = useRoute()
 const generalStore = useGeneralStore()
 const formRef = useElFormRef()
 
@@ -116,10 +118,14 @@ const updateProduct = async () => {
   }
 }
 
+const addProduct = () => {
+  alert('add product')
+}
+
 const submitForm = () => {
   formRef.value.validate(async valid => {
     if (valid) {
-      updateProduct()
+      route.name === routeNames.editProduct ? updateProduct() : addProduct()
     }
   })
 }
