@@ -7,6 +7,11 @@
         { title: product.name }
       ]"
     />
+    <AdminProductActions
+      v-if="authStore.user?.role === ERoles.admin"
+      class="mt-[15px] flex justify-end"
+      :product="product"
+    />
     <div
       class="mt-[30px] grid grid-cols-1 md:grid-cols-[minmax(320px,_380px)_minmax(320px,_1fr)] xl:grid-cols-[570px_1fr]
              gap-[30px]"
@@ -52,8 +57,10 @@
 
 <script setup lang="ts">
 import { productDetailsService } from '@/views/products/products.service'
+import { ERoles } from '@/types/roles'
 
 const route = useRoute()
+const authStore = useAuthStore()
 
 const product = ref<TNullable<IProduct>>(null)
 const isLoading = ref(true)

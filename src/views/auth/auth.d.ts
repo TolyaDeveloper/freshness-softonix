@@ -1,8 +1,3 @@
-enum ERoles {
-  user = 'user',
-  admin = 'admin',
-}
-
 interface IUser {
   cart: Record<string, number> | null
   id: string
