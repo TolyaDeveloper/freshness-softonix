@@ -26,8 +26,9 @@
     <FilterByPrice v-model="filters.priceSortType" />
     <ItemsPerPage v-model="filters.itemsPerPage" class="mt-[15px] sm:mt-0" />
   </div>
-  <el-button
-    class="mt-[20px] flex items-center md:hidden border-none p-0"
+  <button
+    class="mt-[20px] flex items-center md:hidden"
+    type="button"
     aria-label="Open filters"
     @click="isMobileMenuOpened = !isMobileMenuOpened"
   >
@@ -35,7 +36,7 @@
     <span class="ml-[5px] font-poppins">
       {{ isMobileMenuOpened ? 'Hide filters' : 'Open filters' }}
     </span>
-  </el-button>
+  </button>
   <div class="relative grid grid-cols-1 md:grid-cols-[270px_1fr] gap-[30px] mt-[30px] md:mt-[70px]">
     <div
       class="md:block absolute md:static z-10 bg-primary-100 md:bg-transparent p-[15px] md:p-0
@@ -84,10 +85,12 @@
 
 <script setup lang="ts">
 import { findCategory } from '@/helpers'
+import { routeNames } from '@/router/route-names'
 
 const route = useRoute()
 const { replace } = useRouter()
 const generalStore = useGeneralStore()
+const authStore = useAuthStore()
 
 const totalProducts = ref(0)
 const products = ref<IProduct[]>([])
@@ -123,6 +126,10 @@ const getProductsWithCount = async () => {
     }
 
     products.value = data
+
+    if (route.query.searchQuery) {
+      authStore.updateLastSearchedCategory(data[0].category.id)
+    }
   } catch (error) {
     console.error(error)
   } finally {
@@ -172,6 +179,18 @@ onMounted(() => {
   getBrands()
 })
 
+watch(() => route.query.searchQuery, async () => {
+  if (route.name !== routeNames.products) {
+    return
+  }
+
+  if (!route.query.searchQuery) {
+    await replace({ query: { ...route.query, ...filters.value, id: generalStore.categories[0].id } })
+  }
+
+  reset()
+})
+
 watch(() => route.query.id, () => {
   if (!route.query.id) {
     return
@@ -183,8 +202,8 @@ watch(() => route.query.id, () => {
 watch(() => filters, () => {
   priceRange.value = []
 
-  getProductsWithCount()
   getMinMaxPrices()
+  getProductsWithCount()
 
   replace({ query: { ...route.query, ...filters.value } })
 }, { deep: true, immediate: true })

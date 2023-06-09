@@ -22,6 +22,10 @@ class AuthService {
   updateProfile (userId: string | undefined, updatedDataProfile: Partial<IUser>) {
     return useSupabase.from('profiles').update(updatedDataProfile).eq('id', userId)
   }
+
+  updateLastSearchedCategory (categoryId: string, userId: string) {
+    return useSupabase.from('profiles').update({ last_searched_category: categoryId }).eq('id', userId)
+  }
 }
 
 export const authService = new AuthService()

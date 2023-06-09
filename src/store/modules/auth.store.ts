@@ -67,11 +67,26 @@ export const useAuthStore = defineStore('authStore', () => {
     window.location.href = router.resolve({ name: routeNames.login }).href
   }
 
+  const updateLastSearchedCategory = async (categoryId: string) => {
+    try {
+      if (!user.value?.id) {
+        return
+      }
+
+      await authService.updateLastSearchedCategory(categoryId, user.value?.id)
+
+      user.value.last_searched_category = categoryId
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return {
     user,
     login,
     signup,
     logout,
-    getUserProfile
+    getUserProfile,
+    updateLastSearchedCategory
   }
 })

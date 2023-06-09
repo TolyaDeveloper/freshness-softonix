@@ -8,7 +8,10 @@
         :key="category.id"
         class="mb-[6px] text-accent-400"
       >
-        <router-link class="link" :to="{ name: $routeNames.products, query: { id: category.id } }">
+        <router-link
+          class="link"
+          :to="{ name: $routeNames.products, query: { ...route.query, id: category.id } }"
+        >
           {{ category.name }}
         </router-link>
       </li>
@@ -18,4 +21,5 @@
 
 <script setup lang="ts">
 const generalStore = useGeneralStore()
+const route = useRoute()
 </script>

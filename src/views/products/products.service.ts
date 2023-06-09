@@ -39,7 +39,7 @@ class CategoryProductsService {
     }
 
     if (searchQuery) {
-      query.textSearch('name', searchQuery)
+      query.filter('name', 'ilike', `%${searchQuery}%`)
     }
 
     return query
