@@ -78,6 +78,7 @@ interface IDatabase {
           last_searched_category: string | null
           lastname: string
           role: ERoles
+          phone: string
         }
         Insert: {
           cart?: Record<string, number> | null
@@ -89,6 +90,7 @@ interface IDatabase {
           last_searched_category?: string | null
           lastname: string
           role?: ERoles
+          phone?: string
         }
         Update: {
           cart?: Record<string, number> | null
@@ -100,6 +102,7 @@ interface IDatabase {
           last_searched_category?: string | null
           lastname?: string
           role?: ERoles
+          phone?: string
         }
       }
       feedbacks: {
@@ -164,7 +167,7 @@ interface IDatabase {
           id?: string
           products: Record<string, number>
           user_id: string
-          status: TOrderStatuses
+          status?: TOrderStatuses
         }
         Update: {
           id?: string

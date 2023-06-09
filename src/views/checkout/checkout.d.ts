@@ -4,6 +4,7 @@ interface ICheckout {
   email: string
   city: string
   street: string
+  phone: string
   paymentMethod: string
   additionalInformation: string
   cardNumber: string

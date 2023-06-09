@@ -13,6 +13,7 @@ interface IUser {
   street: string
   role: ERoles
   last_searched_category: string | null
+  phone: string
 }
 
 interface ILoginPayload {

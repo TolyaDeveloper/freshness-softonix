@@ -52,6 +52,7 @@ const formModel = useElFormModel({
   email: authStore.user?.email ?? '',
   city: authStore.user?.city ?? '',
   street: authStore.user?.street ?? '',
+  phone: authStore.user?.phone ?? '',
   paymentMethod: 'CARD',
   additionalInformation: '',
   cardNumber: '',

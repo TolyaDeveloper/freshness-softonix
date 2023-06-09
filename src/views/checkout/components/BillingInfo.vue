@@ -25,6 +25,9 @@
     <el-form-item label="Street" prop="street">
       <el-input v-model="modelValue.street" />
     </el-form-item>
+    <el-form-item label="Phone" prop="phone">
+      <el-input v-model="modelValue.phone" />
+    </el-form-item>
   </div>
 </template>
 

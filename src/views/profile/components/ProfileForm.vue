@@ -35,6 +35,9 @@
     <el-form-item label="Default delivery street" prop="street">
       <el-input v-model="editFormModel.street" :disabled="!isEditMode" />
     </el-form-item>
+    <el-form-item label="Phone" prop="phone">
+      <el-input v-model="editFormModel.phone" :disabled="!isEditMode" />
+    </el-form-item>
     <div class="mt-16">
       <template v-if="isEditMode">
         <el-button type="success" native-type="submit" :loading="isLoading" :disabled="isLoading">
@@ -58,8 +61,8 @@ import { cities } from '@/constants/cities'
 import { notificationHandler } from '@/helpers'
 
 const formRef = useElFormRef()
-const store = useAuthStore()
-const { user } = storeToRefs(store)
+const authStore = useAuthStore()
+const { user } = storeToRefs(authStore)
 
 const inputRef = ref<TNullable<HTMLInputElement>>(null)
 const isLoading = ref(false)
@@ -70,7 +73,8 @@ let formModel = useElFormModel({
   firstname: user.value?.firstname,
   lastname: user.value?.lastname,
   city: user.value?.city,
-  street: user.value?.street
+  street: user.value?.street,
+  phone: user.value?.phone
 })
 
 let editFormModel = useElFormModel({ ...formModel })
@@ -110,6 +114,7 @@ const submitForm = () => {
         }
 
         formModel = { ...editFormModel }
+        authStore.user = { ...authStore.user, ...updatedProfile } as IUser
         isEditMode.value = false
         notificationHandler('Account updated', { type: 'success' })
       } catch (error) {
