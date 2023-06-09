@@ -7,7 +7,7 @@
       <el-input
         v-model="formModel.searchQuery"
         size="large"
-        placeholder="Search Products, categories ..."
+        placeholder="Search Products ..."
         clearable
         @clear="clearSearch"
       >

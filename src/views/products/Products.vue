@@ -85,6 +85,7 @@
 
 <script setup lang="ts">
 import { findCategory } from '@/helpers'
+import { routeNames } from '@/router/route-names'
 
 const route = useRoute()
 const { replace } = useRouter()
@@ -120,7 +121,7 @@ const getProductsWithCount = async () => {
 
     totalProducts.value = count ?? 0
 
-    if (!data?.length) {
+    if (!data) {
       return
     }
 
@@ -179,6 +180,10 @@ onMounted(() => {
 })
 
 watch(() => route.query.searchQuery, async () => {
+  if (route.name !== routeNames.products) {
+    return
+  }
+
   if (!route.query.searchQuery) {
     await replace({ query: { ...route.query, ...filters.value, id: generalStore.categories[0].id } })
   }
