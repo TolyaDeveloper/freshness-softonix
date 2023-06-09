@@ -1,8 +1,8 @@
 <template>
   <AsideWithBanners />
   <MostPopularProducts />
-  <FeedbacksSlider :feedbacks="feedbacks" />
   <ProductsByLastSearch v-if="authStore.user" />
+  <FeedbacksSlider :feedbacks="feedbacks" />
 </template>
 
 <script setup lang="ts">
