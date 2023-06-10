@@ -5,7 +5,7 @@
       :limit="1"
       :auto-upload="false"
       list-type="picture"
-      :on-change="handleFileSuccess"
+      :on-change="handleFileChange"
       :on-remove="handleFileRemove"
     >
       <p>Drop product image here or click to upload</p>
@@ -63,9 +63,9 @@
         <el-input v-model="formModel.unit" placeholder="G, KG, Liters..." />
       </el-form-item>
       <el-form-item label="1 unit measure" prop="qty">
-        <el-input v-model="formModel.qty" placeholder="100g, 1kg..." />
+        <el-input v-model="formModel.qty" placeholder="1, 300, 100..." />
       </el-form-item>
-      <el-button class="ml-auto block" type="primary" native-type="submit">
+      <el-button class="ml-auto block" type="primary" native-type="submit" :loading="isLoading">
         Save
       </el-button>
     </el-form>
@@ -78,12 +78,14 @@ import type { UploadFile, UploadProps } from 'element-plus'
 import { notificationHandler } from '@/helpers'
 import { routeNames } from '@/router/route-names'
 
-const props = defineProps<{ product?: IProduct }>()
+const props = defineProps<{ product?: TProduct }>()
 
 const file = ref<TNullable<UploadFile>>(null)
-const imageUri = ref<string | undefined>(props.product?.image)
+const imageUri = ref<string | null| undefined>(props.product?.image)
+const isLoading = ref(false)
 
 const route = useRoute()
+const { push } = useRouter()
 const generalStore = useGeneralStore()
 const formRef = useElFormRef()
 
@@ -92,9 +94,9 @@ const formModel = useElFormModel({
   description: props.product?.description ?? '',
   category: props.product?.category.id ?? '',
   brand: props.product?.brand.id ?? '',
-  price: props.product?.price ?? '',
+  price: Number(props.product?.price ?? ''),
   unit: props.product?.unit ?? '',
-  qty: props.product?.qty ?? ''
+  qty: Number(props.product?.qty ?? '')
 })
 
 const formRules = useElFormRules({
@@ -125,8 +127,7 @@ onMounted(() => {
   generalStore.getBrands()
 })
 
-const handleFileSuccess: UploadProps['onChange'] = (uploadFile) => {
-  console.log({ uploadFile })
+const handleFileChange: UploadProps['onChange'] = (uploadFile) => {
   file.value = uploadFile
   imageUri.value = uploadFile.url
 }
@@ -137,21 +138,49 @@ const handleFileRemove: UploadProps['onRemove'] = () => {
 }
 
 const updateProduct = async () => {
+  isLoading.value = true
+
   try {
     if (!props.product) {
       return
     }
 
-    await productDetailsService.updateProduct(formModel, props.product?.id) // types issue
+    if (file.value) {
+      const data = await filesService.uploadProductImage(file.value)
+
+      console.log({ data })
+
+      if (!data) {
+        return
+      }
+
+      imageUri.value = data.productUrl
+    }
+
+    await productDetailsService.updateProduct(formModel, props.product.id)
 
     notificationHandler('Product updated', { type: 'success' })
+    push({ name: routeNames.productDetails, params: { id: props.product.id } })
   } catch (error) {
     notificationHandler(error as Error)
+  } finally {
+    isLoading.value = false
   }
 }
 
-const addProduct = () => {
-  alert('add product')
+const addProduct = async () => {
+  isLoading.value = true
+
+  try {
+    await productDetailsService.createProduct(formModel)
+
+    notificationHandler('Product created', { type: 'success' })
+    push({ name: routeNames.home })
+  } catch (error) {
+    notificationHandler(error as Error)
+  } finally {
+    isLoading.value = false
+  }
 }
 
 const submitForm = () => {

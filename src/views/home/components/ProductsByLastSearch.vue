@@ -14,7 +14,7 @@
 <script setup lang="ts">
 const authStore = useAuthStore()
 
-const productsByLastSearch = ref<IProduct[]>([])
+const productsByLastSearch = ref<TProduct[]>([])
 const isLoading = ref(true)
 
 const getProductsByLastSearch = async (limit: number, categoryId: TNullable<string | undefined>) => {

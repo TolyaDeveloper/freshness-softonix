@@ -93,7 +93,7 @@ const generalStore = useGeneralStore()
 const authStore = useAuthStore()
 
 const totalProducts = ref(0)
-const products = ref<IProduct[]>([])
+const products = ref<TProduct[]>([])
 const isLoading = ref(true)
 const productView = ref<TProductViews>('grid')
 const minMaxPrices = ref<number[]>([])

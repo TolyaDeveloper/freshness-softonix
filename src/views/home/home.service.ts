@@ -1,6 +1,11 @@
 class HomeService {
   getMostPopularProducts (limit: number) {
-    return useSupabase.from('products').select('*').order('rating', { ascending: false }).limit(limit)
+    return useSupabase
+      .from('products')
+      .select('*')
+      .order('rating', { ascending: false })
+      .limit(limit)
+      .not('rating', 'is', null)
   }
 
   getFeedbacks () {

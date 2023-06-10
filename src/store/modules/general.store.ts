@@ -1,6 +1,6 @@
 export const useGeneralStore = defineStore('generalStore', () => {
-  const categories = ref<ICategory[]>([])
-  const brands = ref<IBrand[]>([])
+  const categories = ref<TCategory[]>([])
+  const brands = ref<TBrand[]>([])
   const initialLoading = ref(true)
 
   const getCategories = async () => {

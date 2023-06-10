@@ -61,8 +61,12 @@ class ProductDetailsService {
     return useSupabase.from('products').select('*, category (*), brand (*)').eq('id', productId)
   }
 
-  updateProduct (editedProduct: Partial<IProduct>, productId: string) {
+  updateProduct (editedProduct: TProductUpdate, productId: string) {
     return useSupabase.from('products').update(editedProduct).eq('id', productId)
+  }
+
+  createProduct (product: TProductInsert) {
+    return useSupabase.from('products').insert(product)
   }
 
   // deleteProduct (productId: string) {

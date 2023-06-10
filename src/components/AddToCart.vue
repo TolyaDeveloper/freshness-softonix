@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  product: IProduct
+  product: TProduct
   units: number
   isAlreadyInCart: boolean
   disabled?: boolean

@@ -29,8 +29,8 @@
 import type { TagProps } from 'element-plus'
 
 const props = defineProps<{
-  order: IOrder
-  products: IProduct[]
+  order: TOrder
+  products: TProduct[]
 }>()
 
 const elTagTypeMappings: Record<TOrderStatuses, TagProps['type']> = {

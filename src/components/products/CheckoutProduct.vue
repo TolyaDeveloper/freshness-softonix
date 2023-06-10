@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  product: IProduct
+  product: TProduct
 }>()
 
 const authStore = useAuthStore()

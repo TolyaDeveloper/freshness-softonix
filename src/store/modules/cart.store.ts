@@ -4,7 +4,7 @@ import { routeNames } from '@/router/route-names'
 export const useCartStore = defineStore('cartStore', () => {
   const authStore = useAuthStore()
 
-  const cartProducts = ref<IProduct[]>([])
+  const cartProducts = ref<TProduct[]>([])
 
   const getProductsFromUserCart = async () => {
     try {

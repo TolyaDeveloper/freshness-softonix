@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { validateQuantityInput } from '@/helpers'
 
-const props = defineProps<{ product: IProduct }>()
+const props = defineProps<{ product: TProduct }>()
 
 const quantity = ref(1)
 const authStore = useAuthStore()

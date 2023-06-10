@@ -15,7 +15,7 @@
 <script setup lang="ts">
 const route = useRoute()
 
-const product = ref<TNullable<IProduct>>(null)
+const product = ref<TNullable<TProduct>>(null)
 const isLoading = ref(true)
 
 const getProductDetails = async () => {

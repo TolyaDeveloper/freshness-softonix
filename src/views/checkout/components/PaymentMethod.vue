@@ -64,7 +64,7 @@ const handleExpirationDate = (value: string) => {
     value = value.slice(0, 2) + '/' + value.slice(2)
   }
 
-  (modelValue.value as ICheckout).cardExpirationDate = value
+  modelValue.value.cardExpirationDate = value
 }
 
 const handleCardNumber = (value: string) => {
@@ -80,6 +80,6 @@ const handleCardNumber = (value: string) => {
     maskedCardNumber += cardNumber[i]
   }
 
-  (modelValue.value as ICheckout).cardNumber = maskedCardNumber
+  modelValue.value.cardNumber = maskedCardNumber
 }
 </script>

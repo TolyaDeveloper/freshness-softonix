@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ product: IProduct }>()
+defineProps<{ product: TProduct }>()
 
 const { push } = useRouter()
 </script>

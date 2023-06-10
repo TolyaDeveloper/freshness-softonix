@@ -34,8 +34,8 @@
 
 <script setup lang="ts">
 const authStore = useAuthStore()
-const orders = ref<IOrder[]>([])
-const products = ref<IProduct[]>([])
+const orders = ref<TOrder[]>([])
+const products = ref<TProduct[]>([])
 const isLoading = ref(true)
 
 const getOrdersByUserId = async () => {

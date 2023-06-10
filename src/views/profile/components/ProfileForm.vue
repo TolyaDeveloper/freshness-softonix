@@ -114,7 +114,7 @@ const submitForm = () => {
         }
 
         formModel = { ...editFormModel }
-        authStore.user = { ...authStore.user, ...updatedProfile } as IUser
+        authStore.user = { ...authStore.user, ...updatedProfile } as TUser
         isEditMode.value = false
         notificationHandler('Account updated', { type: 'success' })
       } catch (error) {

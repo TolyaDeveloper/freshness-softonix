@@ -62,7 +62,7 @@ import { ERoles } from '@/types/roles'
 const route = useRoute()
 const authStore = useAuthStore()
 
-const product = ref<TNullable<IProduct>>(null)
+const product = ref<TNullable<TProduct>>(null)
 const isLoading = ref(true)
 
 const getProductDetails = async () => {

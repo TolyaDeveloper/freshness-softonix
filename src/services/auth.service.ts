@@ -19,7 +19,7 @@ class AuthService {
     return useSupabase.auth.signOut()
   }
 
-  updateProfile (userId: string | undefined, updatedDataProfile: Partial<IUser>) {
+  updateProfile (userId: string | undefined, updatedDataProfile: TUserUpdate) {
     return useSupabase.from('profiles').update(updatedDataProfile).eq('id', userId)
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative max-w-[270px] w-full border border-primary-300 rounded-[12px] p-[15px]">
+  <div class="relative max-w-[270px] w-full h-[335px] border border-primary-300 rounded-[12px] p-[15px]">
     <router-link :to="{ name: $routeNames.productDetails, params: { id: product.id } }">
       <div>
         <ProductImage
@@ -18,7 +18,7 @@
           </p>
         </slot>
         <el-rate v-if="product.rating" :model-value="product.rating" class="h-[20px]" disabled />
-        <p class="mt-[15px] font-poppins font-semibold text-[18px]">
+        <p class="absolute bottom-[15px] left-[15px] mt-[15px] font-poppins font-semibold text-[18px]">
           {{ $filters.currencyParser(product.price) }}
         </p>
       </div>
@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  product: IProduct
+  product: TProduct
 }>()
 
 const authStore = useAuthStore()
