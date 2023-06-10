@@ -1,5 +1,21 @@
 <template>
   <el-card class="max-w-[500px] w-full mx-auto">
+    <el-upload
+      drag
+      :limit="1"
+      :auto-upload="false"
+      list-type="picture"
+      :on-change="handleFileSuccess"
+      :on-remove="handleFileRemove"
+    >
+      <p>Drop product image here or click to upload</p>
+      <img
+        v-if="imageUri"
+        class="mt-[30px] max-w-[200px] w-full h-[200px] object-cover rounded-[12px]"
+        :src="imageUri"
+        :alt="product?.name"
+      >
+    </el-upload>
     <el-form
       ref="formRef"
       :model="formModel"
@@ -57,10 +73,15 @@
 </template>
 
 <script setup lang="ts">
+import type { UploadFile, UploadProps } from 'element-plus'
+
 import { notificationHandler } from '@/helpers'
 import { routeNames } from '@/router/route-names'
 
 const props = defineProps<{ product?: IProduct }>()
+
+const file = ref<TNullable<UploadFile>>(null)
+const imageUri = ref<string | undefined>(props.product?.image)
 
 const route = useRoute()
 const generalStore = useGeneralStore()
@@ -103,6 +124,17 @@ const formRules = useElFormRules({
 onMounted(() => {
   generalStore.getBrands()
 })
+
+const handleFileSuccess: UploadProps['onChange'] = (uploadFile) => {
+  console.log({ uploadFile })
+  file.value = uploadFile
+  imageUri.value = uploadFile.url
+}
+
+const handleFileRemove: UploadProps['onRemove'] = () => {
+  file.value = null
+  imageUri.value = props.product?.image
+}
 
 const updateProduct = async () => {
   try {

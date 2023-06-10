@@ -64,6 +64,10 @@ class ProductDetailsService {
   updateProduct (editedProduct: Partial<IProduct>, productId: string) {
     return useSupabase.from('products').update(editedProduct).eq('id', productId)
   }
+
+  // deleteProduct (productId: string) {
+  //   return useSupabase.from('products').delete()
+  // }
 }
 
 export const productDetailsService = new ProductDetailsService()

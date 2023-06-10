@@ -39,6 +39,7 @@
     "eagerComputed": true,
     "effectScope": true,
     "extendRef": true,
+    "filesService": true,
     "generalService": true,
     "getActivePinia": true,
     "getCurrentInstance": true,
