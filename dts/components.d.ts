@@ -61,6 +61,7 @@ declare module '@vue/runtime-core' {
     FilterByRating: typeof import('./../src/views/products/components/FilterByRating.vue')['default']
     FooterMenu: typeof import('./../src/components/footer/FooterMenu.vue')['default']
     GridProductCard: typeof import('./../src/components/products/GridProductCard.vue')['default']
+    IconAdd: typeof import('~icons/icon/add')['default']
     IconArrowRight: typeof import('~icons/icon/arrow-right')['default']
     IconCart: typeof import('~icons/icon/cart')['default']
     IconDelete: typeof import('~icons/icon/delete')['default']
