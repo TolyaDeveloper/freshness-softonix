@@ -70,11 +70,10 @@ const applyPromocode = async () => {
     }
 
     priceWithPromocode.value = Number(
-    (
-      cartStore.totalCartPrice -
-      cartStore.totalCartPrice * (data[0].discount / 100)
-    ).toFixed(2)
-  )
+      (
+        cartStore.totalCartPrice - cartStore.totalCartPrice * (data[0].discount / 100)
+      ).toFixed(2)
+    )
     isPromocodeApplied.value = true
 
     notificationHandler('Promocode successfully applied', { type: 'success' })

@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-const mostPopularProducts = ref<IProduct[]>([])
+const mostPopularProducts = ref<TProduct[]>([])
 
 const getMostPopularProducts = async (limit: number) => {
   try {

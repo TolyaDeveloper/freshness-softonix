@@ -50,7 +50,7 @@
 import { validateQuantityInput } from '@/helpers'
 
 const props = defineProps<{
-  product: IProduct
+  product: TProduct
 }>()
 
 const authStore = useAuthStore()

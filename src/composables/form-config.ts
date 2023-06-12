@@ -88,6 +88,18 @@ export function useCardNumberRule () {
   } as FormItemRule
 }
 
+export function useNumberRule () {
+  return {
+    validator (_rule, value: string, callback) {
+      if (!/^\d+(\.\d+)?$/.test(value)) {
+        return callback(new Error('Numeric values only'))
+      }
+
+      callback()
+    }
+  } as FormItemRule
+}
+
 export function useEmailRule () {
   return { type: 'email', message: 'Incorrect email', trigger: ['change', 'blur'] } as FormItemRule
 }

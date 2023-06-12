@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { cities } from '@/constants/cities'
+import { cities } from '@/constants'
 
 const formRef = useElFormRef()
 const { signup } = useAuthStore()

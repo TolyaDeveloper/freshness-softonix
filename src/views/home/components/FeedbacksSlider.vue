@@ -21,5 +21,5 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ feedbacks: IFeedback[] }>()
+defineProps<{ feedbacks: TFeedback[] }>()
 </script>

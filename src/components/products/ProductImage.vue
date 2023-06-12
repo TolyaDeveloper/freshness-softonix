@@ -1,7 +1,7 @@
 <template>
   <el-image
     fit="cover"
-    :src="src"
+    :src="src ?? ''"
     :alt="alt"
   >
     <template #error>
@@ -13,5 +13,5 @@
 <script setup lang="ts">
 import NoProductThumbnail from '@/assets/images/no-product-thumbnail.png'
 
-defineProps<{ src: string; alt: string }>()
+defineProps<{ src: string | null; alt: string }>()
 </script>

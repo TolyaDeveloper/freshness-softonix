@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  brands: IBrand[]
+  brands: TBrand[]
   limit?: number
 }>(),
 {

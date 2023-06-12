@@ -7,7 +7,7 @@ export const notificationHandler = (message: Error | string, options?: Notificat
   }, options))
 }
 
-export const findCategory = (categories: ICategory[], categoryId: string) => {
+export const findCategory = (categories: TCategory[], categoryId: string) => {
   return categories.find(category => category.id === categoryId)?.name
 }
 

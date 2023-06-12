@@ -2,27 +2,10 @@ type TNullable<T> = null | T
 type TLayouts = 'default' | 'auth'
 type TProductViews = 'grid' | 'list'
 
-interface ICategory {
-  id: string
-  name: string
-}
+type TCategory = IDatabase['public']['Tables']['categories']['Row']
 
-interface IBrand {
-  id: string
-  name: string
-}
+type TBrand = IDatabase['public']['Tables']['brands']['Row']
 
-interface IProduct {
-  id: string
-  image: string
-  name: string
-  description: string
-  category: ICategory
-  brand: IBrand
-  price: number
-  rating: number | null
-  in_stock: number
-  vitamins: string[] | null
-  unit: string
-  qty: number
-}
+type TProduct = IDatabase['public']['Tables']['products']['Row']
+type TProductInsert = IDatabase['public']['Tables']['products']['Insert']
+type TProductUpdate = IDatabase['public']['Tables']['products']['Update']

@@ -25,11 +25,14 @@
     <el-form-item label="Street" prop="street">
       <el-input v-model="modelValue.street" />
     </el-form-item>
+    <el-form-item label="Phone" prop="phone">
+      <el-input v-model="modelValue.phone" />
+    </el-form-item>
   </div>
 </template>
 
 <script setup lang="ts">
-import { cities } from '@/constants/cities'
+import { cities } from '@/constants'
 
 const modelValue = defineModel<ICheckout>({ required: true })
 </script>

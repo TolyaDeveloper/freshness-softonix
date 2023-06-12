@@ -49,6 +49,6 @@
 
 <script setup lang="ts">
 defineProps<{
-  product: IProduct
+  product: TProduct
 }>()
 </script>

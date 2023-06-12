@@ -8,3 +8,5 @@ export const cities = [
     value: 'Kyiv'
   }
 ]
+
+export const productUnits = ['KG', 'G', 'Liter', 'Piece']

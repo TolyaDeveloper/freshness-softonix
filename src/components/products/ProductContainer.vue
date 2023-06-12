@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ products: IProduct[]; view: TProductViews }>()
+defineProps<{ products: TProduct[]; view: TProductViews }>()
 </script>
 
 <style lang="scss">

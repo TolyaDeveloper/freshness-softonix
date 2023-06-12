@@ -9,6 +9,21 @@ type TJson =
 interface IDatabase {
   public: {
     Tables: {
+      brands: {
+        Row: {
+          id: string
+          name: string
+        }
+        Insert: {
+          id: string
+          name: string
+        }
+        Update: {
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       categories: {
         Row: {
           id: string
@@ -22,85 +37,7 @@ interface IDatabase {
           id?: string
           name?: string
         }
-      }
-      products: {
-        Row: {
-          brand: { id: string; name: string }
-          category: { id: string; name: string }
-          description: string
-          id: string
-          image: string
-          in_stock: number
-          name: string
-          price: number
-          qty: number
-          rating: number | null
-          unit: string
-          vitamins: string[] | null
-        }
-        Insert: {
-          brand: { id: string; name: string }
-          category: { id: string; name: string }
-          description: string
-          id: string
-          image?: string
-          in_stock: number
-          name: string
-          price: number
-          qty: number
-          rating?: number | null
-          unit: string
-          vitamins?: string[] | null
-        }
-        Update: {
-          brand?: { id: string; name: string }
-          category?: { id: string; name: string }
-          description?: string
-          id?: string
-          image?: string
-          in_stock?: number
-          name?: string
-          price?: number
-          qty?: number
-          rating?: number | null
-          unit?: string
-          vitamins?: string[] | null
-        }
-      }
-      profiles: {
-        Row: {
-          cart: Record<string, number> | null
-          city: string
-          street: string
-          email: string
-          firstname: string
-          id: string
-          last_searched_category: string | null
-          lastname: string
-          role: ERoles
-        }
-        Insert: {
-          cart?: Record<string, number> | null
-          city: string
-          street: string
-          email: string
-          firstname: string
-          id: string
-          last_searched_category?: string | null
-          lastname: string
-          role?: ERoles
-        }
-        Update: {
-          cart?: Record<string, number> | null
-          city?: string
-          street?: string
-          email?: string
-          firstname?: string
-          id?: string
-          last_searched_category?: string | null
-          lastname?: string
-          role?: ERoles
-        }
+        Relationships: []
       }
       feedbacks: {
         Row: {
@@ -121,20 +58,145 @@ interface IDatabase {
           id?: string
           username?: string
         }
+        Relationships: []
       }
-      brands: {
+      orders: {
         Row: {
           id: string
-          name: string
+          products: Record<string, number>
+          status: TOrderStatuses
+          user_id: string
         }
         Insert: {
-          id: string
-          name: string
+          id?: string
+          products: Record<string, number>
+          status?: TOrderStatuses
+          user_id: string
         }
         Update: {
           id?: string
-          name?: string
+          products?: Record<string, number>
+          status?: TOrderStatuses
+          user_id?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: 'orders_user_id_fkey'
+            columns: ['user_id']
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      products: {
+        Row: {
+          brand: TBrand
+          category: TCategory
+          description: string
+          id: string
+          image: string | null
+          in_stock: number
+          name: string
+          price: number
+          qty: number
+          rating: number | null
+          unit: string
+          vitamins: string[] | null
+        }
+        Insert: {
+          brand: string
+          category: string
+          description: string
+          id?: string
+          image?: string | null
+          in_stock?: number
+          name: string
+          price: number
+          qty: number
+          rating?: number | null
+          unit: string
+          vitamins?: string[] | null
+        }
+        Update: {
+          brand?: string
+          category?: string
+          description?: string
+          id?: string
+          image?: string | null
+          in_stock?: number
+          name?: string
+          price?: number
+          qty?: number
+          rating?: number | null
+          unit?: string
+          vitamins?: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'products_brand_fkey'
+            columns: ['brand']
+            referencedRelation: 'brands'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'products_category_fkey'
+            columns: ['category']
+            referencedRelation: 'categories'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      profiles: {
+        Row: {
+          cart: Record<string, number> | null
+          city: string
+          email: string
+          firstname: string
+          id: string
+          last_searched_category: string | null
+          lastname: string
+          phone: string
+          role: string
+          street: string
+        }
+        Insert: {
+          cart?: Record<string, number> | null
+          city?: string
+          email: string
+          firstname: string
+          id: string
+          last_searched_category?: string | null
+          lastname: string
+          phone?: string
+          role?: string
+          street?: string
+        }
+        Update: {
+          cart?: Record<string, number> | null
+          city?: string
+          email?: string
+          firstname?: string
+          id?: string
+          last_searched_category?: string | null
+          lastname?: string
+          phone?: string
+          role?: string
+          street?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'profiles_id_fkey'
+            columns: ['id']
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'profiles_last_searched_category_fkey'
+            columns: ['last_searched_category']
+            referencedRelation: 'categories'
+            referencedColumns: ['id']
+          }
+        ]
       }
       promocodes: {
         Row: {
@@ -152,26 +214,34 @@ interface IDatabase {
           discount?: number
           id?: string
         }
+        Relationships: []
       }
-      orders: {
+      recipes: {
         Row: {
           id: string
-          products: Record<string, number>
-          user_id: string
-          status: TOrderStatuses
+          ingredients: string[]
+          instructions: string
+          name: string
+          questions: { answer: string; question: string }[]
+          subtitle: string | null
         }
         Insert: {
           id?: string
-          products: Record<string, number>
-          user_id: string
-          status: TOrderStatuses
+          ingredients: string[]
+          instructions: string
+          name: string
+          questions: { answer: string; question: string }[]
+          subtitle?: string | null
         }
         Update: {
           id?: string
-          products?: Record<string, number> | null
-          user_id?: string
-          status?: TOrderStatuses
+          ingredients?: string[]
+          instructions?: string
+          name?: string
+          questions?: { answer: string; question: string }[]
+          subtitle?: string | null
         }
+        Relationships: []
       }
     }
     Views: {

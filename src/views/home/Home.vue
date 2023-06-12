@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-const feedbacks = ref<IFeedback[]>([])
+const feedbacks = ref<TFeedback[]>([])
 const authStore = useAuthStore()
 
 const getFeedbacks = async () => {

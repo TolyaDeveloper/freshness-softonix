@@ -3,7 +3,7 @@ import { router } from '@/router'
 import { routeNames } from '@/router/route-names'
 
 export const useAuthStore = defineStore('authStore', () => {
-  const user = ref<TNullable<IUser>>(null)
+  const user = ref<TNullable<TUser>>(null)
 
   const login = async (credentials: ILoginPayload): Promise<void> => {
     try {
@@ -38,7 +38,7 @@ export const useAuthStore = defineStore('authStore', () => {
     }
   }
 
-  const getUserProfile = async (id?: string): Promise<IUser | null> => {
+  const getUserProfile = async (id?: string): Promise<TUser | null> => {
     try {
       id = id || (await authService.getUser())?.id
 
