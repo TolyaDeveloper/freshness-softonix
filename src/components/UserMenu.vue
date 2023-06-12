@@ -2,7 +2,7 @@
   <div class="flex items-center">
     <el-tooltip content="Profile">
       <router-link
-        class="mr-[15px]"
+        class="mr-[20px]"
         :to="{ name: $routeNames.profile }"
         aria-label="Profile page"
         title="Profile page"
@@ -12,7 +12,7 @@
     </el-tooltip>
     <el-tooltip content="Cart">
       <router-link
-        class="relative mr-[15px]"
+        class="relative mr-[20px]"
         :to="{ name: $routeNames.cart }"
         aria-label="Shopping cart"
         title="Shopping cart"
@@ -37,14 +37,14 @@
       </router-link>
     </el-tooltip>
     <template v-if="authStore.user?.role === ERoles.admin">
-      <el-divider direction="vertical" />
+      <el-divider class="mx-[10px]" direction="vertical" />
       <el-tooltip content="New product">
         <router-link :to="{ name: $routeNames.addProduct }">
           <IconAdd />
         </router-link>
       </el-tooltip>
     </template>
-    <el-divider direction="vertical" />
+    <el-divider class="mx-[10px]" direction="vertical" />
     <el-tooltip content="Logout">
       <el-button
         class="border-none p-0 text-primary-700"
