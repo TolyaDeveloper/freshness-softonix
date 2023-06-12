@@ -57,7 +57,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="Price" prop="price">
-        <el-input v-model="formModel.price" />
+        <el-input-number v-model="formModel.price" class="number-input" :controls="false" />
       </el-form-item>
       <el-form-item label="Product unit" prop="unit">
         <el-select v-model="formModel.unit" placeholder="Select a product unit">
@@ -70,7 +70,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="1 unit measure" prop="qty">
-        <el-input v-model="formModel.qty" placeholder="1, 300, 100..." />
+        <el-input-number v-model="formModel.qty" class="number-input" placeholder="1, 300, 100..." :controls="false" />
       </el-form-item>
       <el-button class="ml-auto block" type="primary" native-type="submit" :loading="isLoading">
         Save
@@ -214,6 +214,14 @@ const submitForm = () => {
 
   .el-scrollbar__bar.is-vertical {
     display: none;
+  }
+}
+
+.number-input {
+  width: 100%;
+
+  .el-input__inner {
+    text-align: left;
   }
 }
 </style>
