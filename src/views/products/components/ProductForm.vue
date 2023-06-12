@@ -137,14 +137,8 @@ const handleFileRemove: UploadProps['onRemove'] = () => {
   imageUri.value = props.product?.image
 }
 
-const updateProduct = async () => {
-  isLoading.value = true
-
+const uploadImage = async () => {
   try {
-    if (!props.product) {
-      return
-    }
-
     if (file.value) {
       const data = await filesService.uploadProductImage(file.value)
 
@@ -154,7 +148,20 @@ const updateProduct = async () => {
 
       imageUri.value = data.productUrl
     }
+  } catch (error) {
+    notificationHandler(error as Error)
+  }
+}
 
+const updateProduct = async () => {
+  isLoading.value = true
+
+  try {
+    if (!props.product) {
+      return
+    }
+
+    await uploadImage()
     await productDetailsService.updateProduct({ ...formModel, image: imageUri.value }, props.product.id)
 
     notificationHandler('Product updated', { type: 'success' })
@@ -170,6 +177,7 @@ const addProduct = async () => {
   isLoading.value = true
 
   try {
+    await uploadImage()
     await productDetailsService.createProduct({ ...formModel, image: imageUri.value })
 
     notificationHandler('Product created', { type: 'success' })
