@@ -5,17 +5,15 @@
         class="mr-[20px]"
         :to="{ name: $routeNames.profile }"
         aria-label="Profile page"
-        title="Profile page"
       >
         <IconUser />
       </router-link>
     </el-tooltip>
-    <el-tooltip content="Cart">
+    <el-tooltip content="Shopping cart">
       <router-link
         class="relative mr-[20px]"
         :to="{ name: $routeNames.cart }"
         aria-label="Shopping cart"
-        title="Shopping cart"
       >
         <IconCart />
         <span
@@ -48,7 +46,6 @@
       <el-button
         class="border-none p-0 text-primary-700"
         aria-label="Logout"
-        title="Logout"
         @click="authStore.logout"
       >
         <IconLogout />
