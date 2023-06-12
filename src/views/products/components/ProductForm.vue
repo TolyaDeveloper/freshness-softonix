@@ -81,7 +81,7 @@ import { routeNames } from '@/router/route-names'
 const props = defineProps<{ product?: TProduct }>()
 
 const file = ref<TNullable<UploadFile>>(null)
-const imageUri = ref<string | null| undefined>(props.product?.image)
+const imageUri = ref<string | null | undefined>(props.product?.image)
 const isLoading = ref(false)
 
 const route = useRoute()
@@ -94,9 +94,9 @@ const formModel = useElFormModel({
   description: props.product?.description ?? '',
   category: props.product?.category.id ?? '',
   brand: props.product?.brand.id ?? '',
-  price: Number(props.product?.price ?? ''),
+  price: props.product?.price ?? 0,
   unit: props.product?.unit ?? '',
-  qty: Number(props.product?.qty ?? '')
+  qty: props.product?.qty ?? 0
 })
 
 const formRules = useElFormRules({
@@ -148,8 +148,6 @@ const updateProduct = async () => {
     if (file.value) {
       const data = await filesService.uploadProductImage(file.value)
 
-      console.log({ data })
-
       if (!data) {
         return
       }
@@ -157,7 +155,7 @@ const updateProduct = async () => {
       imageUri.value = data.productUrl
     }
 
-    await productDetailsService.updateProduct(formModel, props.product.id)
+    await productDetailsService.updateProduct({ ...formModel, image: imageUri.value }, props.product.id)
 
     notificationHandler('Product updated', { type: 'success' })
     push({ name: routeNames.productDetails, params: { id: props.product.id } })
@@ -172,7 +170,7 @@ const addProduct = async () => {
   isLoading.value = true
 
   try {
-    await productDetailsService.createProduct(formModel)
+    await productDetailsService.createProduct({ ...formModel, image: imageUri.value })
 
     notificationHandler('Product created', { type: 'success' })
     push({ name: routeNames.home })
@@ -190,5 +188,16 @@ const submitForm = () => {
     }
   })
 }
-
 </script>
+
+<style lang="scss">
+.custom-popper {
+  .el-select-dropdown__wrap {
+    overflow-y: scroll;
+  }
+
+  .el-scrollbar__bar.is-vertical {
+    display: none;
+  }
+}
+</style>

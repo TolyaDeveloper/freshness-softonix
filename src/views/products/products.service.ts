@@ -69,9 +69,9 @@ class ProductDetailsService {
     return useSupabase.from('products').insert(product)
   }
 
-  // deleteProduct (productId: string) {
-  //   return useSupabase.from('products').delete()
-  // }
+  deleteProduct (productId: string) {
+    return useSupabase.from('products').delete().eq('id', productId)
+  }
 }
 
 export const productDetailsService = new ProductDetailsService()

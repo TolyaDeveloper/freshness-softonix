@@ -3,6 +3,7 @@ import { routeNames } from '@/router/route-names'
 import { allFilters } from '@/core/filters'
 import { globalProperties, portalNames } from '@/plugins'
 import { EElComponentSize, EElComponentType } from '@/types/enums'
+import type { ERoles } from '@/types/roles'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -12,6 +13,7 @@ declare module 'vue-router' {
     requireAuth?: boolean
     layout?: TLayouts
     isProtectedDuringSession?: boolean
+    roles?: ERoles[]
   }
 }
 

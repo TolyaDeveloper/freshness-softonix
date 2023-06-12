@@ -1,3 +1,4 @@
+import { ERoles } from '@/types/roles'
 import type { RouteRecordRaw } from 'vue-router'
 
 export const productsRouteNames = {
@@ -23,7 +24,8 @@ export const productsRoutes: RouteRecordRaw[] = [
     name: productsRouteNames.addProduct,
     component: () => import('./AddProduct.vue'),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      roles: [ERoles.admin]
     }
   },
   {
@@ -31,7 +33,8 @@ export const productsRoutes: RouteRecordRaw[] = [
     name: productsRouteNames.editProduct,
     component: () => import('./EditProduct.vue'),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      roles: [ERoles.admin]
     }
   }
 ]

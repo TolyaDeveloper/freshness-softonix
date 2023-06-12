@@ -1,6 +1,7 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 
 import { routeNames } from '@/router/route-names'
+import type { ERoles } from '@/types/roles'
 
 export const routeGuard = async (
   to: RouteLocationNormalized,
@@ -11,6 +12,8 @@ export const routeGuard = async (
 
   if (!store.user && to.meta.requireAuth) {
     next({ name: routeNames.login })
+  } else if (to.meta.roles && !(to.meta.roles.includes(store.user?.role as ERoles))) {
+    next({ name: routeNames.home })
   } else {
     next()
   }

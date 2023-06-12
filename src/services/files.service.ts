@@ -7,13 +7,17 @@ class FilesService {
     }
 
     const storage = useSupabase.storage.from('product-images')
-    const res = await storage.upload('product-image', data.raw)
 
-    if (!res.data) {
-      return
+    const timestamp = Date.now()
+    const fileName = `product-image-${timestamp}`
+
+    const { data: uploadedFile, error } = await storage.upload(fileName, data.raw)
+
+    if (error || !uploadedFile) {
+      throw new Error('Failed to upload file')
     }
 
-    const productUrl = await storage.getPublicUrl(res.data.path).data.publicUrl
+    const productUrl = await storage.getPublicUrl(uploadedFile.path).data.publicUrl
 
     return { productUrl }
   }
