@@ -227,6 +227,7 @@
     "useNavigatorLanguage": true,
     "useNetwork": true,
     "useNow": true,
+    "useNumberRule": true,
     "useObjectUrl": true,
     "useOffsetPagination": true,
     "useOnline": true,

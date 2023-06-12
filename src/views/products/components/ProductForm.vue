@@ -60,7 +60,14 @@
         <el-input v-model="formModel.price" />
       </el-form-item>
       <el-form-item label="Product unit" prop="unit">
-        <el-input v-model="formModel.unit" placeholder="G, KG, Liters..." />
+        <el-select v-model="formModel.unit" placeholder="Select a product unit">
+          <el-option
+            v-for="unit in productUnits"
+            :key="unit"
+            :value="unit"
+            :label="unit"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item label="1 unit measure" prop="qty">
         <el-input v-model="formModel.qty" placeholder="1, 300, 100..." />
@@ -77,6 +84,7 @@ import type { UploadFile, UploadProps } from 'element-plus'
 
 import { notificationHandler } from '@/helpers'
 import { routeNames } from '@/router/route-names'
+import { productUnits } from '@/constants'
 
 const props = defineProps<{ product?: TProduct }>()
 
@@ -113,13 +121,13 @@ const formRules = useElFormRules({
     useRequiredRule()
   ],
   price: [
-    useRequiredRule()
+    useNumberRule()
   ],
   unit: [
     useRequiredRule()
   ],
   qty: [
-    useRequiredRule()
+    useNumberRule()
   ]
 })
 

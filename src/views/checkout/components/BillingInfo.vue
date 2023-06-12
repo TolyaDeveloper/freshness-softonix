@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { cities } from '@/constants/cities'
+import { cities } from '@/constants'
 
 const modelValue = defineModel<ICheckout>({ required: true })
 </script>

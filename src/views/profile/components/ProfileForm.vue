@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { cities } from '@/constants/cities'
+import { cities } from '@/constants'
 import { notificationHandler } from '@/helpers'
 
 const formRef = useElFormRef()
