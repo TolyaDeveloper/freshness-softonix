@@ -218,6 +218,7 @@ interface IDatabase {
       }
       recipes: {
         Row: {
+          created_at: Date
           id: string
           ingredients: string[]
           instructions: string
@@ -226,6 +227,7 @@ interface IDatabase {
           subtitle: string | null
         }
         Insert: {
+          created_at?: Date
           id?: string
           ingredients: string[]
           instructions: string
@@ -234,6 +236,7 @@ interface IDatabase {
           subtitle?: string | null
         }
         Update: {
+          created_at?: Date
           id?: string
           ingredients?: string[]
           instructions?: string

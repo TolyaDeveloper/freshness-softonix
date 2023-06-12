@@ -5,7 +5,7 @@
       class="order-[-1] lg:order-1"
       title="Recipes"
       subfocus="Read our recipes"
-      to="/recipes"
+      :to="{ name: $routeNames.recipes }"
     />
     <Banner
       class="order-[-1] lg:order-1"
