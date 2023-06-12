@@ -29,7 +29,6 @@
     </el-tooltip>
     <el-tooltip content="Orders history">
       <router-link
-        class=""
         :to="{ name: $routeNames.orders }"
         aria-label="Orders history"
       >
