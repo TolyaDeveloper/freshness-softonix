@@ -8,7 +8,7 @@
 <script setup lang="ts">
 const authStore = useAuthStore()
 
-function shouldAllowQuiz (): boolean {
+const shouldAllowQuiz = (): boolean => {
   const currentDate = new Date()
 
   if (!authStore.user?.quiz_available_since) {
