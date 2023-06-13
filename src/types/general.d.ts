@@ -9,3 +9,8 @@ type TBrand = IDatabase['public']['Tables']['brands']['Row']
 type TProduct = IDatabase['public']['Tables']['products']['Row']
 type TProductInsert = IDatabase['public']['Tables']['products']['Insert']
 type TProductUpdate = IDatabase['public']['Tables']['products']['Update']
+
+type TPromocode = {
+  code: string
+  discount: number
+}

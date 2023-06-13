@@ -156,6 +156,8 @@ interface IDatabase {
           last_searched_category: string | null
           lastname: string
           phone: string
+          promocode: { code: string; discount: number } | null
+          quiz_available_since: string | null
           role: string
           street: string
         }
@@ -168,6 +170,8 @@ interface IDatabase {
           last_searched_category?: string | null
           lastname: string
           phone?: string
+          promocode?: { code: string; discount: number } | null
+          quiz_available_since?: string | null
           role?: string
           street?: string
         }
@@ -180,6 +184,8 @@ interface IDatabase {
           last_searched_category?: string | null
           lastname?: string
           phone?: string
+          promocode?: { code: string; discount: number } | null
+          quiz_available_since?: string | null
           role?: string
           street?: string
         }
@@ -213,6 +219,27 @@ interface IDatabase {
           code?: string
           discount?: number
           id?: string
+        }
+        Relationships: []
+      }
+      quiz: {
+        Row: {
+          answers: string[]
+          id: string
+          question: string
+          rightAnswer: string
+        }
+        Insert: {
+          answers: string[]
+          id?: string
+          question: string
+          rightAnswer: string
+        }
+        Update: {
+          answers?: string[]
+          id?: string
+          question?: string
+          rightAnswer?: string
         }
         Relationships: []
       }
