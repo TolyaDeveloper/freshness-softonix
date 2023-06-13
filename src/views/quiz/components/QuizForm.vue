@@ -30,7 +30,10 @@
           </el-radio-group>
         </el-card>
       </el-form-item>
-      <el-button type="primary" native-type="submit">Finish quiz</el-button>
+      <div class="flex items-center">
+        <el-button type="primary" native-type="submit">Finish quiz</el-button>
+        <p class="ml-[30px] text-secondary-500">{{ submitError }}</p>
+      </div>
     </el-form>
   </template>
 </template>
@@ -47,6 +50,7 @@ const questions = ref<Pick<TQuiz, 'id' | 'question' | 'answers'>[]>([])
 const rightAnswers = ref<Pick<TQuiz, 'id' | 'rightAnswer'>[]>([])
 const isLoading = ref(true)
 const nextMonthDate = ref<Date>(new Date())
+const submitError = ref('')
 
 const formRef = useElFormRef()
 
@@ -141,11 +145,24 @@ const generateNextMonthDate = () => {
   nextMonthDate.value = nextMonth
 }
 
+const validateSubmit = () => {
+  if (Object.keys(formModel).length !== questions.value.length) {
+    submitError.value = 'Not all answers are filled in!'
+
+    return false
+  }
+
+  return true
+}
+
+const resetSubmitError = () => {
+  submitError.value = ''
+}
+
 const submitForm = () => {
-  formRef.value.validate(async valid => {
-    if (valid) {
-      handleSubmitWorkflow()
-    }
-  })
+  if (validateSubmit()) {
+    resetSubmitError()
+    handleSubmitWorkflow()
+  }
 }
 </script>
