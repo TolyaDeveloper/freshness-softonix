@@ -7,6 +7,7 @@ import { productsRoutes } from '@/views/products/products.routes'
 import { cartRoutes } from '@/views/cart/cart.routes'
 import { checkoutRoutes } from '@/views/checkout/checkout.routes'
 import { ordersRoutes } from '@/views/orders/orders.routes'
+import { recipesRoutes } from '@/views/recipes/recipes.routes'
 
 const routes: Array<RouteRecordRaw> = [
   ...homeRoutes,
@@ -15,7 +16,8 @@ const routes: Array<RouteRecordRaw> = [
   ...productsRoutes,
   ...cartRoutes,
   ...checkoutRoutes,
-  ...ordersRoutes
+  ...ordersRoutes,
+  ...recipesRoutes
 ]
 
 export {

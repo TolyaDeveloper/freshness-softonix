@@ -10,7 +10,7 @@
     </ul>
     <ul class="flex ml-[30px]">
       <li class="text-accent-400">
-        <router-link class="link" to="/recipes">Our recipes</router-link>
+        <router-link class="link" :to="{ name: $routeNames.recipes }">Our recipes</router-link>
       </li>
       <li class="ml-[40px] text-accent-400">
         <a class="link" href="https://www.youtube.com/@farmfreshtoyou/videos" rel="noopener noreferrer" target="_blank">

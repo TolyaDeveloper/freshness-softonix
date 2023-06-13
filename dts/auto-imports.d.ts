@@ -88,6 +88,7 @@ declare global {
   const reactiveOmit: typeof import('@vueuse/core')['reactiveOmit']
   const reactivePick: typeof import('@vueuse/core')['reactivePick']
   const readonly: typeof import('vue')['readonly']
+  const recipesService: typeof import('../src/views/recipes/recipes.service')['recipesService']
   const ref: typeof import('vue')['ref']
   const refAutoReset: typeof import('@vueuse/core')['refAutoReset']
   const refDebounced: typeof import('@vueuse/core')['refDebounced']

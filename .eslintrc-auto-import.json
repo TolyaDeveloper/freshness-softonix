@@ -91,6 +91,7 @@
     "reactiveOmit": true,
     "reactivePick": true,
     "readonly": true,
+    "recipesService": true,
     "ref": true,
     "refAutoReset": true,
     "refDebounced": true,
