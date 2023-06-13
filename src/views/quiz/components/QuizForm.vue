@@ -1,19 +1,18 @@
 <template>
   <el-skeleton v-if="isLoading" />
   <template v-else>
-    <p
-      v-if="isQuizCompleted && correctAnswersCount !== questions.length"
-      class="font-poppins text-[18px] mb-[15px]"
-    >
-      You almost did it!
-    </p>
-    <template v-if="isQuizCompleted && correctAnswersCount === questions.length">
-      <Confetti class="top-[350px]" />
-      <p class="mb-[15px] font-poppins text-[18px]">You won a promocode: {{ authStore.user?.promocode?.code }}</p>
+    <template v-if="isQuizCompleted">
+      <p
+        v-if="correctAnswersCount !== questions.length"
+        class="font-poppins text-[18px] mb-[15px]"
+      >
+        You almost did it!
+      </p>
+      <Confetti v-if="correctAnswersCount === questions.length" class="top-[350px]" />
+      <p class="font-poppins mb-[15px]">
+        Correct {{ correctAnswersCount }} / {{ questions.length }}
+      </p>
     </template>
-    <p v-if="isQuizCompleted" class="font-poppins mb-[15px]">
-      Correct {{ correctAnswersCount }} / {{ questions.length }}
-    </p>
     <el-form
       ref="formRef"
       :model="formModel"
@@ -22,7 +21,10 @@
       @submit.prevent="submitForm"
     >
       <el-form-item v-for="item in questions" :key="item.id" :label="item.question">
-        <el-card class="w-full" :class="{ [`${handleResultColor(result[item.id])}`]: isQuizCompleted }">
+        <el-card
+          class="w-full border-2"
+          :class="{ [`${handleResultColor(result[item.id])}`]: isQuizCompleted }"
+        >
           <el-radio-group v-model="formModel[item.id]" class="flex flex-col">
             <el-radio v-for="(answer, index) in item.answers" :key="index" :label="answer" />
           </el-radio-group>
@@ -34,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { generatePromoCode } from '@/helpers'
+import { generatePromoCode, notificationHandler } from '@/helpers'
 
 const authStore = useAuthStore()
 
@@ -107,7 +109,8 @@ const validateQuiz = async () => {
   isQuizCompleted.value = true
 }
 
-const handleResultColor = (isAnswerCorrect: boolean) => isAnswerCorrect ? 'bg-green-200' : 'bg-red-200'
+const handleResultColor = (isAnswerCorrect: boolean) =>
+  isAnswerCorrect ? 'border-green-200' : 'border-red-200'
 
 const handleSubmitWorkflow = async () => {
   await getRightAnswers()
@@ -123,6 +126,7 @@ const handleSubmitWorkflow = async () => {
 
     await quizService.addUserPromocode(authStore.user.id, promocode)
     authStore.user.promocode = promocode
+    notificationHandler(`Your promocode: ${promocode.code}`, { type: 'success', duration: 0 })
   }
 
   generateNextMonthDate()
