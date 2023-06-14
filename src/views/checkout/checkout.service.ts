@@ -3,8 +3,8 @@ class CheckoutService {
     return useSupabase.from('orders').insert({ products, user_id: userId })
   }
 
-  applyPromocode (name: string) {
-    return useSupabase.from('promocodes').select('*').eq('code', name)
+  deleteUserPromocode (userId: string) {
+    return useSupabase.from('profiles').update({ promocode: null }).eq('id', userId)
   }
 }
 

@@ -33,7 +33,7 @@
         Complete order
       </el-button>
     </el-form>
-    <OrderSummary />
+    <OrderSummary v-model="isPromocodeApplied" />
   </div>
 </template>
 
@@ -45,6 +45,7 @@ const formRef = useElFormRef()
 const authStore = useAuthStore()
 const router = useRouter()
 const isLoading = ref(false)
+const isPromocodeApplied = ref(false)
 
 const formModel = useElFormModel({
   firstname: authStore.user?.firstname ?? '',
@@ -107,6 +108,12 @@ const createOrder = async () => {
     await cartService.updateCart({}, authStore.user.id)
 
     authStore.user.cart = {}
+
+    if (isPromocodeApplied.value) {
+      await checkoutService.deleteUserPromocode(authStore.user.id)
+      authStore.user.promocode = null
+    }
+
     router.replace({ name: routeNames.orders })
     notificationHandler('Order successfully created', { type: 'success' })
   } catch (error) {

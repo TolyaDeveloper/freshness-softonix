@@ -81,6 +81,7 @@ declare global {
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
   const productDetailsService: typeof import('../src/views/products/products.service')['productDetailsService']
   const provide: typeof import('vue')['provide']
+  const quizService: typeof import('../src/views/quiz/quiz.service')['quizService']
   const reactify: typeof import('@vueuse/core')['reactify']
   const reactifyObject: typeof import('@vueuse/core')['reactifyObject']
   const reactive: typeof import('vue')['reactive']

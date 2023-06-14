@@ -55,31 +55,27 @@
 import { notificationHandler } from '@/helpers'
 import { routeNames } from '@/router/route-names'
 
+const isPromocodeApplied = defineModel<boolean>({ required: true })
+
 const cartStore = useCartStore()
+const authStore = useAuthStore()
 const router = useRouter()
 const promocode = ref('')
-const isPromocodeApplied = ref(false)
 const priceWithPromocode = ref(0)
 
-const applyPromocode = async () => {
-  try {
-    const { data } = await checkoutService.applyPromocode(promocode.value)
-
-    if (!data?.length) {
-      throw new Error('Invalid promocode')
-    }
-
-    priceWithPromocode.value = Number(
-      (
-        cartStore.totalCartPrice - cartStore.totalCartPrice * (data[0].discount / 100)
-      ).toFixed(2)
-    )
-    isPromocodeApplied.value = true
-
-    notificationHandler('Promocode successfully applied', { type: 'success' })
-  } catch (error) {
-    notificationHandler(error as Error)
+const applyPromocode = () => {
+  if (!authStore.user?.promocode || authStore.user?.promocode?.code !== promocode.value) {
+    return notificationHandler('Invalid promocode')
   }
+
+  priceWithPromocode.value = Number(
+    (
+      cartStore.totalCartPrice - cartStore.totalCartPrice * (authStore.user.promocode.discount / 100)
+    ).toFixed(2)
+  )
+  isPromocodeApplied.value = true
+
+  notificationHandler('Promocode successfully applied', { type: 'success' })
 }
 
 onMounted(() => {

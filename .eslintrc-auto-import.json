@@ -84,6 +84,7 @@
     "pausableWatch": true,
     "productDetailsService": true,
     "provide": true,
+    "quizService": true,
     "reactify": true,
     "reactifyObject": true,
     "reactive": true,
