@@ -1,5 +1,5 @@
 <template>
-  <component :is="components[props.layout]" v-loading.fullscreen="loading ? layout === 'default' : false">
+  <component :is="components[props.layout]" :loading="loading">
     <slot />
   </component>
 </template>
