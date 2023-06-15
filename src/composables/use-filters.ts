@@ -4,7 +4,7 @@ export const useFilters = () => {
   const defaultFilters: IFilters = {
     filterByBrand: [],
     filterByRating: [],
-    itemsPerPage: 10,
+    itemsPerPage: 5,
     page: 1,
     priceSortType: 'DEFAULT'
   }

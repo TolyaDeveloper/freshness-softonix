@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div v-loading.fullscreen="loading" class="app-container">
     <header>
       <TopBar />
       <el-divider class="m-0 border-primary-700 opacity-5" />
@@ -14,3 +14,7 @@
     </footer>
   </div>
 </template>
+
+<script setup lang="ts">
+defineProps<{ loading: boolean }>()
+</script>

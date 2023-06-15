@@ -1,6 +1,6 @@
 <template>
   <Layout
-    v-loading.fullscreen="generalStore.initialLoading"
+    :loading="generalStore.initialLoading"
     :layout="$route.meta.layout"
   >
     <router-view />

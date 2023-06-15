@@ -10,6 +10,7 @@
       >
         <router-link
           class="link"
+          :class="{ [`underline`]: route.query.id as string === category.id }"
           :to="{ name: $routeNames.products, query: { ...route.query, id: category.id } }"
         >
           {{ category.name }}

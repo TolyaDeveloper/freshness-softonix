@@ -15,6 +15,10 @@ export const priceFilterOptions: { value: TPriceFilters; label: string }[] = [
 
 export const itemsPerPageOptions = [
   {
+    value: 5,
+    label: 5
+  },
+  {
     value: 10,
     label: 10
   },
