@@ -1,5 +1,5 @@
 <template>
-  <component :is="components[props.layout]">
+  <component :is="components[props.layout]" v-loading.fullscreen="loading ? layout === 'default' : false">
     <slot />
   </component>
 </template>
@@ -8,7 +8,7 @@
 import DefaultLayout from './DefaultLayout.vue'
 import AuthLayoutLayout from './AuthLayout.vue'
 
-const props = withDefaults(defineProps<{ layout: TLayouts }>(), {
+const props = withDefaults(defineProps<{ layout: TLayouts; loading: boolean }>(), {
   layout: 'default'
 })
 
